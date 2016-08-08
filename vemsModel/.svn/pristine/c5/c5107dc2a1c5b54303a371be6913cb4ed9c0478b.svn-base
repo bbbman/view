@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>设置通道树</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+
+
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../../../dist/js/html5shiv.js"></script>
+        <script src="../../../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body set-channel-modal">
+            <!--  <div class="content-inner">
+              <div class="con-item role-management" >  -->
+                  <div class="setdictionary-table-box clearfix">
+                      
+                      <div class="settings-panel">
+                       <div class="settings-panel-header">
+                        <div class="search-box form-inline">
+                          <div class="form-group">
+                            <div class="input-group clearfix">
+                                <input type="text" class="form-control pull-left" id="keyVal" placeholder="请输入关键字">
+                                <span class="input-group-btn  pull-left">
+                                 <a role="button" class="btn  btn-primary btn-flat" id="btn-search" >搜索</a>
+                                </span>
+                            </div>  
+                          </div>
+                        </div> 
+                          <div class="action-bar" style="">
+                             <button class="btn btn-default btn-tree" id="addTreeNodes" type="button" title="添加新区域"><img src="../../dist/images/ic_Add.png" ></button> 
+                             <button class="btn  btn-default btn-tree" id="moveUp" type="button" title="通道或者区域同级上移"><img src="../../dist/images/ic_Upward.png"></button> 
+                             <button class="btn  btn-default btn-tree" id="moveDown" type="button" title="通道或者区域同级下移"><img src="../../dist/images/ic_Down.png"></button>
+                             <button class="btn btn-default btn-tree" id="skipMoveUp" type="button" title="区域越级上移"><img src="../../dist/images/ic_Beyond.png"></button> 
+                             <button class="btn  btn-default btn-tree" id="skipMoveDown" type="button" title="区域越级下移"><img src="../../dist/images/ic_Beneath.png"></button>
+                             <button class="btn  btn-default btn-tree" id="updateTreeNodes" type="button" title="修改区域名称"><img src="../../dist/images/ic_Edit.png"></button> 
+                             <button class="btn  btn-default btn-tree" id="delTreeNodes" type="button" title="删除空的区域"><img src="../../dist/images/ic_Delete.png"></button> 
+                           <!-- <button class="btn  btn-default btn-sm" id="saveTree" type="button" title="保存"><img src="../../dist/images/ic_Save.png"></button> -->
+                          </div>
+                        </div>
+                        <div class="dictionary-tree-panel" style="">
+                            <div class="dictionary-tree-content" style="overflow:auto;">
+                               <ul id="treeDemo" class="ztree"></ul> 
+                            </div>
+                        </div>
+                      </div>
+                      <div class="reference-panel">
+                        <div class="reference-panel-header">
+                           <h3 style="">匹配通道</h3>
+                           <div class="">
+                             <span class="item-title">当前选中：</span>
+                             <span class="item-con" id="selected-area"></span>
+                           </div>
+                           <div class="match-channel-name">
+                             <span class="item-title">当前匹配：</span>
+                             <span class="item-con" id="include-channel"></span>
+                           </div>
+
+                          
+                        </div>
+                        <div class="reference-tree-panel">
+                          <div class="dictionary-tree-content">
+                                 <ul id="treeDemo1" class="ztree"></ul> 
+                          </div>
+                        </div>
+                      </div>
+                      
+                </div>
+            <!--   </div>
+                       </div> -->
+             <div class="modal-footer">
+                <button type="button" class="btn  btn-default btn-flat  pull-left close-modal" >取消</button> 
+                <button type="button" class="btn  btn-primary btn-flat pull-right" id="saveTree">保存</button>
+            </div>
+            
+               
+        </div>
+       
+    </div>
+ <!--[if !IE]> -->
+ <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+ <script type="text/javascript" src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+ <script type="text/javascript" src="../../dist/js/jquery.ztree.exhide-3.5.min.js"></script>
+
+ <!-- <![endif]-->
+ <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+  <script src="../../dist/js/layer/layer.js"></script>
+  <script src="../../dist/js/public.js"></script>
+ <script>
+
+      var wayName=null;
+      $(function(){
+        $(".close-modal").on("click",function(){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        })
+       //判断是设置计费区域还是设置统计区域
+       var way=GetRequest();
+           wayName=way['way'];       
+       if(wayName!=undefined&&wayName=='charge'){
+           //  alert(way['way']);
+             //初始化计费区域相关的树参数
+            
+       }else if(wayName!=undefined&&wayName=='statistics'){
+          // alert(way['way']);
+           //初始化统计区域相关的树参数
+
+       }
+           //通道树的设置
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $("#addTreeNodes").bind("click", {isParent:false}, add);
+        $("#updateTreeNodes").bind("click", edit);
+        $("#delTreeNodes").bind("click", remove);
+        $('#btn-search').bind("click", searchNode);
+        $('#moveUp').bind('click',moveUpNode);
+        $("#moveDown").bind('click',moveDownNode);
+        $('#skipMoveUp').bind('click',skipMoveUp);
+        $("#skipMoveDown").bind('click',skipMoveDown);
+        $("#saveTree").bind('click',saveTree);
+
+        //参照树
+        $.fn.zTree.init($("#treeDemo1"), setting1, zNodes1);
+       
+      });
+
+
+        /*id为treeDemo1的树参数start*/
+        var setting1 = {
+             view: {
+              showLine:false,
+              showIcon: showIconForTree,
+              selectedMulti: false,
+              fontCss: getFontCss
+          },
+            check: {
+              enable: true,
+              chkStyle: "checkbox",
+              chkboxType: { "Y": "s", "N": "ps" },
+              chkDisabledInherit: true,
+            },
+            data: {
+            },
+            callback: {
+              beforeCheck:zTreeBeforeCheck,
+              onCheck: zTreeOnCheck,
+            }
+          };
+
+        var zNodes1 = [
+            {id:1,name:"停车场A",isParent:true, open:true,iconSkin:"pIcon1",
+                children: [
+                  { name:"进口",isParent:true, open:true,iconSkin:"pIcon2",
+                    children: [
+                      { id:1, name:"A区域进口1",isParent:false, open:false,iconSkin:"pIcon3",},
+                      { id:112, name:"B区域进口1",isParent:false, open:false,iconSkin:"pIcon3",},
+                      { id:113, name:"B区域进口2",isParent:false, open:false,iconSkin:"pIcon3",},
+                      { id:114, name:"C区域进口1",isParent:false, open:false,iconSkin:"pIcon3",}
+                    ]},
+                  { name:"出口",isParent:true, open:true,iconSkin:"pIcon2",
+                    children: [
+                      {id:121, name:"A区域出口1",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:122, name:"A区域出口2",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:123, name:"A区域出口3",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:124,name:"B区域出口1",isParent:false, open:false,iconSkin:"pIcon3",}
+                    ]},
+                ]},
+            { id:2, name:"停车场B", open:true,iconSkin:"pIcon1",
+                children: [
+                  { name:"进口",isParent:true, open:true,iconSkin:"pIcon2",
+                    children: [
+                      {id:234, name:"a区域进口1",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:212, name:"b区域进口2",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:213,name:"b区域进口3",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:214,name:"b区域进口4",isParent:false, open:false,iconSkin:"pIcon3",}
+                    ]},
+                  { name:"出口",isParent:true, open:true,iconSkin:"pIcon2",
+                    children: [
+                      { id:221,  name:"a区域出口1",isParent:false, open:false,iconSkin:"pIcon3",},
+                      { id:222,  name:"a区域出口2",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:223,  name:"b区域出口1",isParent:false, open:false,iconSkin:"pIcon3",},
+                      {id:224, name:"d区域出口3",isParent:false, open:false,iconSkin:"pIcon3",}
+                    ]},
+                ]},];
+         
+           /* var zNodes1 =[
+            { id:1, pId:0, name:"停车场A", open:true,iconSkin:"pIcon1",},
+            { id:11, pId:1, name:"进口", open:true,iconSkin:"pIcon2"},
+            { id:111, pId:11, name:"A区域进口1"},
+            { id:112, pId:11, name:"B区域进口1"},
+            { id:113, pId:11, name:"B区域进口2"},
+            { id:114, pId:11, name:"C区域进口1"},
+            { id:12, pId:1, name:"出口", open:true,iconSkin:"pIcon2"},
+            { id:121, pId:12, name:"A区域出口1"},
+            { id:122, pId:12, name:"A区域出口2"},
+            { id:123, pId:12, name:"A区域出口3"},
+            { id:124, pId:12, name:"B区域出口1"},
+            { id:2, pId:0, name:"停车场B", open:true,iconSkin:"pIcon1",},
+            { id:21, pId:2, name:"进口", open:true,iconSkin:"pIcon2"},
+            { id:211, pId:21, name:"a区域进口1"},
+            { id:212, pId:21, name:"b区域进口2"},
+            { id:213, pId:21, name:"b区域进口3"},
+            { id:214, pId:21, name:"b区域进口4"},
+            { id:22, pId:2, name:"出口", open:true,iconSkin:"pIcon2"},
+            { id:221, pId:22, name:"a区域出口1"},
+            { id:222, pId:22, name:"a区域出口2"},
+            { id:223, pId:22, name:"b区域出口1"},
+            { id:224, pId:22, name:"d区域出口3"},
+            { id:3, pId:0, name:"停车场C", open:true,iconSkin:"pIcon1",},
+            { id:31, pId:3, name:"进口", open:true,iconSkin:"pIcon2"},
+            { id:311, pId:31, name:"a区域进口1"},
+            { id:312, pId:31, name:"b区域进口2"},
+            { id:313, pId:31, name:"b区域进口3"},
+            { id:314, pId:31, name:"b区域进口4"},
+            { id:32, pId:3, name:"出口", open:true,iconSkin:"pIcon2"},
+            { id:221, pId:32, name:"a区域出口1"},
+            { id:322, pId:32, name:"a区域出口2"},
+            { id:323, pId:32, name:"b区域出口1"},
+            { id:324, pId:32, name:"d区域出口3"},
+          ];*/
+      var checkedChildIds;
+      function zTreeBeforeCheck(treeId, treeNode) {
+          var treeObj1 = $.fn.zTree.getZTreeObj("treeDemo1");
+          checkedChildIds='';
+          if(treeNode.isParent&&treeNode.checked){
+            if(treeNode.pId==null&&treeNode.level==0){
+              var childNodes=treeNode.children;
+              if(childNodes[0].checked){
+                var childNodes1=childNodes[0].children;
+                for(var i=0,l=childNodes1.length;i<l;i++){
+                  if(childNodes1[i].checked){
+
+                   checkedChildIds=checkedChildIds+','+childNodes1[i].id;
+                  }
+                }
+              }
+              if(childNodes[1].checked){
+                var childNodes2=childNodes[1].children;
+                for(var j=0,l=childNodes2.length;j<l;j++){
+                  if(childNodes2[j].checked){
+                   checkedChildIds=checkedChildIds+','+childNodes2[j].id;
+                  }
+                }
+              }
+
+            }else{
+                 var childNodes=treeNode.children;
+                 for(var i=0,l=childNodes.length;i<l;i++){
+                  if(childNodes[i].checked){
+                   checkedChildIds=checkedChildIds+','+childNodes[i].id;
+                  }
+                }
+            }
+          }/*else if(treeNode.isParent&&!treeNode.checked){
+             if(treeNode.pId==0){
+                var childNodes=treeNode.children;
+                var childNodes1=childNodes[0].children;
+                for(var i=0,l=childNodes1.length;i<l;i++){
+                   checkedChildIds=checkedChildIds+','+childNodes1[i].id;
+                }
+                var childNodes2=childNodes[1].children;
+                for(var i=0,l=childNodes2.length;i<l;i++){
+                   checkedChildIds=checkedChildIds+','+childNodes2[i].id;
+                }
+             }else{
+                 var childNodes=treeNode.children;
+                 for(var i=0,l=childNodes.length;i<l;i++){
+                   checkedChildIds=checkedChildIds+','+childNodes[i].id;
+                }
+             }
+
+          }*/
+      };
+      function getchildsId(treeNode1,type){
+          var treeNode1childArray=new Array();
+          var treeNode1childs=treeNode1.children;
+          if(treeNode1childs!=null&&treeNode1childs!=undefined){
+             for(var j=0;j<treeNode1childs.length;j++){
+              if(!treeNode1childs[j].isParent){
+                treeNode1childArray.push(treeNode1childs[j].id);
+              }
+             }
+          }
+          if(type=="string"){
+            return treeNode1childArray.join(',');
+          }else if(type=="array"){
+            return treeNode1childArray;
+          }
+      }
+      function zTreeOnCheck(event, treeId, treeNode) {
+          var treeObj1 = $.fn.zTree.getZTreeObj("treeDemo1");
+          var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+          var nodes = treeObj.getSelectedNodes(),
+              treeNode1 = nodes[0];
+              if(treeNode1==undefined||treeNode1==null||!treeNode1.isParent){
+                top.window.tipError('请先选中需要绑定通道的停车场或区域！');
+                treeObj1.checkAllNodes(false);
+                return;
+              }
+          var changeCheckedNodes = treeObj1.getChangeCheckedNodes();//获取改变了checkbox状态的节点集合
+          var uncheckedChildIds='';
+          for(var i=0;i<changeCheckedNodes.length;i++){
+            if(changeCheckedNodes[i].checked&&!changeCheckedNodes[i].isParent){
+               uncheckedChildIds=uncheckedChildIds+','+changeCheckedNodes[i].id;
+            }
+          }
+
+          var treeNode1childArray=getchildsId(treeNode1,'array');
+          if(!treeNode.checked){
+            if(treeNode.isParent){
+              //取消选中的是一级节点或二级节点时
+                var checkedChildIdArry=checkedChildIds.split(',');
+                for(var i=0;i<checkedChildIdArry.length;i++){
+                   if(checkedChildIdArry[i]!=''){
+                      var idVal=parseInt(checkedChildIdArry[i]);
+                      var nodes = treeObj.getNodesByParam("id",idVal, null);
+                      if(nodes==undefined){
+                        return;
+                      }
+                      for(var j=0;j<nodes.length;j++){
+                        if(!nodes[j].isParent&&nodes[j].getParentNode().id== treeNode1.id){
+                             treeObj.removeNode(nodes[j]);
+                        }
+                      }
+                    showChildsNameStr(treeNode1);
+                   }
+                } 
+          }else{
+                  var idVal=treeNode.id;
+                  var nodes = treeObj.getNodesByParam("id",idVal, null);
+                  if(nodes==undefined){
+                    return;
+                  }
+                  for(var j=0;j<nodes.length;j++){
+                    if(!nodes[j].isParent&&nodes[j].getParentNode().id== treeNode1.id){
+                         treeObj.removeNode(nodes[j]);
+                    }
+                  }
+                  showChildsNameStr(treeNode1);
+            }      
+          }else if(treeNode.checked){
+            var newNodes=new Array();
+           if(treeNode.isParent){
+               var uncheckedChildIdArry=uncheckedChildIds.split(',');
+                for(var i=0;i<uncheckedChildIdArry.length;i++){
+                   if(uncheckedChildIdArry[i]!=''){
+                      var idVal=parseInt(uncheckedChildIdArry[i]);
+                      var nodes = treeObj1.getNodesByParam("id",idVal, null);
+                      if(nodes==undefined){
+                        return;
+                      }
+                      for(var j=0;j<nodes.length;j++){
+                        if(!nodes[j].isParent){
+                          if($.inArray(idVal,treeNode1childArray)==-1){
+                            var newNode= { id:nodes[j].id,pId:treeNode1.id, name:nodes[j].name,rootId:treeNode1.rootId,isParent:false,drag:false,iconSkin:"pIcon3",state:0,};
+                            newNodes.push(newNode);
+                          }  
+                        }
+                      }
+                      
+                   }
+                }
+                treeObj.addNodes(treeNode1, newNodes,false); 
+                showChildsNameStr(treeNode1);
+           }else{
+                var idVal=treeNode.id;
+                if($.inArray(idVal,treeNode1childArray)==-1){
+                  var newNode= { id:treeNode.id,pId:treeNode1.id, name:treeNode.name,rootId:treeNode1.rootId,isParent:false,drag:false,iconSkin:"pIcon3",state:0,};
+                  newNodes.push(newNode);
+                }
+                treeObj.addNodes(treeNode1, newNodes,false);
+                showChildsNameStr(treeNode1); 
+            }   
+          }
+      };
+      /*id为treeDemo1的树参数end*/
+      /*id为treeDemo的树参数start*/
+       var setting = {
+            view: {
+                showLine:false,
+                showIcon: showIconForTree,
+                selectedMulti: false,
+                fontCss: getFontCss
+            },
+            edit: {
+                drag: {
+                    autoExpandTrigger: true,
+                    isCopy:false,
+                    isMove:true,
+                    prev: dropPrev,
+                    inner: dropInner,
+                    next: dropNext
+                },
+                enable: true,
+                showRemoveBtn: false,
+                showRenameBtn: false
+            },
+            data: {
+                keep: {
+                    parent:true,
+                    leaf:true
+                },
+            },
+            callback: {
+                beforeDrag: beforeDrag,
+                beforeDrop: beforeDrop,
+                beforeRename: beforeRename,
+                onClick: zTreeOnClick,
+            }
+        };
+         var zNodes = [
+            {id:1,name:"停车场A", rootId:'1',isParent:true,open:true,drag:false,iconSkin:"pIcon1",state:0,
+                children: [
+                  {id:10, name:"区域a",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",state:0,
+                    children: [
+                      { id:1,pId:1, name:"A区域进口1",rootId:'1',isParent:false,drag:false,iconSkin:"pIcon3",state:0,},
+                      { id:112, name:"B区域进口1",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3",state:0,},
+                    /*  { id:113, name:"B区域进口2",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      { id:114, name:"C区域进口1",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"}*/
+                  ]},
+                /*  {id:13, name:"区域b",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",
+                    children: [
+                      {id:121, name:"A区域出口1",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:122, name:"A区域出口2",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:123, name:"A区域出口3",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:124,name:"B区域出口1",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"}
+                  ]},*/
+            ]},
+           { id:2, name:"停车场B", rootId:'2',isParent:true,open:true,drag:false,iconSkin:"pIcon1",
+                children: [
+                  {id:23, name:"区域A",rootId:'2', isParent:true,open:false,drag:true,iconSkin:"pIcon2",
+                    children: [
+                      {id:2, name:"a区域进口1",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:212, name:"b区域进口2",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:213,name:"b区域进口3",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:214,name:"b区域进口4",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"}
+                  ]},
+                  {id:2,name:"区域B",rootId:'2',isParent:true,open:false,drag:true,iconSkin:"pIcon2",
+                    children: [
+                      { id:221,  name:"a区域出口1",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      { id:222,  name:"a区域出口2",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:223,  name:"b区域出口1",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:224, name:"d区域出口3",rootId:'2',isParent:false,open:false,drag:false,iconSkin:"pIcon3"}
+                  ]},
+            ]},
+            { id:3, name:"停车场C", rootId:'3',isParent:true,open:true,drag:false,iconSkin:"pIcon1",},
+            { id:4, name:"停车场D", rootId:'4',isParent:true,open:true,drag:false,iconSkin:"pIcon1",
+                 children: [
+                  {id:2, name:"区域A",rootId:'4', isParent:true,open:false,drag:true,iconSkin:"pIcon2",}
+            ]},
+            
+          ];
+         
+        function  zTreeOnClick(event, treeId, treeNode){
+           var treeObj = $.fn.zTree.getZTreeObj("treeDemo"); 
+           var treeObj1 = $.fn.zTree.getZTreeObj("treeDemo1"); 
+           if (treeNode!=undefined&&treeNode!=null) {
+                treeObj.selectNode(treeNode);
+                var rootId=treeNode.rootId;
+                $("#selected-area").text(treeNode.name);
+                showChildsNameStr(treeNode);
+                var hasChannelId=getchildsId(treeNode,'string');
+                treeObj1.checkAllNodes(false);
+                var parkingNodes=treeObj1.getNodesByParam("iconSkin","pIcon1", null);
+                for (var i=0, l=parkingNodes.length; i < l; i++) {
+                  if(wayName=='charge'&&treeNode.id==rootId&&treeNode.level==0){
+                      treeObj1.hideNode(parkingNodes[i]);
+                      if(i==(l-1)){
+                         return;
+                      }
+                   }else{
+                     if(parkingNodes[i].id!=rootId){
+                      treeObj1.hideNode(parkingNodes[i]);
+                      //treeObj1.setChkDisabled(parkingNodes[i],true,false,true);
+                     // treeObj1.expandNode(parkingNodes[i],false, true, true);
+                     }else{
+                       treeObj1.showNode(parkingNodes[i]);
+                       //treeObj1.setChkDisabled(parkingNodes[i],false,false,true);
+                      // treeObj1.expandNode(parkingNodes[i],true, true, true);
+                     }
+                   }  
+                }
+                if(wayName=='charge'){
+                  setChargeAreaFn(rootId);
+                }
+                if(hasChannelId!=undefined&&hasChannelId!=null&&hasChannelId!=""){
+                    var channelId=hasChannelId.split(',');
+                    for(var i=0;i<channelId.length;i++){
+                      if(channelId[i]!=''){
+                        var idVal=parseInt(channelId[i]);
+                        var nodes = treeObj1.getNodesByParam("id",idVal, null);
+                        for(var k=0;k< nodes.length;k++){
+                          if(!nodes[k].isParent){
+                            if(wayName=='charge'){
+                               treeObj1.setChkDisabled(nodes[k],false,false,true);
+                            }
+                            treeObj1.checkNode(nodes[k], true, true, true );
+                          }
+                        } 
+                      }  
+                    }              
+                } 
+              }
+        }
+        function showChildsNameStr(treeNode){
+          if(!treeNode.isParent){
+              $("#include-channel").text("");
+              $("#include-channel").attr('title','');
+              return;
+          }
+           var childrens=treeNode.children;
+           if(childrens==undefined||childrens==null){
+               $("#include-channel").text("");
+               $("#include-channel").attr('title','');
+               return;
+           }
+           var channelsName=new Array();
+            for(var k=0;k<childrens.length;k++){
+               if(!childrens[k].isParent){
+                  channelsName.push(childrens[k].name);
+               }
+            }
+            if(channelsName.length>0){
+               $("#include-channel").text(channelsName.join(','));
+               $("#include-channel").attr('title',channelsName.join(','));
+               return;
+            }else{
+               $("#include-channel").text("");
+               $("#include-channel").attr('title','');
+               return;
+            }
+        }
+
+        function setChargeAreaFn(rootId){
+          var treeObj = $.fn.zTree.getZTreeObj("treeDemo"); 
+          var treeObj1 = $.fn.zTree.getZTreeObj("treeDemo1"); 
+          var allNodes=treeObj.getNodesByParam("rootId",rootId, null);
+          var nodes=treeObj1.getNodesByParam("id",rootId, null);
+          for (var i=0, l=nodes.length; i < l; i++){
+               if(nodes[i].level==0){
+                  treeObj1.showNode(nodes[i]);
+               }
+           }
+          for (var i=0, l=allNodes.length; i < l; i++){
+              if(!allNodes[i].isParent){
+                var nodes= treeObj1.getNodesByParam("id",allNodes[i].id, null);
+                for(var k=0;k<nodes.length;k++){
+                   if(!nodes[k].isParent){
+                      treeObj1.setChkDisabled(nodes[k],true,false,true);
+                    }
+                }
+              } 
+          }
+        }
+ 
+        function saveTree(){
+             var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+             var nodes = JSON.stringify(zTree.transformToArray(zTree.getNodes()));
+             console.log(nodes);
+        }
+
+        function beforeRename(treeId, treeNode, newName) {
+            if (newName.length == 0) {
+                top.window.tipError('区域名称不能为空！');
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                setTimeout(function(){zTree.editName(treeNode)}, 10);
+                return false;
+            }
+            return true;
+        } 
+
+        var newCount = 1;
+        function add(e) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            treeObj1 = $.fn.zTree.getZTreeObj("treeDemo1"),
+            isParent = e.data.isParent,
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            if(!treeNode||!treeNode.isParent){
+                top.window.tipError('请先选中一个停车场或者区域！');
+                return false;
+            }
+            if(treeNode.level>3){
+              top.window.tipError('区域层级最多允许4层！');
+              return false;
+            }
+            if (treeNode){
+                treeNode= zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"新区域",rootId:treeNode.rootId, isParent:true,open:false,drag:true,iconSkin:"pIcon2",state:1}); 
+                newCount++;
+                treeObj1.checkAllNodes(false);
+            }
+            if (treeNode) {
+                zTree.editName(treeNode[0]);
+                if(wayName=='charge'){
+                  setChargeAreaFn(treeNode[0].rootId);
+                }
+            }
+        };
+        function edit() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            if (nodes.length == 0||!treeNode.isParent||treeNode.level==0) {
+                top.window.tipError('请先选中一个区域！');
+                return;
+            }
+          /*  if( !treeNode.isParent||treeNode.level==0){
+                top.window.tipError('停车场与通道名称不允许修改！');
+                return;
+            }*/
+            zTree.editName(treeNode);
+        };
+
+        function remove(e) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            if (nodes.length == 0||(treeNode.isParent&&treeNode.level==0)||!treeNode.isParent) {
+              parent.window.tipError('请先选中一个区域！');
+                return;
+            }
+          /*  if(treeNode.isParent&&treeNode.level==0){
+                top.window.tipError('停车场不允许删除！');
+                return;
+            }
+            if(!treeNode.isParent){
+                top.window.tipError('已匹配的通道不允许删除！');
+                return false;
+            }*/
+            if(treeNode.children){
+               var nodes = zTree.getNodesByParam("state", 2,treeNode );
+              if(treeNode.children.length>nodes.length&&treeNode.level>0){
+                top.window.tipError('区域包含子区域或者已匹配的通道不允许删除！');
+                return false;
+              }
+            }
+            var sureFn=function(){
+                treeNode.state = 2;
+                zTree.updateNode(treeNode);
+                zTree.hideNode(treeNode);
+               // zTree.removeNode(treeNode);
+            };
+            warningMsg('您确定要删除这个区域吗？',sureFn);
+        };
+
+        function dropPrev(treeId, nodes, targetNode) {
+            var pNode = targetNode.getParentNode();
+            /*if (pNode && pNode.dropInner === 0) {
+                return false;
+            } else {*/
+                // if(targetNode.isParent)
+                //     return false;
+                if(targetNode.level==0){
+                   return false;
+                }
+                if (targetNode === null){
+                    return false;
+                }
+                for (var i=0,l=curDragNodes.length; i<l; i++) {
+                    var curPNode = curDragNodes[i].getParentNode();
+                    if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.rootId!=targetNode.rootId) {
+                        return false;
+                    }
+                }
+           /* }*/
+            return true;
+        }
+        function dropInner(treeId, nodes, targetNode) {
+            /*if (targetNode && targetNode.dropInner ===0) {
+                return false;
+            } else {*/
+               /* if(targetNode.isRoot){
+                   return false;
+                }*/
+                if (targetNode === null){
+                    return false;
+                }
+                for (var i=0,l=curDragNodes.length; i<l; i++) {
+                    if (!targetNode && curDragNodes[i].dropRoot === false) {
+                        return false;
+                    } else if (curDragNodes[i].parentTId && curDragNodes[i].getParentNode() !== targetNode && curDragNodes[i].rootId !== targetNode.rootId) {
+                        return false;
+                    }
+                }
+            /*}*/
+            return true;
+        }
+        function dropNext(treeId, nodes, targetNode) {
+            var pNode = targetNode.getParentNode();
+           /* if (pNode && pNode.dropInner === 0) {
+                return false;
+            } else {*/
+               if(targetNode.level==0){
+                   return false;
+                }
+                if (targetNode === null){
+                    return false;
+                }
+                for (var i=0,l=curDragNodes.length; i<l; i++) {
+                    var curPNode = curDragNodes[i].getParentNode();
+                    if (curPNode && curDragNodes[i].rootId!== targetNode.rootId) {
+                        return false;
+                    }
+                }
+           /* }*/
+            return true;
+        }
+        var nodeList =[];
+        function searchNode(e) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            value = $.trim($("#keyVal").val());
+            updateNodes(false);
+            if(value!=''){
+                nodeList = zTree.getNodesByParamFuzzy("name", value);
+                updateNodes(true);
+            }
+        }
+        function updateNodes(highlight) {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"); 
+            for( var i=0, l=nodeList.length; i<l; i++) {
+                nodeList[i].highlight = highlight;
+                 if(highlight&&nodeList[i].getParentNode()){
+                    zTree.expandNode(nodeList[i].getParentNode(), true, false, true);
+                }
+                zTree.updateNode(nodeList[i]);
+            }
+        }
+
+        function getFontCss(treeId, treeNode) {
+            return (!!treeNode.highlight) ? {color:"#A60000", "font-weight":"bold","font-size":"16px"} : {color:"#333", "font-weight":"normal","font-size":"16px"};
+        }
+
+        function showIconForTree(treeId, treeNode) {
+           /* return treeNode.isParent;*/
+           return true;
+        };
+
+
+        function moveUpNode(e){
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            var prevNode=treeNode.getPreNode();
+            if (nodes.length == 0||treeNode.level==0) {
+                top.window.tipError('请先选中一个区域或者通道！');
+                return;
+            }
+          /*  if(treeNode.level==0){
+               top.window.tipError('停车场不能移动！');
+               return;
+            }*/
+            if(prevNode){
+                zTree.moveNode(prevNode,treeNode, "prev");
+            }else{
+                return false;
+            }   
+        }
+
+        function moveDownNode(e){
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            var nextNode=treeNode.getNextNode();
+            if (nodes.length == 0||treeNode.level==0) {
+                top.window.tipError('请先选中一个区域或者通道！');
+                return;
+            }
+          /*  if(treeNode.level==0){
+                top.window.tipError('停车场不能移动！');
+                return;
+            }*/
+            if(nextNode){
+               zTree.moveNode(nextNode,treeNode, "next");
+            }else{
+                 return false;
+            }
+           
+            
+        }
+        
+         function skipMoveUp(e){
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            var prevNode=treeNode.getPreNode();
+            var parentNode=treeNode.getParentNode();
+            if (nodes.length == 0||treeNode.level==0||!treeNode.isParent) {
+                top.window.tipError('请先选中一个区域！');
+                return;
+            }
+           /* if(treeNode.level==0){
+                top.window.tipError('停车场不能移动！');
+                return;
+            }
+            if(!treeNode.isParent){
+              top.window.tipError('已绑定的通道不能越级移动！');
+              return;
+            }*/
+            if(prevNode){
+               if(prevNode.isParent){
+                 zTree.moveNode(prevNode,treeNode, "inner");
+                 return false;
+              }else if(parentNode.level!=0){
+                     zTree.moveNode(parentNode,treeNode, "prev");
+                     return false;
+              }
+            }else if(parentNode.level!=0){
+                  zTree.moveNode(parentNode,treeNode, "prev");
+                  return false;
+            }   
+        }
+
+        function skipMoveDown(e){
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+            var nextNode=treeNode.getNextNode();
+            var parentNode=treeNode.getParentNode();
+            if (nodes.length == 0||treeNode.level==0||!treeNode.isParent) {
+                top.window.tipError('请先选中一个区域！');
+                return;
+            }
+        /*    if(treeNode.level==0){
+                top.window.tipError('停车场不能移动！');
+                return;
+            }
+            if(!treeNode.isParent){
+              top.window.tipError('已绑定的通道不能越级移动！');
+              return;
+            }*/
+            if(nextNode){
+               if(nextNode.isParent){
+                 zTree.moveNode(nextNode,treeNode, "inner");
+                 return false;
+              }else if(parentNode.level!=0){
+                     zTree.moveNode(parentNode,treeNode, "next");
+                     return false;
+              }
+            }else if(parentNode.level!=0){
+                  zTree.moveNode(parentNode,treeNode, "next");
+                  return false;
+            }
+            
+                 
+         }
+
+        var log, className = "dark", curDragNodes, autoExpandNode;
+        function beforeDrag(treeId, treeNodes) {
+            className = (className === "dark" ? "":"dark");
+            for (var i=0,l=treeNodes.length; i<l; i++) {
+                if (treeNodes[i].drag === false) {
+                    curDragNodes = null;
+                    return false;
+                } else if (treeNodes[i].parentTId && treeNodes[i].getParentNode().childDrag === false) {
+                    curDragNodes = null;
+                    return false;
+                }
+            }
+            curDragNodes = treeNodes;
+            return true;
+        }
+        function beforeDragOpen(treeId, treeNode) {
+            autoExpandNode = treeNode;
+            return true;
+        }
+        function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+            className = (className === "dark" ? "":"dark");
+            return true;
+        }
+        /*id为treeDemo的树参数end*/
+
+      /*
+       * 获取URL参数
+       */
+      function GetRequest() {
+         var url=window.location.href;
+         var requeststr=url.split('?')[1];
+         var theRequest=new Object();
+         if(requeststr!=undefined)
+         {
+           var requestparams=requeststr.split('&');
+           for(var i=0;i<requestparams.length;i++)
+           {
+             var key=requestparams[i].split("=")[0];
+             var kvalue=requestparams[i].split("=")[1];
+             kvalue=decodeURI(kvalue);
+             theRequest[key]=decodeURI(kvalue);
+           }
+         }
+         return theRequest;
+      }
+
+ </script>
+</body>
+
+</html>

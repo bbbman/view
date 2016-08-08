@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-车辆管理-红名单车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <nav class="con-item-nav">
+                    <ul class="clearfix">
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/localCarManage.html" class="ake-third-menu">本地车辆</a></li>
+                        <li class="con-nav-item active"><a href="../../parking_vip/car_manage/redlistCarManage.html" class="ake-third-menu">红名单车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/blacklistCarManage.html" class="ake-third-menu">黑名单车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/visitedCarManage.html" class="ake-third-menu">来访车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/vipCarManage.html" class="ake-third-menu">VIP车辆</a></li>
+                    </ul>
+                </nav>
+                <div class="function clearfix">
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="synchronousDetail">同步详情</a>
+                </div>
+                <h3 class="text-primary" style="margin:14px 0">红名单规则</h3>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="rule-detail col-xs-4">
+                        <h4 class="text-primary">规则说明</h4>
+                        <p class="text-danger">红名单车辆会免费放行，放行规则以临时车通行规则为准）</p>
+                        <p class="text-danger">规则中可使用通配符，具体说明如下：</p>
+                        <p class="text-danger">？表示一位数字、字母或汉字*表示多位数字、字母或汉字</p>
+                        <p class="text-danger">例如：</p>
+                        <p class="text-danger">规则1，警*，表示所有以警字开头的车辆都为红名单车辆*学，<br>表示所有以学字结尾的车辆都是红名单车辆</p>
+                        <p class="text-danger">红名单规则1和2是或的关系</p>
+                    </div>
+                    <form class="form-horizontal col-xs-6 redRule-con" style="min-height:400px;position:relative;padding-top:20px;padding-bottom:55px">
+                        <div class="form-group redRule-form-group">
+                            <label for="" class="col-xs-3 control-label">车牌号规则1:</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+                            <button type="button" class="btn  btn-primary btn-flat pull-left" id="addRedRule">添加一行</button>
+                        </div>
+                        <div class="modal-footer" style="position:absolute;bottom:0;width:100%;padding:10px 20%">
+                            <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+    <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/main.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $(".main-sidebar").mCustomScrollbar({
+                theme: "dark"
+            });
+        }
+
+    });
+
+    //添加一行
+    $("#addRedRule").on("click",function(){
+        var length = $(".redRule-form-group").length  + 1;
+        var rule_modal = '<div class="form-group redRule-form-group"><label for="" class="col-xs-3 control-label">车牌号规则'+length +':</label>' + '<div class="col-xs-5"><input type="text" class="form-control" placeholder="">'
+        + '</div><button type="button" class="btn  btn-danger btn-flat pull-left detele-redRule">删除</button></div>';
+        $(".redRule-con").append(rule_modal);
+    });
+    //删除
+    $(document).on("click",".detele-redRule",function(){
+        $(this).closest(".redRule-form-group").remove();
+    });
+
+    $(".ake-third-menu").on('click', function() {
+        var src = $(this).attr('href');
+        parent.$("#ake-iframe").attr("src", src);
+    });
+
+    // $(".redlistRule").click(function() {
+    //     layer.open({
+    //         type: 2,
+    //         title: '红名单规则设置',
+    //         maxmin: true,
+    //         shadeClose: false, //点击遮罩关闭层
+    //         area: ['65%', '55%'],
+    //         offset: ['30px'],
+    //         content: ['modal/redlistRuleModal.html']
+    //     });
+    //     var wrap = $(".layui-layer-content ");
+    //     browser_ = /iphone|ipad/i.test(navigator.userAgent);
+    //     if (browser_ == true) {
+    //         wrap.addClass("iframe-wrap");
+    //     }
+    //     return false;
+    // })
+
+    // $("#importRedlist").click(function() {
+    //     layer.open({
+    //         type: 2,
+    //         title: '导入黑名单',
+    //         maxmin: true,
+    //         shadeClose: false, //点击遮罩关闭层
+    //         area: ['65%', '62%'],
+    //         offset: ['30px'],
+    //         content: ['modal/importRedlistModal.html']
+    //     });
+    // })
+
+    $("#synchronousDetail").click(function() {
+        layer.open({
+            type: 2,
+            title: '同步详情',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['68%', '62%'],
+            offset: ['30px'],
+            content: ['modal/synchronousRedlistModal.html']
+        });
+    })
+    </script>
+</body>
+
+</html>

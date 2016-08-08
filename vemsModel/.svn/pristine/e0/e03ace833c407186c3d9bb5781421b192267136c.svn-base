@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP类型管理-设置日期表</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="index-page">
+    <div class="content-inner ake-iframe clearfix holiday-content" id="akeHolidayCalendar" style="height:97%;">
+        <div class="con-item role-management" style="margin-bottom: 60px;">
+            <div class="row con-item-header  con-item-header-p20 clearfix">
+              <form class="col-xs-4 form-inline seting-way-box">
+                 <div class='form-group'>
+                  <div class="col-xs-12">
+                    <label class="radio-inline">
+                      <div class="iradiobox_square-blue radiobox checked">
+                           <input type="radio" class="icheck" name="radio-group" checked="checked" value="freely">
+                           <ins class="iCheck-helper"></ins>
+                      </div>
+                        自由设置
+                        
+                    </label>
+                    <label class="radio-inline">
+                        <div class="iradiobox_square-blue radiobox">
+                           <input type="radio" name="radio-group" class="icheck" value="weekly">
+                           <ins class="iCheck-helper" ></ins>
+                           </div>
+                            按周设置
+                    </label>
+                    <label class="radio-inline">
+                          <div class="iradiobox_square-blue radiobox ">
+                          <input type="radio" class="icheck"name="radio-group"  value="monthly" >
+                          <ins class="iCheck-helper"></ins>
+                          </div>
+                          按月设置
+                    </label>
+                    <label class="radio-inline">
+                          <div class="iradiobox_square-blue radiobox ">
+                          <input type="radio" class="icheck"name="radio-group"  value="themonth" >
+                          <ins class="iCheck-helper"></ins>
+                          </div>
+                          整月设置
+                    </label>
+                 </div>
+                </div>   
+             </form>
+             <div class="col-xs-4 year-switch-box"> 
+                 <div class="year-show-box">
+                     <a class="btn-arrow-left"></a>
+                     <div class="box-radius year-val">2015</div>
+                     <a class="btn-arrow-right"></a>                
+                 </div> 
+             </div>
+             <div class="col-xs-4 btn-box clearfix"> 
+                <button class="btn btn-primary btn-flat pull-right" title="保存" id="btn-calendar-save">保存</button>  
+             </div>
+            </div>
+            <div class="row" style="overflow: hidden;">
+                <div class="col-xs-12 calendar-box-wrap">
+                </div>
+                
+              </div>
+            </div>
+        </div>
+
+        <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+        <!-- <![endif]-->
+        <!--[if IE]>
+            <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <script src="../../dist/js/bootstrap.min.js"></script>
+         <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+         <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+         <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+        <script src="../../dist/js/public.js"></script>
+        <script src="../../dist/js/akecalendarset.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                var index = parent.layer.getFrameIndex(window.name), //获取窗口索引
+                    frameName,akeHolidayObject=null;
+                
+                // console.log(parent.$('.add').length);
+                
+                if(parent.$('.add').length > 0){ //如果当前是新增设置日期
+                    localStorage.clear();  //先清除存储好的日期
+                    frameName = parent.$('.add').attr("id");
+                    akeHolidayObject=$('#akeHolidayCalendar').bindakeCalendar();  //调用节假日设置插件
+
+                }else if(parent.$('.modify').length > 0){ //如果当前是修改 设置日期
+                    localStorage.clear();
+                    frameName = parent.$('.modify').attr("id");
+                    var dateListStr = [{"year":"2015","settedList":"2015-02-01,2015-02-02,2015-02-08"},{"year":"2016","settedList":"2016-02-03,2016-02-04"}];  //这里是 已经设置好的 日期，格式可以自定
+                    if(dateListStr.length>0){
+                        for(var i=0;i<dateListStr.length;i++){
+                            var name = dateListStr[i].year,
+                                value = dateListStr[i].settedList;
+                            localStorage.setItem(name,value);  //此时，存储的格式为：name:是当前的年份，value:是对应年份的已选中日期
+                        }
+                    }
+                    akeHolidayObject=$('#akeHolidayCalendar').bindakeCalendar();  //调用日期设置插件
+                }
+
+                 $('#btn-calendar-save').on('click',function(){
+
+                    var dateList = akeHolidayObject.getholidays();
+                    // 把设置好的日期 先放在 html的 隐藏域 class="dateListSetting" 中,日期格式待定
+                    parent.frames[frameName].window.$('input.dateListSetting').val(dateList);
+                    
+                    parent.layer.close(index);
+
+                     //打印所选择的日期
+                     console.log(akeHolidayObject.getholiday());
+                 });
+            })
+        </script>
+</body>
+</html>

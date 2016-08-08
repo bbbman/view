@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车辆锁定</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/ling.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style>
+    .carLock-rule-inner {
+        margin:20px 0;
+        background:#eff3f8;
+        border-radius:3px;
+        -webkit-border-radius:3px;
+        border-top: 3px solid #d2d6de;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+        height:362px;
+    }
+    .carLock-rule-inner h3{
+        margin:0;
+        height:40px;
+        line-height:40px;
+        padding-left: 20px;
+    }
+    .carLock-rule-inner .form-horizontal {
+        margin-top: 20px;
+    }
+    .carLock-rule-inner .form-horizontal .form-footer {
+        padding:10px 0;
+        margin-left:40px;
+        margin-right: 40px;
+    }
+    .carLock-rule-inner .form-horizontal .form-footer button {
+        margin-left:20px;
+    }
+    .add-carLock-box {
+        line-height:428px;
+        text-align:center;
+    }
+    .add-carLock-box .addLock-icon {
+        font-size:100px;
+        color:#3399cc;
+        cursor:pointer;
+    }
+    </style>
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <nav class="con-item-nav">
+                    <ul class="clearfix">
+                        <li class="con-nav-item active"><a href="carLock.html" class="ake-third-menu">车辆锁定</a></li>
+                        <li class="con-nav-item"><a href="fuzzyMatching.html" class="ake-third-menu">模糊匹配</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row" style="margin:0 6px">
+                <div class="col-xs-12">
+                    <div class="row carLock-con">
+                        <div class="col-xs-6 carLock-rule">
+                            <div class="carLock-rule-inner">
+                                <h3 class="text-primary"><span class="glyphicon glyphicon-cog"></span>未生效</h3>
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="" class="col-xs-4 control-label">VIP类型:</label>
+                                            <div class="col-xs-6">
+                                                <select class="form-control">
+                                                    <option>所有车辆</option>
+                                                    <option>a</option>
+                                                    <option>b</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="col-xs-4 control-label">进场自动锁定:</label>
+                                            <div class="col-xs-6">
+                                                <select class="form-control">
+                                                    <option>开启</option>
+                                                    <option>关闭</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="col-xs-4 control-label">开锁后可离场实践:</label>
+                                            <div class="col-xs-4">
+                                                <input type="text" class="form-control" placeholder="">
+                                            </div>
+                                            <div class="col-xs-2" style="margin-top:8px;margin-left:-18px">分钟</div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="col-xs-4 control-label">开锁到期未离场自动上锁:</label>
+                                            <div class="col-xs-6">
+                                                <select class="form-control">
+                                                    <option>开启</option>
+                                                    <option>关闭</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="" class="col-xs-4 control-label">缴费后自动解锁:</label>
+                                            <div class="col-xs-6">
+                                                <select class="form-control">
+                                                    <option>开启</option>
+                                                    <option>关闭</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-footer  clearfix">
+                                            <button class="btn btn-primary pull-right delete-carLock">删除规则</button>
+                                            <button class="btn btn-primary pull-right">保存规则</button>
+                                        </div>
+                                    </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 carLock-rule add-carLock-rule">
+                            <div class="carLock-rule-inner add-carLock-box">
+                                    <span class="glyphicon glyphicon-plus addLock-icon"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+
+    <script>
+    $(function(){
+        $(".addLock-icon").on('click',function(){
+            var html = '<div class="col-xs-6 carLock-rule"><div class=carLock-rule-inner><h3 class=text-primary><span class="glyphicon glyphicon-cog"></span>未生效</h3><form class=form-horizontal><div class=form-group><label for="" class="col-xs-4 control-label">VIP类型:</label><div class=col-xs-6><select class=form-control><option>所有车辆<option>a<option>b</select></div></div><div class=form-group><label for="" class="col-xs-4 control-label">进场自动锁定:</label><div class=col-xs-6><select class=form-control><option>开启<option>关闭</select></div></div><div class=form-group><label for="" class="col-xs-4 control-label">开锁后可离场实践:</label><div class=col-xs-4><input class=form-control placeholder=""></div><div class=col-xs-2 style=margin-top:8px;margin-left:-18px>分钟</div></div><div class=form-group><label for="" class="col-xs-4 control-label">开锁到期未离场自动上锁:</label><div class=col-xs-6><select class=form-control><option>开启<option>关闭</select></div></div><div class=form-group><label for="" class="col-xs-4 control-label">缴费后自动解锁:</label><div class=col-xs-6><select class=form-control><option>开启<option>关闭</select></div></div><div class="form-footer clearfix"><button class="btn btn-primary pull-right delete-carLock">删除规则</button> <button class="btn btn-primary pull-right">保存规则</button></div></form></div></div>';
+                $('.add-carLock-rule').before(html);
+        });
+
+
+
+        var del_item;
+        function deleteCarLock(){
+            del_item.remove();
+        }
+        $(document).on('click','.delete-carLock',function(){
+            del_item = $(this).closest('.carLock-rule');
+            window.top.showAffirmModal('删除安全配置', '您确定要删除本安全配置吗?', deleteCarLock);
+            return false;
+        })
+    })
+
+    </script>
+</body>
+
+</html>

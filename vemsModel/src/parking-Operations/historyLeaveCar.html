@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>历史出场车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">停车场名称</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">停车场名称</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                                <option>停车场1</option>
+                                <option>停车场2</option>
+                                <option>停车场3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">车牌号码</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">车牌号码</div>
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">进场时间</label>
+                        <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-time glyphicon "></div>
+                            <input type="text" class="form-control time-input" id="approachTime" placeholder="请选择进场时间" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">出场时间</label>
+                        <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-time glyphicon "></div>
+                            <input type="text" class="form-control time-input" id="leaveTime" placeholder="请选择出场时间" readonly>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="sr-only" for="">进场通道</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">进场通道</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="sr-only" for="">出场通道</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">出场通道</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="sr-only" for="">进场VIP类型</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">进场VIP类型</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="sr-only" for="">出场VIP类型</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">出场VIP类型</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>车牌号</th>
+                                    <th>卡号</th>
+                                    <th>停车时长</th>
+                                    <th>VIP类型</th>
+                                    <th>停车场名称</th>
+                                    <th>进场时间</th>
+                                    <th>进场通道</th>
+                                    <th>进场车牌照片</th>
+                                    <th>出场时间</th>
+                                    <th>出场通道</th>
+                                    <th>出场车牌照片</th>
+                                    <th>应收</th>
+                                    <th>实收</th>
+                                    <th>优惠</th>
+                                    <th class="hidden-480">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>合计</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a class='look-plsteImg'>查看大图</a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a class='look-plsteImg'>查看大图</a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info open-leavecar-detail-modal" title="校正" >详情</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">...</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /span -->
+            <!-- /span -->
+        </div>
+        <!-- /row -->
+    </div>
+    </div>
+    <!--ake-add-madal -->
+    <!-- 表单modal -->
+    <div class="modal fade ake-modal" id="leavecar-detail-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">历史出场车辆详情</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row leavecar-detail-list">
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">停车场：</span>
+                            <span class="col-sm-9">顺联国际停车场</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">车牌：</span>
+                            <span class="col-sm-9">粤A 12345</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">进场时间：</span>
+                            <span class="col-sm-9">2015-11-23 10:34</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">出场时间：</span>
+                            <span class="col-sm-9">2015-11-23 10:34</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">停车时长：</span>
+                            <span class="col-sm-9">2小时</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">应收金额：</span>
+                            <span class="col-sm-9">10元</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">实收金额：</span>
+                            <span class="col-sm-9">3元</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-detail-item">
+                            <span class="col-sm-3 item-title">优惠金额：</span>
+                            <span class="col-sm-9">7元</span>
+                        </div>
+                        <div class="col-sm-12 leavecar-pay-detail">
+                            <!--                             <div class="col-xs-12"> -->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>支付来源</th>
+                                            <th>支付方式</th>
+                                            <th>支付金额</th>
+                                            <th>优惠</th>
+                                            <th>时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>线上缴费</td>
+                                            <td>不详</td>
+                                            <td>3</td>
+                                            <td>不详</td>
+                                            <td>2015-12-23 11:30</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--   </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-primary  btn-flat  pull-right" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--查看大图modal-->
+    <div class="modal fade imgDetail-modal" id="look-bigPlate-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-lg history-imgDetail" role="document">
+            <div class="modal-content row">
+                <div class="modal-header clearfix col-xs-12">
+                   
+                    <h4 class="modal-title text-center col-xs-6 pt0" id="exampleModalLabel">进场大图</h4>
+                    <h4 class="modal-title text-center col-xs-6 pt0" id="exampleModalLabel">出场大图 
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </h4>
+                </div>
+                <div class="modal-body col-xs-12 pt0">
+                    <div class="big-plate-img col-xs-6">
+                        <img src="../dist/images/plate-test.jpg" alt="车牌大图" style="width:100%;">
+                    </div>
+                    <div class="big-plate-img col-xs-6">
+                        <img src="../dist/images/plate-test.jpg" alt="车牌大图" style="width:100%;">
+                    </div>
+                </div>
+                <div class="modal-footer col-xs-12">  
+                    <button type="button" class="btn  btn-primary btn-flat col-xs-offset-3 col-xs-2">上一条</button>
+                    <button type="button" class="btn  btn-primary btn-flat  col-xs-offset-3 col-xs-2 next-btn">下一条</button>
+                    <button type="button" class="btn  btn-default btn-flat col-xs-offset-1  col-xs-1  close-btn" data-dismiss="modal">关闭</button> 
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../dist/js/timeset.js"></script>
+
+    
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $(".main-sidebar").mCustomScrollbar({
+                theme: "dark"
+            });
+        }
+        //绑定时间区间控件
+        $('#approachTime').binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY-MM-DD HH:mm',
+            isTimePicker: true,
+            position: 'left'
+        });
+
+        $('#leaveTime').binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY-MM-DD HH:mm',
+            isTimePicker: true,
+            position: 'left'
+        });
+        //点击查看大图
+        $(document).on('click', '.look-plsteImg', function(e) {
+            $('#look-bigPlate-modal').modal('show');
+
+        });
+
+        $(document).on("click", ".open-leavecar-detail-modal", function() {
+            layer.open({
+                type: 2,
+                title: '历史出场车辆详情',
+                maxmin: true,
+                shadeClose: false, //点击遮罩关闭层
+                area: ['98%', '80%'],
+                offset: ['30px'],
+                content: ['modal/leavecar-detail-modal.html']
+            });
+            var wrap =  $(".layui-layer-content ");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+        })
+    });
+    </script>
+</body>
+
+</html>

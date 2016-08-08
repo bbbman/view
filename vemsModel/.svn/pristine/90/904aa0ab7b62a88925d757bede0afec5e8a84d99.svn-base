@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>绑定收费规则</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body bind-chargeRule-modal">
+           <div class="bind-rule-wrap">
+            <div class="bind-rule-head clearfix">
+                <ul class="head-nav pull-left">
+                    <li><a class="active-rule" data-name="group0" title="默认收费规则">默认收费规则</a></li>
+                <!--     <li><a>默认收费规则</a></li>
+                <li><a>默认收费规则</a></li>
+                <li><a>默认收费规则</a></li> -->
+                </ul>
+                <button class="btn btn-flat btn-primary btn-add pull-right">+添加计费组</button>
+            </div>
+            <div class="bind-rule-body" id="group0">
+                <div class="rule-way bind-default-rule-way">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox1" value="option1">区分工作日
+                    </label>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" id="inlineCheckbox2" value="option2">区分大小车
+                    </label>
+                </div>
+                <div class=" row rule-way bind-new-rule-way hidden">
+                     <div class="col-sm-4 form-group">
+                        <label class="col-sm-5 control-label">组编号：</label>
+                        <div class="col-sm-7">
+                           <input type="text" class="form-control" placeholder="" readonly="">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <label class="checkbox-inline">
+                          <input type="checkbox" id="inlineCheckbox1" value="option1">区分工作日
+                        </label>
+                        <label class="checkbox-inline">
+                          <input type="checkbox" id="inlineCheckbox2" value="option2">区分大小车
+                        </label>
+                    </div>
+                     <div class="col-sm-3 form-group clearfix">
+                        <button class="btn btn-flat btn-info btn-del-rule-group pull-left">删除组</button>
+                         <button class="btn btn-flat btn-info btn-update-rule-group pull-right">修改组</button>
+                    </div>
+                </div>
+                <div class="bind-rule-content default-bind-box">
+                    <div class="row">
+                        <div class="col-sm-12 form-group">
+                            <label class="col-sm-2 control-label">默认收费规则：</label>
+                            <div class="col-sm-3">
+                                <select  class="form-control">
+                                  <option>规则1</option>
+                                  <option>规则2</option>
+                                  <option>规则3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bind-rule-content distinguish-working-day hidden">
+                    <div class="workday-box "> 
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6 form-group">
+                                        <label class="col-sm-5 control-label">工作日收费规则：</label>
+                                        <div class="col-sm-7">
+                                            <select  class="form-control">
+                                              <option>规则1</option>
+                                              <option>规则2</option>
+                                              <option>规则3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>     
+                    </div>
+                     <div class='divider'></div>
+                    <div class="nonworkday-box ">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-6 form-group">
+                                        <label class="col-sm-5 control-label">非工作日收费规则：</label>
+                                        <div class="col-sm-7">
+                                            <select  class="form-control">
+                                              <option>规则1</option>
+                                              <option>规则2</option>
+                                              <option>规则3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                  <div class='divider'></div>
+                 
+                </div>
+                <div class="bind-rule-content distinguish-working-day-car  hidden">
+                    <div class="workday-box">
+                         <h4>工作日收费规则</h4>
+                         <div class="row workday-twoway-con ">
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">小型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">中型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">大型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">超大车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                         </div>
+                         <!--two-bindway-box-->
+                        <div class='divider'></div>
+                    </div>
+                    <div class="nonworkday-box ">
+                         <h4>非工作日收费规则</h4>
+                         <div class="row nonworkday-twoway-con" >
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">小型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">中型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">大型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">超大车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                         </div>
+                    <div class='divider'></div>
+                  </div>
+                </div>
+                <div class="bind-rule-content distinguish-car hidden">
+                    <div class="workday-box">
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">小型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">中型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">大型车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <label class="col-sm-3 control-label">超大车：</label>
+                                <div class="col-sm-9">
+                                   <select  class="form-control">
+                                      <option>规则1</option>
+                                      <option>规则2</option>
+                                      <option>规则3</option>
+                                    </select>
+                                </div>
+                            </div>
+                         <!--two-bindway-box-->
+                         </div>
+                        <div class='divider'></div>
+                   </div>
+               </div>
+            </div> 
+                <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left close-modal">取消</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="btn-save">保存设置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- 
+    ake-add-madal 
+      表单modal
+    <div class="modal fade ake-modal " id="bind-chargeRule-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-lg bind-chargeRule-modal" role="document">
+            
+        </div>
+    </div> -->
+
+
+     <!--ake-add-madal -->
+    <!-- 表单modal -->
+    <div class="modal fade ake-modal" id="add-chargeGroup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">新增计费组</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal"> 
+                       <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">计费组编号:</label>
+                            <div class="col-sm-5">
+                               <input type="text" class="form-control" placeholder=""  id="groupNum">
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">计费组名称:</label>
+                            <div class="col-sm-5">
+                               <input type="text" class="form-control" placeholder="" id="groupName" >
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                   <input type="hidden" val="add">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">取消</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="sureBtn">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../dist/js/main.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+      };
+
+
+      $(".close-modal").on("click", function() {
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });  
+
+      
+       $('#bind-chargeRule-modal').modal('show');
+       //绑定收费规则modal中的事件
+       $(document).on('click','.rule-way input:checkbox',function(e){
+            var $this=$(e.target);
+            var currentId=$('.bind-rule-head .active-rule').attr('data-name');
+            var Val=$this.val();
+            var $checkbox;
+            if(currentId=='group0'){
+                 $checkbox=$('#'+currentId+' .bind-default-rule-way input:checkbox'); 
+            }else{
+                 $checkbox=$('#'+currentId+' .bind-new-rule-way input:checkbox');  
+            }
+            var isTwoWay=$checkbox.eq(0).prop('checked')&&$checkbox.eq(1).prop('checked');
+                $('#'+currentId+' .bind-rule-content input').val('');
+                $('#'+currentId+' .bind-rule-content select option:first').prop('checked','checked');
+            if(!isTwoWay){
+                var checkedVal=$('#'+currentId+' .bind-new-rule-way input:checkbox:checked').val();
+                if(currentId=='group0'){
+                        checkedVal=$('#'+currentId+' .bind-default-rule-way input:checkbox:checked').val(); 
+                    }
+               if(checkedVal=='option1'){ 
+                  $('#'+currentId+' .default-bind-box').addClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day-car').addClass('hidden');
+                  $('#'+currentId+' .distinguish-car').addClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day').removeClass('hidden');
+               }else if(checkedVal=='option2'){
+                  $('#'+currentId+' .default-bind-box').addClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day-car').addClass('hidden');
+                  $('#'+currentId+' .distinguish-car').removeClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day').addClass('hidden');
+               }else if(checkedVal==undefined||checkedVal==null){
+                  $('#'+currentId+' .default-bind-box').removeClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day-car').addClass('hidden');
+                  $('#'+currentId+' .distinguish-car').addClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day').addClass('hidden');
+               }
+            }else{
+                  $('#'+currentId+' .default-bind-box').addClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day-car').removeClass('hidden');
+                  $('#'+currentId+' .distinguish-car').addClass('hidden');
+                  $('#'+currentId+' .distinguish-working-day').addClass('hidden');
+            }
+       });
+
+       
+        //添加收费规则组弹窗
+         $(document).on('click','.bind-rule-head .btn-add',function(e){
+             var $this=$(e.target);
+             $('#add-chargeGroup-modal #groupNum').val('');
+             $('#add-chargeGroup-modal #groupName').val('');
+             $('#add-chargeGroup-modal .modal-title').text("添加计费组");
+             $('#add-chargeGroup-modal input[type="hidden"]').val('add');
+             $('#add-chargeGroup-modal').modal('show');
+             
+         });
+       //点击添加弹窗的确认按钮
+       $('#add-chargeGroup-modal #sureBtn').on("click",function(){
+            var groupNum= $.trim($('#add-chargeGroup-modal #groupNum').val());
+            var groupName= $.trim($('#add-chargeGroup-modal #groupName').val());
+            if(groupNum==""||groupName==""){
+                 return false;
+            }
+            $('#add-chargeGroup-modal').modal('hide');
+            if($('#add-chargeGroup-modal input[type="hidden"]').val()=="update"){
+                var currentId=$('.bind-rule-head .active-rule').attr('data-name');
+                $('.bind-rule-head .active-rule').attr('title',groupName);
+                var name=groupName;
+                if(groupName.length>6){
+                    name=groupName.substring(0, 6);
+                 }
+                $('.bind-rule-head .active-rule').text(name);
+                $('#'+currentId+' .bind-new-rule-way input[type="text"]').val(groupNum);
+            }else{
+              var l=$('.bind-rule-head .head-nav li').length;
+             if(l>=20){
+               alert('收费规则组不得超过20个');
+               return false;
+               }
+             var $rulegroup=$('#group0').clone().attr('id','group'+l)
+                 $rulegroup.find('.bind-rule-content input').val('');
+                 $rulegroup.find('.bind-rule-content select option:first').prop('checked','checked');
+                 $rulegroup.find('.bind-rule-content input:checkbox').removeAttr('checked');
+                 $rulegroup.find('.bind-default-rule-way').addClass('hidden');
+                 $rulegroup.find('.bind-new-rule-way').removeClass('hidden');
+                 $rulegroup.find('.bind-new-rule-way input[type="text"]').val(groupNum);
+
+                 $rulegroup.find('.default-bind-box').removeClass('hidden');
+                 $rulegroup.find('.distinguish-working-day-car').addClass('hidden');
+                 $rulegroup.find('.distinguish-car').addClass('hidden');
+                 $rulegroup.find('.distinguish-working-day').addClass('hidden');
+
+                 $rulegroup.css('display','block');
+                 $('.bind-rule-head .head-nav a').removeClass('active-rule');
+                 var name=groupName;
+                 if(groupName.length>6){
+                    name=groupName.substring(0, 6);
+                 }
+                 $('.bind-rule-head .head-nav').append('<li><a class="active-rule" data-name="group'+l+'" title="'+groupName+'">'+name+'</a></li>');
+                 $('.bind-rule-body').css('display','none');
+                $('.bind-chargeRule-modal .bind-rule-wrap').append($rulegroup);
+            }
+            
+       });
+         
+      //删除收费规则组
+       $(document).on('click','.btn-del-rule-group',function(e){
+             var $this=$(e.target);
+             var id=$this.closest('.bind-rule-body').attr('id');
+                 $('#'+id).remove();
+                 $('.bind-rule-head .head-nav a[data-name='+id+']').remove();
+
+                 $('.bind-rule-head .head-nav a:first').addClass('active-rule');
+                 $('#group0').css('display','block');
+         });
+
+       //修改收费规则组
+        $(document).on('click','.btn-update-rule-group',function(e){
+             var currentId=$('.bind-rule-head .active-rule').attr('data-name');
+             var groupName=$('.bind-rule-head .active-rule').attr('title');
+             var groupNum=$('#'+currentId+' .bind-new-rule-way input[type="text"]').val();
+             $('#add-chargeGroup-modal #groupNum').val(groupNum);
+             $('#add-chargeGroup-modal #groupName').val(groupName);
+             $('#add-chargeGroup-modal .modal-title').text("修改计费组");
+             $('#add-chargeGroup-modal input[type="hidden"]').val('update');
+             $('#add-chargeGroup-modal').modal('show');
+            
+         });
+       //modal头部导航切换
+       $(document).on('click','.bind-rule-head .head-nav a',function(e){
+            var $this=$(e.target);
+            var id=$this.attr('data-name');
+                $('.bind-rule-head .head-nav a').removeClass('active-rule');
+                $('.bind-rule-body').css('display','none');
+                $this.addClass('active-rule');
+                $('#'+id).css('display','block');
+       });
+
+
+    });
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="ake-modal-body" style="overflow-x:hidden">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <ul id="treeDemo" class="ztree"></ul>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn  btn-default btn-flat  pull-left close-modal">取消</button>
+            <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">确认</button>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script>
+        $(".close-modal").on("click", function() {
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+
+        // tree setting
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            }
+        };
+        // 数据格式一
+        var zNodes = [{
+            id: 1,
+            pId: 0,
+            name: "随意勾选 1",
+            open: true,
+          
+        }, {
+            id: 11,
+            pId: 1,
+            name: "随意勾选 1-1",
+            open: true,
+          
+        }, {
+            id: 111,
+            pId: 11,
+            name: "随意勾选 1-1-1",
+      
+        }, {
+            id: 112,
+            pId: 11,
+            name: "随意勾选 1-1-2",
+        }, {
+            id: 12,
+            pId: 1,
+            name: "随意勾选 1-2",
+            open: true
+        }, {
+            id: 121,
+            pId: 12,
+            name: "随意勾选 1-2-1"
+        }, {
+            id: 122,
+            pId: 12,
+            name: "随意勾选 1-2-2"
+        }, {
+            id: 2,
+            pId: 0,
+            name: "随意勾选 2",
+            checked: true,
+            open: true
+        }, {
+            id: 21,
+            pId: 2,
+            name: "随意勾选 2-1"
+        }, {
+            id: 22,
+            pId: 2,
+            name: "随意勾选 2-2",
+            open: true
+        }, {
+            id: 221,
+            pId: 22,
+            name: "随意勾选 2-2-1",
+            checked: true
+        }, {
+            id: 222,
+            pId: 22,
+            name: "随意勾选 2-2-2"
+        }, {
+            id: 23,
+            pId: 2,
+            name: "随意勾选 2-3"
+        }];
+        //标准格式
+        // var zNodes =[
+        //       { name:"父节点1 - 展开", open:true,
+        //         children: [
+        //           { name:"父节点11 - 折叠",
+        //             children: [
+        //               { name:"叶子节点111"},
+        //               { name:"叶子节点112"},
+        //               { name:"叶子节点113"},
+        //               { name:"叶子节点114"}
+        //             ]},
+        //           { name:"父节点12 - 折叠",
+        //             children: [
+        //               { name:"叶子节点121"},
+        //               { name:"叶子节点122"},
+        //               { name:"叶子节点123"},
+        //               { name:"叶子节点124"}
+        //             ]},
+        //           { name:"父节点13 - 没有子节点", isParent:true}
+        //         ]},
+        //       { name:"父节点2 - 折叠",
+        //         children: [
+        //           { name:"父节点21 - 展开", open:true,
+        //             children: [
+        //               { name:"叶子节点211"},
+        //               { name:"叶子节点212"},
+        //               { name:"叶子节点213"},
+        //               { name:"叶子节点214"}
+        //             ]},
+        //           { name:"父节点22 - 折叠",
+        //             children: [
+        //               { name:"叶子节点221"},
+        //               { name:"叶子节点222"},
+        //               { name:"叶子节点223"},
+        //               { name:"叶子节点224"}
+        //             ]},
+        //           { name:"父节点23 - 折叠",
+        //             children: [
+        //               { name:"叶子节点231"},
+        //               { name:"叶子节点232"},
+        //               { name:"叶子节点233"},
+        //               { name:"叶子节点234"}
+        //             ]}
+        //         ]},
+        //       { name:"父节点3 - 没有子节点", isParent:true}
+
+        //     ];
+        //初始化tree
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+        //获取节点数据
+
+        // $("#setting-function-modal button").on("click", function() {
+        //     var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        //     var nodes = treeObj.getCheckedNodes(true); //获取tree被勾选的节点
+        //     for (var i = 0; i < nodes.length; i++) {
+        //         console.log(nodes[i].id)
+        //     };
+        // });
+    </script>
+    
+
+  
+
+    </body>
+
+    </html>

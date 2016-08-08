@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP类型管理-查看通行权限</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通行权限:</label>
+                   <div class="col-xs-9 apply-parking" style="min-height: 34px;width:56%;">
+                      <ul id="treeDemo" class="ztree"></ul>
+                   </div>
+               </div>
+               <div class="modal-footer" style="text-align: center;">
+                   <button type="button" class="btn  btn-primary btn-flat" id="cancel">关闭</button>
+               </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+
+        })
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })       
+
+        <!--
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            view: {
+              showIcon: false,
+              showLine: false
+            }
+        };
+
+        var zNodes =[
+            { id:1, pId:0, name:"停车场A",nocheck: true, open:true},
+            { id:11, pId:1, name:"区域一",nocheck: true, open:true},
+            { id:111, pId:11, name:"通道1",checked:true,chkDisabled:true},
+            { id:112, pId:11, name:"通道2",checked:true,chkDisabled:true},
+            { id:113, pId:11, name:"区域二",nocheck: true,open:true},
+            { id:1131, pId:113, name:"通道3",chkDisabled:true},
+            { id:1132, pId:113, name:"通道4",checked:true,chkDisabled:true},
+            { id:1133, pId:113, name:"通道5",checked:true,chkDisabled:true},
+            { id:1134, pId:113, name:"通道6",checked:true,chkDisabled:true},
+            { id:2, pId:0, name:"停车场B", nocheck: true, open:true},
+            { id:21, pId:2, name:"区域一",nocheck: true,open:true},
+            { id:211, pId:21, name:"通道1",checked:true,chkDisabled:true},
+            { id:212, pId:21, name:"通道2",checked:true,chkDisabled:true}
+        ];
+
+        /**
+         * 注意：
+         *  id的命名规则为：
+         *      第一层节点为一位数，按顺序从1开始，依此类推；
+         *      第二层的节点为两位数，十位数取父节点的id，个位数为此节点在同级节点中的位置；
+         *      第三层的节点为三位数，前两位数为其父节点的id，各位数为此节点在同级节点中的位置；
+         *      依此类推。
+         *  
+         *  pId的命名规则为：
+         *      如果此节点为第一层节点，则pId=0；否则，pId为此节点的id的前两位。如，如果此节点id为1132，则PId为113。
+         *      以此类推。
+         *  checked:表示初始化的时候，节点是否选中状态
+         *  open:表示初始化时是否打开此节点
+         *  nocheck：为TRUE时表示该节点无checkbox
+         *  chkDisabled:true表示禁用当前checkbox ,即不可选,只做显示
+         */
+        
+        var code;
+        
+        function setCheck() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            py = $("#py").attr("checked")? "p":"",
+            sy = $("#sy").attr("checked")? "s":"",
+            pn = $("#pn").attr("checked")? "p":"",
+            sn = $("#sn").attr("checked")? "s":"",
+            type = { "Y":py + sy, "N":pn + sn};
+            zTree.setting.check.chkboxType = type;
+            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+        }
+        function showCode(str) {
+            if (!code) code = $("#code");
+            code.empty();
+            code.append("<li>"+str+"</li>");
+        }
+
+        $(function(){
+          $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+          setCheck();
+          $("#py").bind("change", setCheck);
+          $("#sy").bind("change", setCheck);
+          $("#pn").bind("change", setCheck);
+          $("#sn").bind("change", setCheck);
+        })
+
+
+    </script>
+</body>
+</html>

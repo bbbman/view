@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>版本说明</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+    <style>
+        .version-body dl{
+            font-size: 16px;
+        }
+        .version-body dt ,.version-body dd {
+           line-height: 36px;
+        }
+    </style>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body version-body" >
+    <div class="content-inner" style="box-shadow:none">
+        <div class="con-item role-management" style="background:#fff">
+            <h3 class="bg-success" style="padding:15px 0 15px 80px">版本说明</h3>
+            <dl class="dl-horizontal">
+                <dt  class="text-primary">系统名称：</dt>
+                <dd>视频一体机停车场管理系统</dd>
+                <dt  class="text-primary">版本号：</dt>
+                <dd>v1.0.0</dd>
+                <dt  class="text-primary">上线时间：</dt>
+                <dd>2015-01-12 </dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt  class="text-primary">上一版本号：</dt>
+                <dd>v1.1.1</dd>
+                <dt  class="text-primary">上线时间：</dt>
+                <dd>2015-01-12 </dd>
+            </dl>
+            <h3 class="bg-info" style="padding:15px 0 15px 80px">更新内容说明</h3>
+            <dl class="dl-horizontal">
+                <dt  class="text-primary">新增：</dt>
+                <dd>KKJJ:KJLKJLFKLGLS;JFGLKFSJGKLFJ</dd>
+                <dt  class="text-primary">修改：</dt>
+                <dd>skdjfkjSLKDJFL;FJGL;KJS;JSKLFJKLGFJ</dd>
+                <dt  class="text-primary">升级：</dt>
+                <dd>skdjkjfgSDJFKLFJ;FLJF;GJFSFLKJG;LJSFG</dd>
+                <dt  class="text-primary">删除：</dt>
+                <dd>KDJFKJFKFJLKJFFKJGKFJSKFJ;GKFJG;KF</dd>
+            </dl>
+        </div>
+    </div>
+</body>
+
+</html>

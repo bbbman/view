@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP车主管理-VIP车主管理-批量开通或续期VIP</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="notice">
+                    <span class="col-xs-12 orange mb20">
+                        <h5>温馨提示：请按照以下步骤进行导入</h5>
+                        <p>1、请先下载模板文件，严格按照模板文件格式进行填写，不可更改文件格式.</p>
+                        <p>2、模板文件填写完成后，浏览选择文件，然后点击上传。</p>
+                        <p>3、如果上传失败，请下载失败文件，并注意失败原因的提示。重新填写上传。</p>
+                        <p>PS：此步骤仅供页面样式测试，请开发人员按具体情况自行填写。</p>
+                    </span>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="businesskey" class="col-xs-3 control-label">下载模板:</label>
+                        <div class="col-xs-8">
+                            <span class="col-xs-8 uploaded-file ellipsis">XXX.xls</span>
+                            <input type="button" value="下载" class="upload-btn col-xs-2 pull-right" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="businesskey" class="col-xs-3 control-label">上传文件:</label>
+                        <div class="col-xs-8">
+                            <input type='text' name='textfield' id='textfield' class='form-control pull-left txt' style="width:60%;" />  
+                            <input type='button' class='upload-btn col-xs-2 ml15' value='浏览...' />
+                                <input type="file" name="fileField" class="file upload-btn col-xs-9" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                            <input type="button" name="upload" class="upload-btn col-xs-2 pull-right" value="上传" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span id="upload-fail-tip" class="col-xs-offset-3 col-xs-8 red fail-tip">上传失败，文档格式错误，请下载失败文件！</span>
+                    </div>
+                    <div class="form-group orange">
+                        <label for="businesskey" class="col-xs-3 control-label">下载失败文件:</label>
+                        <div class="col-xs-8">
+                            <span class="col-xs-8 uploaded-file ellipsis">XXX.xls</span>
+                            <input type="button" value="下载" class="upload-btn col-xs-2 pull-right" />
+                        </div>
+                    </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+               </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+    <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+    <script src="../../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+        })
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+        
+
+    </script>
+</body>
+</html>

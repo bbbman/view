@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>重置密码</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+		<script src="dist/js/html5shiv.js"></script>
+		<script src="dist/js/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body class="login-page reset-page">
+    <div class="login-wrap">
+        <header>
+            <img src="dist/images/top_pic.png" alt="">
+        </header>
+        <div class="login-box">
+            <h3>重置密码</h3>
+            <a href="#" class="link-back"><&nbsp;返回登录</a>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="用户名">
+                    </div>
+                    <div class="warning-tips">
+                        <img src="dist/images/alarm.png" alt="">用户名不存在
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">验证码</label>
+                    <div class="col-sm-6 yanzheng-input">
+                        <input type="text" class="form-control" id="inputPassword3" placeholder="验证码">
+                    </div>
+                    <div class="col-sm-3 getyanzheng"><a href="#">获取验证码</a></div>
+                    <div class="warning-tips">
+                        <img src="dist/images/alarm.png" alt="">用户名不存在
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">新密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="inputEmail3" placeholder="">
+                    </div>
+                    <div class="warning-tips">
+                        <img src="dist/images/alarm.png" alt="">用户名不存在
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">确认密码</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="inputEmail3" placeholder="">
+                    </div>
+                    <div class="warning-tips">
+                        <img src="dist/images/alarm.png" alt="">用户名不存在
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="enter-btn">
+                        <button type="submit" class="btn btn-default btn-block">重置密码</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+
+		<script src="dist/js/jquery-1.10.2.min.js"></script>
+
+	<![endif]-->
+</body>
+
+</html>

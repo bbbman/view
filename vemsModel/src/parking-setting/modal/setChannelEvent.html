@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>通道管理-设置通道触发事件</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../dist/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<style>
+   section {
+      position: absolute;
+      top: 5px;
+      right: 138px;
+      display: inline-block;
+    }
+.checkbox {
+    position: relative;
+    display: inline-block;
+}
+
+
+.checkbox input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+.checkbox label {
+    width: 90px;
+    height: 42px;
+    background: #ccc;
+    position: relative;
+    display: inline-block;
+    border-radius: 46px;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.checkbox input:checked + label:after {
+    left: 40px;
+}
+
+
+.checkbox label:after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    left: 0;
+    top: -5px;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.checkbox input:checked + label:after {
+    left: 40px;
+}
+.checkbox label:after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    left: 0;
+    top: -5px;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+}
+
+.start-close-btn .checkbox:after, .start-close-btn .checkbox:before {
+  content: 'OFF';
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 12px;
+  color: #90201F;
+  color: #cc3432;
+}
+.start-close-btn .checkbox:before {
+  content: 'ON';
+  left: 10px;
+  z-index: 1;
+  color: #256c32;
+}
+.start-close-btn .checkbox label {
+  background: #fff;
+  height: 32px;
+  border-radius: 0;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.start-close-btn .checkbox label:after {
+  background: #90201F;
+  border-radius: 0;
+  box-shadow: none !important;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  top: 0;
+  width: 40px;
+  height: 32px;
+}
+.start-close-btn .checkbox input:checked + label:after {
+  background: #4BD865;
+  left: 50px;
+}
+.start-close-btn .btn-title{
+    display: inline-block;
+    position: relative;
+    top: -10px;
+    font-size: 14px;
+    right: 8px;
+    font-weight: bold;
+}
+    
+</style>
+<body class="ake-modal-body" style="overflow-x:hidden">
+    <div class="modal-content ake-iframe-modal set-channel-event">
+        <div class="modal-body col-xs-12 pt0">
+           <div class="left-wrap col-xs-3 pt0">
+              <ul class="list-unstyled">
+                  <li><a class="btn-add" id="addEventBtn">+添加一个事件</a></li>
+                 <!--  <li><a class="event-name event-active" data-link="">元旦免费停车</a></li> -->
+              </ul> 
+           </div>
+           <div class="right-wrap col-xs-9 pt0">
+              
+            </div>
+            <div class="col-xs-12 pt0">
+              <div class="modal-footer col-xs-12">
+                <button type="button" class="btn  btn-default btn-flat  pull-left close-modal" >取消</button> 
+                <button type="button" class="btn  btn-primary btn-flat pull-right">保存</button>
+               </div> 
+            </div>
+          </div>  
+        </div>
+    </div>
+
+
+<!-- 事件模板 -->
+<div class="event-box hidden" data-id="eventTemplate">
+    <div class="event-header form-horizontal">
+        <div class="form-group">
+            <label for="" class="col-xs-2 control-label">事件名称:</label>
+            <div class="col-xs-5">
+                <input type="text" class="form-control" placeholder="" data-id="eventName" value="新事件">
+            </div>
+        </div>
+        <section class="start-close-btn">
+          <div class="btn-title">状态:</div>
+          <div class="checkbox">
+            <input type="checkbox" checked="checked"/>
+            <label></label>
+          </div>
+        </section>
+        <input type="hidden" value="1"/>
+        <a class="event-del btn-del" data-id="delEventBtn">删除事件</a>
+    </div>
+    <!--  event-header-->
+
+    <div class="event-body">
+        <div class="event-content">
+            <h4>触发内容</h4>
+            <div class="form-horizontal">
+               <div class="form-group">
+                    <label for="" class="col-xs-2 control-label">优惠券类型:</label>
+                    <div class="col-xs-3">
+                        <select class="form-control" data-id="couoponType">
+                            <option value="timeCoupon">时间券</option>
+                            <option value="freeCoupon">免费券</option>
+                            <option value="deductionCoupon">金额扣减券</option>
+                            <option value="discountCoupon">金额折扣券</option>
+                            <option value="fixedvalueCoupon">金额固定值券</option>
+                            <option value="valuationCoupon">不同计价券</option>
+                            <option value="cappingCoupon">时间段封顶券</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-2 control-label related-title">优惠券面值:</label>
+                     <div class="col-xs-4 typeBox">
+                        <div class="col-xs-2 sign-type-box hidden  pt0">
+                          <span class="sign-type">+</span>
+                          <input type="hidden" class="sign" value="+">
+                        </div>
+                        <select class="col-xs-10 form-control hidden" data-id="moneyType" style="width:75%;">
+                            <option value="">应交金额</option>
+                            <option value="">实交金额</option>
+                            <option value="">优惠金额</option>
+                            <option value="aggregate-money">时间段累计交费</option>
+                            <option value="user-defined">自定义</option>
+                        </select>
+                        <select class="form-control " data-id="timeType">
+                            <option value="">停车时长</option>
+                            <option value="user-defined">自定义</option>
+                        </select>
+                    </div>
+                    <span class="col-xs-1 unit">+</span>
+                    <div class="col-xs-4 related">
+                        <span class="free-coupon  hidden" data-id="freeCoupon">0</span>
+                        <input type="text" class="form-control" placeholder=""  >
+                        <select class="form-control hidden" data-id="valuationCoupon">
+                            <option value="">计费组1计费组</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-6 relate-aggregate-money hidden">
+                        <input type="text" class="form-control timePoint-input" placeholder="起始时间" readonly="" style="width:80px; display:inline-block;"><input type="text" class="form-control aggregateMoney-day" placeholder="天" style="width:50px; display:inline-block;margin-left:10px;">
+                        <span class="">至</span> 
+                        <input type="text" class="form-control timePoint-input" placeholder="结束时间" readonly=""style="width:80px; display:inline-block;"><input type="text" class="form-control aggregateMoney-day "placeholder="天"  style="width:50px;display:inline-block; margin-left:10px;">
+                    </div>
+                </div>
+                <div  class="form-group relate-aggregate-money hidden">
+                    <div class="col-xs-offset-2 col-xs-10">
+                         <span class="col-xs-1 unit">+</span>
+                         <div class="col-xs-4">
+                             <input type="text" class="form-control" placeholder=""  >
+                         </div>
+                    </div>
+                </div>
+                <div class="form-group relate-capping hidden">
+                    <label for="" class="col-xs-2 control-label">封顶时间段:</label>
+                    <div class="col-xs-6">
+                       <input type="text" class="form-control timePoint-input" placeholder="起始时间" readonly="" style="width:80px; display:inline-block;"><input type="text" class="form-control aggregateMoney-day" placeholder="天" style="width:50px; display:inline-block;margin-left:10px;">
+                        <span class="">至</span> 
+                        <input type="text" class="form-control timePoint-input" placeholder="结束时间" readonly=""style="width:80px; display:inline-block;"><input type="text" class="form-control aggregateMoney-day "placeholder="天"  style="width:50px;display:inline-block; margin-left:10px;">
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-2 control-label">有效开始时间:</label>
+                    <div class="col-xs-9">
+                        <select class="col-xs-3 commn-input"  data-id="validStartTime0">
+                            <option value="">发放时间</option>
+                            <option value="">停车开始时间</option>
+                            <option value="user-defined">自定义</option>
+                        </select>
+                         <select class="col-xs-3 commn-input"  data-id="validStartTime1">
+                            <option value="">发放时间</option>
+                            <option value="">停车开始时间</option>
+                            <option value="">停车结束时间</option>
+                            <option value="user-defined">自定义</option>
+                        </select>
+                        <input type="text" class="col-xs-3 commn-input time-input timePoint-input hidden" data-id="user-defined" placeholder="请选择时间点" readonly="">
+                        <span class="col-xs-1 unit">+</span>
+                        <input type="text" class="col-xs-2 commn-input day-input" placveholder="" >
+                        <span class="unit">天</span>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <label for="" class="col-xs-2 control-label">有效结束时间:</label>
+                    <div class="col-xs-9">
+                        <select class="col-xs-3 commn-input" data-id="validEndTime0">
+                            <option value="">相对开始时间</option>
+                            <option value="user-defined">自定义</option>
+                        </select> 
+                        <select class="col-xs-3 commn-input" data-id="validEndTime1">
+                            <option value="start-time">停车结束时间</option>
+                            <option value="">相对开始时间</option>
+                            <option value="user-defined">自定义</option>
+                        </select>
+                        <input type="text" class="col-xs-3 commn-input time-input timePoint-input hidden" data-id="user-defined" placeholder="请选择时间点" readonly="" >
+                        <span class="col-xs-1 unit">+</span>
+                        <input type="text" class="col-xs-2 commn-input day-input" placveholder="" >
+                        <span class="unit hidden" data-id="unit-day">天</span>
+                        <span class="unit" data-id="unit-minute">分钟</span>
+                    </div>
+                </div>   
+            </div>
+           </div>
+        </div>
+        <div class="event-condition">
+            <h4>触发条件</h4>
+            <a class="condition-del btn-del" data-id="delConditionBtn">删除条件</a>
+            <div class="form-inline">
+               <div class="form-group">
+                    <label for="" class="col-xs-4 control-label">&nbsp;条件:</label>
+                    <div class="col-xs-8">
+                        <select class="form-control" data-id="approch-condition">
+                            <option value="plate">车牌</option>
+                            <option value="approchTime">进场时间</option>
+                            <option value="vipName">VIP名称</option>
+                            <option value="chargeType">车辆计费类型</option>
+                        </select>
+                        <select class="form-control" data-id="leave-condition">
+                            <option value="plate">车牌</option>
+                            <option value="approchTime">进场时间</option>
+                            <option value="vipName">VIP名称</option>
+                            <option value="chargeType">车辆计费类型</option>
+                            <option value="leaveTime">离场时间</option>
+                            <option value="parkingTime">停车时长</option>
+                            <option value="money0">应交金额</option>
+                            <option value="money1">优惠金额</option>
+                            <option value="money2">实交金额</option>
+                            <option value="aggregateMoney">时间段累计交费</option>
+                        </select>
+                    </div>
+                </div> 
+                <div class="form-group">
+                    <div  class="col-xs-2 judge-type-box">
+                      <span class="judge-type">包含</span>
+                      <input type="hidden" class="judge" value="包含">
+                    </div>
+                    <div class="col-xs-10 judge-type-con">
+                        <input type="text" class="form-control timePoint-input hidden" placeholder="请选择时间点" readonly="" data-id="timeInterval"><span class="hidden" data-id="timeInterval">至</span>
+                        <input type="text" class="form-control timePoint-input hidden" placeholder="请选择时间点" readonly="" data-id="timeInterval">
+                        <input type="text" class="form-control timePoint-input hidden" placeholder="请选择时间点" readonly="" data-id="timePoint">
+                        <input type="text" class="form-control hidden" placeholder="" data-id="IntervalVal"><span class="hidden" data-id="IntervalVal">至</span><input type="text" class="form-control hidden" placeholder="" data-id="IntervalVal">
+                        <input type="text" class="form-control hidden" placeholder="" data-id="IntervalPoint">
+                        <span class="hidden" data-id="parkingTime">分钟</span><span class="hidden" data-id="money">元</span>
+                        <input type="text" class="form-control" placeholder="" data-id="plateInput">
+                        <select class="form-control hidden" data-id="vipName">
+                            <option value="">临时车</option>
+                            <option value="">第三方VIP</option>
+                            <option value="">本地VIP</option>
+                        </select>
+                        <select class="form-control hidden" data-id="chargeType">
+                            <option value="">小车</option>
+                            <option value="">中车</option>
+                            <option value="">大车</option>
+                        </select>
+                        <input type="text" class="form-control timePoint-input hidden" placeholder="起始时间" readonly="" data-id="aggregateMoney"><input type="text" class="form-control aggregateMoney-day hidden" placeholder="天" data-id="aggregateMoney">
+                        <span class="hidden" data-id="aggregateMoney">至</span> 
+                        <input type="text" class="form-control timePoint-input hidden" placeholder="结束时间" readonly="" data-id="aggregateMoney"><input type="text" class="form-control aggregateMoney-day hidden"placeholder="天" data-id="aggregateMoney">
+                    </div> 
+                </div>
+                <div class="form-group col-xs-offset-4 hidden" data-id="aggregateMoney">
+                    <div class="col-xs-4 aggregate-type-box pt0">
+                      <span class="aggregate-type">></span>
+                      <input type="hidden" class="aggregate-judge" value=">">
+                    </div>
+                    <div class="col-xs-8 aggregate-type-con pt0">
+                        <input type="text" class="form-control" placeholder="单位元" data-id="aggregateMoneyInput">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-box clearfix">
+            <a class="add-condition-btn pull-right" data-id="addConditionBtn">添加条件</a>
+        </div>
+    </div>
+    <!--  event-body -->
+</div>
+
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+ <script src="../../dist/js/bootstrap-timepicker.min.js"></script>
+ <script type="text/javascript">
+    var isApproch=false;//是否为进场通道的标识
+    $(function(){
+        bindFn();
+    });
+
+    //绑定添加、删除事件方法
+    function bindFn(){
+        var newEvent=$('.event-box[data-id="eventTemplate"]').clone().removeClass('hidden');
+        var newCondition;
+        if(isApproch){
+            newEvent.find('select[data-id="leave-condition"]').remove();
+            newEvent.find('select[data-id="validStartTime1"]').remove();
+            newEvent.find('select[data-id="validEndTime1"]').remove();
+            newEvent.find('select[data-id="IntervalVal"]').remove();
+            newEvent.find('select[data-id="IntervalPoint"]').remove();
+            newEvent.find('select[data-id="parkingTime"]').remove();
+            newEvent.find('select[data-id="money"]').remove();
+            newCondition=newEvent.find('.event-condition').clone();
+        }else{
+            newEvent.find('select[data-id="approch-condition"]').remove();
+            newEvent.find('select[data-id="validStartTime0"]').remove();
+            newEvent.find('select[data-id="validEndTime0"]').remove();
+            newCondition=newEvent.find('.event-condition').clone();
+        }
+       $('#addEventBtn').on('click',function(){
+            if($('.left-wrap ul li').length>5){
+              top.window.tipError('最多添加5个事件！'); 
+              return; 
+            }
+           $('.left-wrap ul li .event-name').removeClass('event-active');
+           $('.left-wrap ul').append('<li><a class="event-name event-active" data-link="" title="新事件">新事件</a></li>');
+           $('.right-wrap .event-box').addClass('hidden');
+           var newEvent1=newEvent.clone();
+           bindTimepickerfn(newEvent1.find('.timePoint-input'));//绑定时间控件
+           $('.right-wrap').append(newEvent1);   
+
+       }); 
+       $(document).on('click','.left-wrap ul li .event-name',function(e){
+            var $this=$(e.target);
+            var Index= $this.parent().index();
+            $('.left-wrap ul li a').removeClass('event-active');
+             $this.addClass('event-active');
+            $('.right-wrap .event-box').addClass('hidden');
+            $('.right-wrap .event-box').eq(Index-1).removeClass('hidden');
+       });
+       $(document).on('click','.right-wrap .event-box .btn-box a',function(e){
+            var $this=$(e.target);
+            if($this.closest('.event-box').find('.event-condition').length>4){
+                top.window.tipError('每个事件最多添加5个条件！'); 
+                 return; 
+            }
+            var  newCondition1=newCondition.clone();
+            bindTimepickerfn(newCondition1.find('.timePoint-input'));//绑定时间控件
+            $this.parent().before(newCondition1);
+       });
+       $(document).on('click','.right-wrap .event-box .condition-del',function(e){
+            var $this=$(e.target);
+            $this.closest('.event-condition').remove();
+       });
+      $(document).on('click','.right-wrap .event-box .event-del',function(e){
+            var $this=$(e.target);
+            var index=$this.closest('.event-box').index();
+            $this.closest('.event-box').remove();
+            $('.left-wrap ul li').eq(index+1).remove();
+            if(index<=0){
+              $('.left-wrap ul li').eq(1).find('.event-name').click();
+            }else{
+               $('.left-wrap ul li').eq(index).find('.event-name').click();
+            }
+       });
+
+      $(document).on('click','.right-wrap .event-box .start-close-btn',function(e){
+            var $this=$(e.currentTarget);
+            if($this.find('input[type="checkbox"]').is(':checked')){
+                $this.next().val("1");
+            }else{
+                 $this.next().val("0");
+            }
+      });
+
+      $(document).on('change','select[data-id="couoponType"]',function(e){
+            var $this=$(e.target);
+            var Val=$this.val();
+            var related=$this.closest('.form-horizontal').find('.related');
+            var title=$this.closest('.form-horizontal').find('.related-title');
+            var moneyType=$this.closest('.form-horizontal').find('select[data-id="moneyType"]');
+            var timeType=$this.closest('.form-horizontal').find('select[data-id="timeType"]');
+            var typeBox=$this.closest('.form-horizontal').find('.typeBox');
+            var signBox=$this.closest('.form-horizontal').find('.sign-type-box');
+            // $this.closest('.form-horizontal').find('.unit').removeClass('hidden');
+            $this.closest('.form-horizontal').find('.relate-aggregate-money').addClass('hidden');
+            $this.closest('.form-horizontal').find('.relate-capping').addClass('hidden');
+            related.removeClass('hidden');
+            moneyType.addClass('hidden');
+            timeType.addClass('hidden');
+            typeBox.addClass('hidden');
+            typeBox.siblings('.unit').addClass('hidden');
+            signBox.addClass('hidden');
+            switch(Val){
+                case 'freeCoupon': related.find('input,select').addClass('hidden');
+                                   related.find('span[data-id="freeCoupon"]').removeClass('hidden');
+                                   title.text('优惠券面值(元):');
+                                   break;
+                case 'valuationCoupon': related.find('input,span').addClass('hidden');
+                                   related.find('select[data-id="valuationCoupon"]').removeClass('hidden');
+                                   title.text('优惠券面值:');
+                                   break;
+                case 'timeCoupon': related.find('select,span').addClass('hidden');
+                                   related.find('input').removeClass('hidden');
+                                   timeType.removeClass('hidden');
+                                   typeBox.removeClass('hidden');
+                                   typeBox.siblings('.unit').removeClass('hidden');
+                                   title.text('优惠券面值(分):');
+                                   break;
+                case 'discountCoupon': related.find('select,span').addClass('hidden');
+                                       related.find('input').removeClass('hidden');
+                                       title.text('优惠券面值(折):');
+                                       break;
+                case 'cappingCoupon':related.find('select,span').addClass('hidden');
+                                     related.find('input').removeClass('hidden');
+                                    $this.closest('.form-horizontal').find('.relate-capping').removeClass('hidden');
+                                     moneyType.find('option').eq(0).prop('selected',"selected");
+                                     moneyType.removeClass('hidden');
+                                     signBox.removeClass('hidden');
+                                     typeBox.removeClass('hidden');
+                                     typeBox.siblings('.unit').removeClass('hidden');
+                                     title.text('优惠券面值(元):');
+                                     break;                     
+                default: related.find('select,span').addClass('hidden');
+                         related.find('input').removeClass('hidden');
+                         moneyType.find('option').eq(0).prop('selected',"selected");
+                         moneyType.removeClass('hidden');
+                         signBox.removeClass('hidden');
+                         typeBox.removeClass('hidden');
+                         typeBox.siblings('.unit').removeClass('hidden');
+                         title.text('优惠券面值(元):');
+                         break;
+            } 
+      });
+
+     $(document).on('change','select[data-id="moneyType"],select[data-id="timeType"]',function(e){
+          var $this=$(e.target);
+          var Val=$this.val();
+          $this.parent().siblings('.unit').removeClass('hidden');
+          $this.closest('.form-horizontal').find('.relate-aggregate-money').addClass('hidden');
+          $this.parent().siblings('.related').removeClass('hidden');
+          if($this.attr('data-id')=="moneyType"){
+             $this.parent().find('.sign-type-box').removeClass('hidden');
+          }
+          switch(Val){
+            case 'user-defined': $this.parent().siblings('.unit').addClass('hidden');
+                                 $this.parent().find('.sign-type-box').addClass('hidden');
+                                 break;
+            case 'aggregate-money':$this.parent().siblings('.unit').addClass('hidden');
+                                   $this.parent().siblings('.related').addClass('hidden');
+                                   $this.closest('.form-horizontal').find('.relate-aggregate-money').removeClass('hidden');
+                                   break;
+            default:break;
+
+          }
+ 
+     });
+
+     $(document).on('change','select[data-id="validStartTime0"],select[data-id="validStartTime1"]',function(e){
+            var $this=$(e.target);
+            var Val=$this.val();
+            var related=$this.closest('div');
+            if(Val=='user-defined'){
+                related.find('input[data-id="user-defined"]').removeClass('hidden');
+            }else{
+                related.find('input[data-id="user-defined"]').addClass('hidden');
+            }
+      });
+
+      $(document).on('change','select[data-id="validEndTime0"],select[data-id="validEndTime1"]',function(e){
+            var $this=$(e.target);
+            var Val=$this.val();
+            var related=$this.closest('div');
+            if(Val=='user-defined'){
+                related.find('input[data-id="user-defined"]').removeClass('hidden');
+                related.find('span[data-id="unit-day"]').removeClass('hidden');
+                related.find('span[data-id="unit-minute"]').addClass('hidden');
+            }else if(Val=="start-time"){
+                related.find('input[data-id="user-defined"]').addClass('hidden');
+                related.find('span[data-id="unit-day"]').removeClass('hidden');
+                related.find('span[data-id="unit-minute"]').addClass('hidden');
+            }else{
+                related.find('input[data-id="user-defined"]').addClass('hidden');
+                related.find('span[data-id="unit-day"]').addClass('hidden');
+                related.find('span[data-id="unit-minute"]').removeClass('hidden');
+            }
+      });
+
+      $(document).on('change','select[data-id="leave-condition"],select[data-id="approch-condition"]',function(e){
+            var $this=$(e.target);
+            var Val=$this.val();
+            var related=$this.closest('.form-inline').find('.judge-type-con');
+            var judge0=$this.closest('.form-inline').find('.judge-type');
+            var judge1=$this.closest('.form-inline').find('.judge');
+            var judge2=$this.closest('.form-inline').find('.aggregate-type');
+            var judge3=$this.closest('.form-inline').find('.aggregate-judge');
+            related.find('select,input,span').addClass('hidden');
+            $this.closest('.form-inline').find('div[data-id="aggregateMoney"]').addClass('hidden');
+            judge0.css({'font-size':'16px'}).text('=');
+            judge1.val('=');
+            judge3.val('>');
+            judge0.removeClass('onlyTag');
+            judge2.removeClass('onlyTag');
+            switch(Val){
+                case 'plate': judge0.css({'font-size':'12px'}).text('包含');
+                              judge1.val('包含');
+                              related.find('input[data-id="plateInput"]').removeClass('hidden');
+                              break;
+                case 'vipName': related.find('select[data-id="vipName"]').removeClass('hidden');
+                                break;
+                case 'chargeType': related.find('select[data-id="chargeType"]').removeClass('hidden');
+                                   break;
+                case 'approchTime':case 'leaveTime':related.find('input[data-id="timePoint"]').removeClass('hidden');
+                                   judge0.addClass('onlyTag');
+                                   break;
+                case 'parkingTime':related.find('input[data-id="IntervalPoint"]').removeClass('hidden');
+                                   related.find('span[data-id="parkingTime"]').removeClass('hidden');
+                                   judge0.addClass('onlyTag');
+                                   break;
+                case'money0':case'money1':case'money2':related.find('input[data-id="IntervalPoint"]').removeClass('hidden');
+                            related.find('span[data-id="money"]').removeClass('hidden');
+                            judge0.addClass('onlyTag');
+                             break;
+                case 'aggregateMoney':related.find('input[data-id="aggregateMoney"]').removeClass('hidden');
+                            related.find('span[data-id="aggregateMoney"]').removeClass('hidden');
+                            $this.closest('.form-inline').find('div[data-id="aggregateMoney"]').removeClass('hidden');
+                            judge0.css({'font-size':'12px'}).text('自定义');
+                            judge1.val('自定义');
+                            judge2.addClass('onlyTag');
+                            break;
+                default : break;
+            }
+      });
+
+      $(document).on('click','.onlyTag',function(e){
+           var $this=$(e.target);
+           $this.css({'font-size':'16px'});
+           var  judge1=$this.closest('.form-inline').find('.judge');
+           var val;
+           $this.closest('.form-group').find('.judge-type-con input,.judge-type-con span').addClass('hidden');
+           if(!isApproch){
+                val=$this.closest('.form-inline').find('select[data-id="leave-condition"]  option:selected').val(); 
+                if(val=='parkingTime'){
+                   $this.closest('.form-group').find('input[data-id="IntervalPoint"]').removeClass('hidden');
+                   $this.closest('.form-group').find('span[data-id="parkingTime"]').removeClass('hidden'); 
+                }else if(val=='money0'||val=='money1'||val=='money2'){
+                    $this.closest('.form-group').find('input[data-id="IntervalPoint"]').removeClass('hidden');
+                    $this.closest('.form-group').find('span[data-id="money"]').removeClass('hidden');
+                }else{
+                   $this.closest('.form-group').find('input[data-id="timePoint"]').removeClass('hidden');
+                } 
+           }else{
+                val=$this.closest('.form-inline').find('select[data-id="approch-condition"]  option:selected').val(); 
+                $this.closest('.form-group').find('input[data-id="timePoint"]').removeClass('hidden');
+           }
+           switch($this.text()){
+              case '=':$this.text('>');
+                       judge1.val('>');
+                       break;
+              case '>':$this.text('<');
+                       judge1.val('<');
+                       break;
+              case '<':
+                       if(val=='aggregateMoney'){
+                            $this.text('=');
+                            judge1.val('=');
+                            break;
+                       }
+                       $this.css({'font-size':'12px'}).text('自定义');
+                       judge1.val('自定义');
+                       if(val=='parkingTime'||val=='money0'||val=='money1'||val=='money2'){
+                           $this.closest('.form-group').find('input[data-id="IntervalPoint"]').addClass('hidden');
+                           $this.closest('.form-group').find('[data-id="IntervalVal"]').removeClass('hidden');   
+                       }else{
+                          $this.closest('.form-group').find('input[data-id="timePoint"]').addClass('hidden');
+                          $this.closest('.form-group').find('[data-id="timeInterval"]').removeClass('hidden');
+                       }
+                       break;
+              case '自定义':$this.text('=');
+                            judge1.val('=');
+                            break;
+              default:break;
+           }
+
+      });
+   $(document).on('click','.sign-type-box .sign-type',function(e){
+           var $this=$(e.target);
+           var txt=$this.text();
+           if(txt=='+'){
+              $this.text('-');
+              $this.siblings('sign').val('-');
+           }else{
+             $this.text('+');
+              $this.siblings('sign').val('+');
+           }
+       });
+
+      $(document).on('blur','.right-wrap input[data-id="eventName"]',function(e){
+            var $this=$(e.target);
+            var Index=$this.closest('.event-box').index();
+            var Val=$this.val();
+            if(Val==''){
+               top.window.tipError('事件名不能为空！');
+               // alert('事件名不能为空！');
+                $this.val($('.left-wrap ul li').eq(Index+1).find('.event-name').attr('title'));
+                $this.focus();
+                return;
+            }
+            var nameVal=Val;
+            if(Val.length>14){
+              nameVal=nameVal.substring(0,14)+'...'; 
+            }
+            $('.left-wrap ul li').eq(Index+1).find('.event-name').attr('title',Val);
+            $('.left-wrap ul li').eq(Index+1).find('.event-name').text(nameVal);
+      });
+
+    }
+    //绑定时间控件方法
+    function bindTimepickerfn(handObj){
+         handObj.each(function(){
+            $(this).timepicker({
+                minuteStep: 1,
+                showMeridian: false,
+                defaultTime: 'current'
+            });
+         })
+    }
+  </script>
+
+</body>
+
+</html>

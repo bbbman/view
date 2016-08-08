@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>字典表设置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+    <link rel="stylesheet" href="../dist/css/zTreeStyle.css" type="text/css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="setdictionary-table-box ">
+                <div class="search-box form-inline" style="width:420px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="keyVal" placeholder="请输入关键字">
+                            <span class="input-group-btn">
+                                 <a role="button" class="btn  btn-primary btn-flat pull-left" id="btn-search">搜索</a>
+                                </span>
+                        </div>
+                    </div>
+                    <a class="btn btn-flat btn-info pull-right" title="同步详情" id="dictionary-detail">
+                            同步详情
+                        </a>
+                </div>
+                <div class="settings-panel">
+                    <div class="action-bar">
+                        <button class="btn btn-default btn-sm" id="addTreeNodes" type="button" title="添加"><img src="../dist/images/ic_Add.png"></button>
+                        <button class="btn  btn-default btn-sm" id="moveUp" type="button" title="同级上移"><img src="../dist/images/ic_Upward.png"></button>
+                        <button class="btn  btn-default btn-sm" id="moveDown" type="button" title="同级下移"><img src="../dist/images/ic_Down.png"></button>
+                        <button class="btn  btn-default btn-sm" id="updateTreeNodes" type="button" title="修改"><img src="../dist/images/ic_Edit.png"></button>
+                        <button class="btn  btn-default btn-sm" id="delTreeNodes" type="button" title="删除"><img src="../dist/images/ic_Delete.png"></button>
+                        <button class="btn  btn-default btn-sm" id="saveTree" type="button" title="保存"><img src="../dist/images/ic_Save.png"></button>
+                    </div>
+                    <div class="dictionary-tree-panel">
+                        <div class="dictionary-tree-content">
+                            <ul id="treeDemo" class="ztree"></ul>
+                        </div>
+                    </div>
+                    <div class="add-treeChild-box hidden">
+                        <h4>新增字典表内容</h4>
+                        <div class="add-treeChild-con">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">标识：</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control" placeholder="" id="marker" disabled="disabled">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">序号：</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control" placeholder="" id="num">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-xs-3 control-label">名称：</label>
+                                    <div class="col-xs-8">
+                                        <input type="text" class="form-control" placeholder="" id="name">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="add-treeChild-footer" style=" ">
+                            <button class="btn btn-default pull-left" id="cancelAdd" type="button">取消</button>
+                            <button class="btn btn-primary pull-right" id="sureAdd" type="button">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../dist/js/timeset.js"></script>
+    <script src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $(".main-sidebar").mCustomScrollbar({
+                theme: "dark"
+            });
+        }
+
+        //字典表的设置
+        $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        $("#addTreeNodes").bind("click", {
+            isParent: false
+        }, add);
+        $("#updateTreeNodes").bind("click", edit);
+        $("#delTreeNodes").bind("click", remove);
+        $('#btn-search').bind("click", searchNode);
+        $('#moveUp').bind('click', moveUpNode);
+        $("#moveDown").bind('click', moveDownNode);
+        $("#saveTree").bind('click', saveTree);
+
+    });
+
+
+    var setting = {
+        view: {
+            showLine: false,
+            showIcon: showIconForTree,
+            selectedMulti: false,
+            fontCss: getFontCss
+        },
+        edit: {
+            drag: {
+                autoExpandTrigger: true,
+                prev: dropPrev,
+                inner: dropInner,
+                next: dropNext
+            },
+            enable: true,
+            showRemoveBtn: false,
+            showRenameBtn: false
+        },
+        data: {
+            keep: {
+                parent: true,
+                leaf: true
+            },
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick: beforeClick,
+            beforeDrag: beforeDrag,
+            beforeDrop: beforeDrop,
+        }
+    };
+
+    var zNodes = [{
+        id: 1,
+        pId: 0,
+        name: "父节点 1",
+        open: true,
+        drag: false,
+        childOuter: false,
+        iconSkin: "pIcon2",
+    }, {
+        id: 11,
+        pId: 1,
+        name: "叶子节点 1-1"
+    }, {
+        id: 12,
+        pId: 1,
+        name: "叶子节点 1-2"
+    }, {
+        id: 13,
+        pId: 1,
+        name: "叶子节点 1-3"
+    }, {
+        id: 2,
+        pId: 0,
+        name: "父节点 2",
+        open: true,
+        drag: false,
+        childOuter: false,
+        iconSkin: "pIcon2",
+    }, {
+        id: 21,
+        pId: 2,
+        name: "叶子节点 2-1"
+    }, {
+        id: 22,
+        pId: 2,
+        name: "叶子节点 2-2"
+    }, {
+        id: 23,
+        pId: 2,
+        name: "叶子节点 2-3"
+    }, {
+        id: 3,
+        pId: 0,
+        name: "父节点 3",
+        open: true,
+        drag: false,
+        childOuter: false,
+        iconSkin: "pIcon2",
+    }, {
+        id: 31,
+        pId: 3,
+        name: "叶子节点 3-1"
+    }, {
+        id: 32,
+        pId: 3,
+        name: "叶子节点 3-2"
+    }, {
+        id: 33,
+        pId: 3,
+        name: "叶子节点 3-3"
+    }];
+
+
+    function saveTree() {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = JSON.stringify(zTree.transformTozTreeNodes(zTree.getNodes()));
+        console.log(nodes);
+    }
+
+    function beforeClick() {
+        $('.add-treeChild-box').addClass('hidden');
+    }
+    var newCount = 1;
+
+    function add(e) {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            isParent = e.data.isParent,
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+        if (!treeNode || !treeNode.isParent) {
+            alert("请先选择一个父节点");
+            return false;
+        }
+        if (treeNode) {
+            $('.add-treeChild-box h4').text('新增字典表内容');
+            $('.add-treeChild-box input').val('');
+            $("#marker").val(treeNode.name);
+            $('#num').removeAttr('disabled');
+            $('.add-treeChild-box').removeClass('hidden');
+            $("#cancelAdd").off();
+            $("#sureAdd").off();
+            $('#cancelAdd').on('click', function() {
+                $('.add-treeChild-box').addClass('hidden');
+            });
+            $("#sureAdd").on('click', function() {
+                //var marker=$("#marker").val();
+                var num = $("#num").val();
+                var name = $("#name").val();
+                if (num == null || name == null) {
+                    alert('不能为空');
+                    return false;
+                } else {
+                    zTree.addNodes(treeNode, {
+                        id: (100 + newCount),
+                        pId: treeNode.id,
+                        isParent: isParent,
+                        name: name
+                    });
+                }
+                $('.add-treeChild-box').addClass('hidden');
+            });
+        }
+        /*if (treeNode) {
+            zTree.editName(treeNode[0]);
+        }*/
+    };
+
+    function edit() {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+        if (nodes.length == 0) {
+            alert("请先选择一个节点");
+            return;
+        }
+        if (treeNode.isParent) {
+            //alert("父节点不允许修改！");
+            return;
+        }
+        $('.add-treeChild-box h4').text('修改字典表内容');
+        var nodeName = treeNode.name;
+        // var nodeNum=treeNode.num;
+        $('.add-treeChild-box #num').attr('disabled', 'disabled');
+        $('.add-treeChild-box #name').val(nodeName);
+        $('.add-treeChild-box').removeClass('hidden');
+        $("#cancelAdd").off();
+        $("#sureAdd").off();
+        $('#cancelAdd').on('click', function() {
+            $('.add-treeChild-box').addClass('hidden');
+        });
+        $("#sureAdd").on('click', function() {
+            // var marker=$("#marker").val();
+            // var num=$("#num").val();
+            var name = $("#name").val();
+            if (name == null) {
+                alert('不能为空');
+                return false;
+            } else {
+                treeNode.name = name;
+                zTree.updateNode(treeNode);
+
+            }
+            $('.add-treeChild-box').addClass('hidden');
+        });
+        //zTree.editName(treeNode);
+    };
+
+    function remove(e) {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+        if (nodes.length == 0) {
+            alert("请先选择一个节点");
+            return;
+        }
+        if (treeNode.isParent) {
+            // alert("父节点不允许删除！");
+            return;
+        }
+        if (confirm('确定要删除此节点吗？')) {
+            zTree.removeNode(treeNode);
+        }
+    };
+
+    function dropPrev(treeId, nodes, targetNode) {
+        var pNode = targetNode.getParentNode();
+        if (pNode && pNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                var curPNode = curDragNodes[i].getParentNode();
+                if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function dropInner(treeId, nodes, targetNode) {
+        if (targetNode && targetNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                if (!targetNode && curDragNodes[i].dropRoot === false) {
+                    return false;
+                } else if (curDragNodes[i].parentTId && curDragNodes[i].getParentNode() !== targetNode && curDragNodes[i].getParentNode().childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function dropNext(treeId, nodes, targetNode) {
+        var pNode = targetNode.getParentNode();
+        if (pNode && pNode.dropInner === false) {
+            return false;
+        } else {
+            for (var i = 0, l = curDragNodes.length; i < l; i++) {
+                var curPNode = curDragNodes[i].getParentNode();
+                if (curPNode && curPNode !== targetNode.getParentNode() && curPNode.childOuter === false) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    var nodeList = [];
+
+    function searchNode(e) {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            value = $.trim($("#keyVal").val());
+        updateNodes(false);
+        if (value != '') {
+            nodeList = zTree.getNodesByParamFuzzy("name", value);
+            updateNodes(true);
+        }
+    }
+
+    function updateNodes(highlight) {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+        for (var i = 0, l = nodeList.length; i < l; i++) {
+            nodeList[i].highlight = highlight;
+            if (highlight && nodeList[i].getParentNode()) {
+                zTree.expandNode(nodeList[i].getParentNode(), true, false, true);
+            }
+            /*else if(!highlight&&nodeList[i].getParentNode()){
+                                // zTree.expandNode(nodeList[i].getParentNode(), false, false, true); 
+                            }  */
+            zTree.updateNode(nodeList[i]);
+        }
+    }
+
+    function getFontCss(treeId, treeNode) {
+        return (!!treeNode.highlight) ? {
+            color: "#A60000",
+            "font-weight": "bold"
+        } : {
+            color: "#333",
+            "font-weight": "normal"
+        };
+    }
+
+    function showIconForTree(treeId, treeNode) {
+        return treeNode.isParent;
+    }
+
+    function moveUpNode(e) {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+        var prevNode = treeNode.getPreNode();
+        if (nodes.length == 0) {
+            alert("请先选择一个节点");
+            return;
+        }
+        if (treeNode.level == 0) {
+            //alert("根节点不能移动");
+            return;
+        }
+        if (prevNode) {
+            zTree.moveNode(prevNode, treeNode, "prev");
+        } else {
+            return false;
+        }
+    }
+
+    function moveDownNode(e) {
+        $('.add-treeChild-box').addClass('hidden');
+        var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            nodes = zTree.getSelectedNodes(),
+            treeNode = nodes[0];
+        var nextNode = treeNode.getNextNode();
+        if (nodes.length == 0) {
+            alert("请先选择一个节点");
+            return;
+        }
+        if (treeNode.level == 0) {
+            //alert("根节点不能移动");
+            return;
+        }
+        if (nextNode) {
+            zTree.moveNode(nextNode, treeNode, "next");
+        } else {
+            return false;
+        }
+    }
+
+    var log, className = "dark",
+        curDragNodes, autoExpandNode;
+
+    function beforeDrag(treeId, treeNodes) {
+        className = (className === "dark" ? "" : "dark");
+        for (var i = 0, l = treeNodes.length; i < l; i++) {
+            if (treeNodes[i].drag === false) {
+                curDragNodes = null;
+                return false;
+            } else if (treeNodes[i].parentTId && treeNodes[i].getParentNode().childDrag === false) {
+                curDragNodes = null;
+                return false;
+            }
+        }
+        curDragNodes = treeNodes;
+        return true;
+    }
+
+    function beforeDragOpen(treeId, treeNode) {
+        autoExpandNode = treeNode;
+        return true;
+    }
+
+    function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+        className = (className === "dark" ? "" : "dark");
+        return true;
+    }
+
+
+
+
+    $(function(){
+        $("#dictionary-detail").click(function(){
+               layer.open({
+                   type: 2,
+                   title: '字典同步详情',
+                   maxmin: true,
+                   shadeClose: false, //点击遮罩关闭层
+                   area : ['900px' , '80%'],
+                   offset : ['30px'],
+                   content: ['modal/dictionary-tongbu.html']
+               });
+               var wrap =  $(".layui-layer-content");
+               browser_ = /iphone|ipad/i.test(navigator.userAgent);
+               if(browser_ == true) {
+                   wrap.addClass("iframe-wrap");
+               }
+               return false;
+           });
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>车场VIP-车辆管理-来访车辆-添加来访车辆</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- time -->
+        <link rel="stylesheet" href="../../../dist/css/bootstrap-datepicker3.min.css">
+        <link rel="stylesheet" href="../../../dist/css/font-awesome.min-4.3.0.css">
+
+        <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+        <link rel="stylesheet" href="../../../dist/css/main.css">
+        <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+        <script src="../../../dist/js/html5shiv.js"></script>
+        <script src="../../../dist/js/respond.min.js"></script>
+        <![endif]-->
+        <style>
+            .native-date {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border: 1px solid rgba(0, 0, 0, 0.15);
+                border-radius: 4px;
+                -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+                background-clip: padding-box;
+            }
+
+            #native-date-input {
+                width: 220px;
+                height: 214px;
+            }
+
+            .date-info-list li.active {
+                margin: 4px 6px;
+            }
+
+            .date-info-list li.active a {
+                padding: 6px 12px;
+                cursor: default;
+            }
+
+            .date-info-list li.active a i {
+                padding-left: 4px;
+                cursor: pointer;
+            }
+
+            .vip-price {
+                margin-left: 20px;
+            }
+
+        </style>
+
+    </head>
+
+    <body class="index-page">
+        <div class="modal-content ake-iframe-modal">
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="" class="col-xs-3 control-label">黑名单类型:</label>
+                        <div class="col-xs-6">
+                            <select class="form-control" id="">
+                                <option>普通VIP</option>
+                                <option>超级VIP</option>
+                                <option>黄金VIP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-xs-3 control-label">车牌号码<span class="xing">*</span>:</label>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="car_license_number" placeholder="请输入车牌号码" maxlength="7" style="text-transform: uppercase;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-xs-3 control-label">车主姓名:</label>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-xs-3 control-label">黑名单原因:</label>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-xs-3 control-label">备注1:</label>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-xs-3 control-label">备注2:</label>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox col-xs-offset-3">
+                            <label>
+                                黑名单有效期：
+                                <input type="checkbox" id="setBlackTimeType" style="position:static;margin-bottom:7px;margin-left:0"> 永久
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group setBlackTime_cell">
+                        <label for="" class="col-xs-3 control-label">VIP有效期:</label>
+                        <div class="col-xs-5">
+                            <select class="form-control" id="vip_expiry" style="width:39%">
+                                <option value="自然月">自然月</option>
+                                <option value="自定义">自定义</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-offset-3 col-xs-9 native-date-box" style="margin-top:15px;">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <div class="native-date" style="width:215px">
+                                    </div>
+                                </div>
+                                <div class="col-xs-4" style="display:none">
+                                    <textarea class="form-control" id="native-date-input"></textarea>
+                                    <input class="form-control" id="new-date-input"></input>
+                                    <input class="form-control" id="link-date-input"></input>
+                                </div>
+                                <div class="col-xs-6">
+                                    <ul class="nav nav-pills date-info-list" role="tablist">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-offset-3 col-xs-5 free-date" style="display:none;margin-top:15px">
+                            <div class="input-daterange input-group" id="input-daterange">
+                                <input type="text" class="input-sm form-control" name="free-date-start" id="input-daterange-start" placeholder="自定义开始时间" readonly/>
+                                <span class="input-group-addon">至</span>
+                                <input type="text" class="input-sm form-control" name="free-date-end" id="input-daterange-end" placeholder="自定义结束时间" readonly/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">取消</button>
+                <button type="button" class="btn  btn-primary btn-flat pull-right" id="save_carInfo">确认</button>
+            </div>
+        </div>
+
+        <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+        <!-- <![endif]-->
+        <!--[if IE]>
+            <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <script src="../../../dist/js/bootstrap.min.js"></script>
+
+        <!-- time -->
+        <script src="../../../dist/js/bootstrap-datepicker.js"></script>
+        <script src="../../../dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+
+
+        <script type="text/javascript">
+            $(function() {
+
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                $("#cancel").on('click', function() {
+                    parent.layer.close(index);
+                })
+
+
+                $('#setBlackTimeType').on('click', function() {
+                    if ($(this).prop('checked')) {
+                        $('.setBlackTime_cell').hide();
+                    } else {
+                        $('.setBlackTime_cell').show();
+                    }
+                })
+
+
+                // time start
+
+                //类型选择
+                $("#vip_expiry").change(function() {
+                    if ($(this).val() == "自定义") {
+                        $(".free-date").show();
+                        $(".native-date-box").hide();
+                    } else {
+                        $(".free-date").hide();
+                        $(".native-date-box").show();
+                        $('#count-time').val(parseInt($('#count-time').val()));
+                        // $("#input-daterange-start,#input-daterange-end").val("");
+                    }
+                });
+
+                $('#input-daterange').datepicker({
+                    inputs: $("#input-daterange-start,#input-daterange-end"),
+                    language: "zh-CN",
+                    keyboardNavigation: false,
+                    maxViewMode: 0,
+                    calendarWeeks: true,
+                    todayHighlight: true,
+                    format: 'yyyy-m-dd',
+                    autoclose: true
+                })
+                $('#input-daterange-start').datepicker('update', new Date());
+                $('#input-daterange-end').datepicker('update', new Date());
+
+
+                $(".native-date").datepicker({
+                    format: "yyyy-m",
+                    minViewMode: 1,
+                    language: "zh-CN",
+                    keyboardNavigation: false,
+                    forceParse: false,
+                    calendarWeeks: true,
+                    todayHighlight: true
+                }).on('changeDate', function(e) {
+                    var native_date = e.date;
+                    var date_array = [];
+                    var year = native_date.getFullYear();
+                    var month = native_date.getMonth() + 1;
+                    var textarea_val = $("#native-date-input").val();
+                    var clock = year + "年" + month + "月";
+                    if (textarea_val !== "") {
+                        var array_val = textarea_val.split(";");
+                        if (array_val.indexOf(clock) == -1) {
+                            array_val.push(clock);
+                            var l = [];
+                            $.each(array_val, function(index, item) {
+                                var item = item.slice(0, item.length - 1);
+                                var d = new Date();
+                                d.setDate(1);
+                                var t = item.split("年");
+                                d.setFullYear(t[0], t[1] - 1);
+                                l.push(d);
+                            })
+                            l.sort(function(a, b) {
+                                return a < b ? 1 : -1;
+                            });
+                            var r_l = [];
+                            var j_l = new Array();
+                            $.each(l, function(index, item) {
+                                var y = item.getFullYear();
+                                var m = q = item.getMonth() + 1;
+                                var ym = y + "年" + m + "月";
+                                var jm = y + '-' + q + '-' + '1';
+                                r_l.unshift(ym);
+                                j_l.unshift(jm);
+                            });
+                            console.log(r_l);
+                            $(".date-info-list").find("li").remove();
+                            $.each(r_l, function(index, item) {
+                                var h_ = ' <li role="presentation" class="active"><a><span class="deta-detail">' + item + '</span><i class="detele-native-date fa fa-trash-o fa-lg"></i></a></li>';
+                                $(".date-info-list").append(h_);
+                            })
+                            var input_realVal = r_l.join(";");
+                            var input_new = j_l.join(",");
+                            $("#native-date-input").val(input_realVal);
+                            $("#new-date-input").val(input_new);
+                            $("#count-time").val(array_val.length);
+                            $('#vipPrice').text(array_val.length * 100);
+
+                        }
+                    } else {
+                        var h_ = ' <li role="presentation" class="active"><a><span class="deta-detail">' + clock + '</span><i class="detele-native-date fa fa-trash-o fa-lg"></i></a></li>';
+                        $(".date-info-list").append(h_);
+                        $("#native-date-input").val(clock);
+                        $("#new-date-input").val(year + '-' + month + '-' + '1');
+                        $("#count-time").val("1");
+                        $('#vipPrice').text(100);
+                    }
+                })
+
+                $(document).on("click", ".detele-native-date", function(e) {
+                    $(this).closest("li.active").remove();
+                    var This=$(e.currentTarget);
+                    var str=This.parent().find('.deta-detail').text().split('年');
+                    var str2=str[1].split('月');
+                    var str3=str[0]+'-'+str2[0]+'-'+'1';
+                    var text=$("#new-date-input").val();
+                    text=text.replace(str3+',',"");
+                    if(text==$("#new-date-input").val()){
+                       text=text.replace(','+str3,"");
+                    }
+                    $("#new-date-input").val(text);
+                    var input_val=[];
+                    $(".deta-detail").each(function() {
+                        var this_val = $(this).text();
+                        input_val.unshift(this_val);
+                    });
+                    var input_realVal = input_val.join(";");
+                    $("#native-date-input").val(input_realVal);
+                    $("#count-time").val(input_val.length);
+                     $('#vipPrice').text(input_val.length*100);
+                });
+                // time end
+
+            });
+
+        </script>
+    </body>
+
+</html>

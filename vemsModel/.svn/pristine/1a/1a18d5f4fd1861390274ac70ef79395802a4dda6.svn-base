@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-外部服务配置-修改外部服务</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+    <style type="text/css">
+        .col-sm-3{ width:25%; float: left;padding-top: 7px; margin-bottom: 0;text-align: right; }
+        .col-sm-6{ width: 50%; float: left;}
+    </style>
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">停车场:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>停车场A</option>
+                           <option>停车场B</option>
+                           <option>停车场C</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">服务类型:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>服务类型1</option>
+                           <option>服务类型1B</option>
+                           <option>服务类型1C</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">名称:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">优先级:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>1</option>
+                           <option>2</option>
+                           <option>3</option>
+                           <option>4</option>
+                           <option>5</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">开启接口:</label>
+                    <div class="col-xs-6 apply-parking" style="min-height: 34px;">
+                       <ul id="treeDemo" class="ztree"></ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">IP地址:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">端口:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">请求URl:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">是否签名:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>是</option>
+                           <option>否</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">签名类型:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>签名类型1</option>
+                           <option>签名类型2</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">签名秘钥:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">是否加密:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>是</option>
+                           <option>否</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">加密类型:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>加密类型1</option>
+                           <option>加密类型2</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">加密秘钥:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">服务状态:</label>
+                    <div class="col-sm-6">
+                        <span class="inblock h34 ml10">在线</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">是否启用:</label>
+                    <div class="col-xs-6">
+                       <select class="form-control" id="">
+                           <option>未启用</option>
+                           <option>启用</option>
+                           <option>禁用</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+     <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+        })
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+
+        <!--
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            view: {
+              showIcon: false,
+              showLine: false
+            }
+        };
+
+        var zNodes =[
+            { id:1, pId:0, name:"接口名称",nocheck: true, open:true},
+            { id:11, pId:1, name:"车牌图片上传接口", open:true},
+            { id:12, pId:1, name:"车牌图片上传接口", open:true},
+            { id:13, pId:1, name:"进出数据上传接口", open:true}
+        ];
+
+        /**
+         * 注意：
+         *  id的命名规则为：
+         *      第一层节点为一位数，按顺序从1开始，依此类推；
+         *      第二层的节点为两位数，十位数取父节点的id，个位数为此节点在同级节点中的位置；
+         *      第三层的节点为三位数，前两位数为其父节点的id，各位数为此节点在同级节点中的位置；
+         *      依此类推。
+         *  
+         *  pId的命名规则为：
+         *      如果此节点为第一层节点，则pId=0；否则，pId为此节点的id的前两位。如，如果此节点id为1132，则PId为113。
+         *      以此类推。
+         *  checked:表示初始化的时候，节点是否选中状态
+         *  open:表示初始化时是否打开此节点
+         *  nocheck：为TRUE时表示该节点无checkbox
+         */
+        
+        var code;
+        
+        function setCheck() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            py = $("#py").attr("checked")? "p":"",
+            sy = $("#sy").attr("checked")? "s":"",
+            pn = $("#pn").attr("checked")? "p":"",
+            sn = $("#sn").attr("checked")? "s":"",
+            type = { "Y":py + sy, "N":pn + sn};
+            zTree.setting.check.chkboxType = type;
+            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+        }
+        function showCode(str) {
+            if (!code) code = $("#code");
+            code.empty();
+            code.append("<li>"+str+"</li>");
+        }
+
+        $(function(){
+          $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+          setCheck();
+          $("#py").bind("change", setCheck);
+          $("#sy").bind("change", setCheck);
+          $("#pn").bind("change", setCheck);
+          $("#sn").bind("change", setCheck);
+        })
+
+    </script>
+</body>
+</html>

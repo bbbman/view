@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>在场车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">停车场名称</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">停车场名称</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                                <option>停车场1</option>
+                                <option>停车场2</option>
+                                <option>停车场3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">车牌号码</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">车牌号码</div>
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">进场时间</label>
+                        <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-time glyphicon "></div>
+                            <input type="text" class="form-control time-input" id="approachTime" placeholder="请选择进场时间" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">记录类型</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">记录类型</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                                <option>类型1</option>
+                                <option>类型2</option>
+                                <option>类型3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">校正状态</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">校正状态</div>
+                            <select class="form-control">
+                                <option>全部</option>
+                                <option>未校正</option>
+                                <option>已校正</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </div>
+                </div>
+                <div class="function clearfix">
+                    <a class="btn btn-default pull-right ake-add-btn" href="#" id="open-set-restcarport-modal">设置剩余车位数</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" id="ake-all-items">
+                                        </label>
+                                    </th>
+                                    <th>车牌照片</th>
+                                    <th>车牌号</th>
+                                    <th>卡号</th>
+                                    <th>进场时间</th>
+                                    <th>进场通道</th>
+                                    <th>VIP类型</th>
+                                    <th>停车场名称</th>
+                                    <th>校正状态</th>
+                                    <th class="hidden-480">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace">
+                                        </label>
+                                    </td>
+                                    <td></td>
+                                    <td><a class='look-plsteImg'>查看大图</a></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>未校正</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" title="车牌校正" data-toggle="modal" data-target="#plate-adjust-modal">车牌校正</button>
+                                        <button class="btn btn-sm btn-danger" title="强制离场" id='btn-force'>强制离场 </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">...</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /span -->
+            <!-- /span -->
+        </div>
+        <!-- /row -->
+    </div>
+    </div>
+    <!-- 表单modal -->
+    <div class="modal fade ake-modal" id="plate-adjust-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog check-plate-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">车牌校正</h4>
+                </div>
+                <div class="modal-body row">
+                    <div class="discern-plateImg-box col-xs-12">
+                        <div class="col-xs-4 big-plateImg-box">
+                            <img src="../dist/images/plate-test.jpg" alt="识别大图" class="img-thumbnail">
+                        </div>
+                        <div class="col-xs-8 discern-result-list" style="padding-right:10px; padding-left:10px;">
+                            <div class="col-xs-3 discern-result-item" style="padding-left:0px;">
+                                <img src="../dist/images/plate-test.jpg" alt="识别小图" class="img-thumbnail" style="width:100%;">
+                                <span>识别结果</span>
+                            </div>
+                            <div class="col-xs-3 discern-result-item">
+                                <img src="../dist/images/plate_test2.jpg" alt="识别小图" class="img-thumbnail" style="width:100%;">
+                                <span>识别结果</span>
+                            </div>
+                            <div class="col-xs-3 discern-result-item">
+                                <img src="../dist/images/plate_test1.jpg" alt="识别小图" class="img-thumbnail" style="width:100%;">
+                                <span>识别结果</span>
+                            </div>
+                            <div class="col-xs-3 discern-result-item">
+                                <img src="../dist/images/plate_test1.jpg" alt="识别小图" class="img-thumbnail" style="width:100%;">
+                                <span>识别结果</span>
+                            </div>
+                            <form class="form-horizontal col-xs-12">
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">最终车牌:</label>
+                                    <div class="sign-word col-xs-1">
+                                        <input id="plate-fristWord" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="sign-word col-xs-1">
+                                        <input id="plate-lastword" type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <button type="button" class="btn  btn-primary btn-flat pull-left">确认校正</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="province-codes-box col-sm-12">
+                                <ul class="list-unstyled list-inline province-codes-list">
+                                    <li id="currentCode" class="hidden"></li>
+                                    <li name="京">京</li>
+                                    <li name="津">津</li>
+                                    <li name="冀">冀</li>
+                                    <li name="晋">晋</li>
+                                    <li name="蒙">蒙</li>
+                                    <li name="辽">辽</li>
+                                    <li name="黑">黑</li>
+                                    <li name="沪">沪</li>
+                                    <li name="苏">苏</li>
+                                    <li name="浙">浙</li>
+                                    <li name="皖">皖</li>
+                                    <li name="闽">闽</li>
+                                    <li name="赣">赣</li>
+                                    <li name="鲁">鲁</li>
+                                    <li name="豫">豫</li>
+                                    <li name="鄂">鄂</li>
+                                    <li name="湘">湘</li>
+                                    <li name="粤">粤</li>
+                                    <li name="桂">桂</li>
+                                    <li name="琼">琼</li>
+                                    <li name="渝">渝</li>
+                                    <li name="川">川</li>
+                                    <li name="贵">贵</li>
+                                    <li name="滇">滇</li>
+                                    <li name="藏">藏</li>
+                                    <li name="陕">陕</li>
+                                    <li name="甘">甘</li>
+                                    <li name="青">青</li>
+                                    <li name="宁">宁</li>
+                                    <li name="新">新</li>
+                                    <li name="港">港</li>
+                                    <li name="澳">澳</li>
+                                    <li name="台">台</li>
+                                    <li name="使">使</li>
+                                    <li name="领">领</li>
+                                    <li name="警" class="plate-last-word">警</li>
+                                    <li name="挂" class="plate-last-word">挂</li>
+                                    <li name="学" class="plate-last-word">学</li>
+                                    <li name="WJ">WJ</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="adjust-btn-group col-xs-12" style="text-align:center;">
+                            <button type="button" class="btn  btn-primary btn-flat">无牌车</button>
+                            <button type="button" class="btn  btn-primary btn-flat ">遮挡车</button>
+                            <button type="button" class="btn  btn-primary btn-flat ">非汽车</button>
+                            <button type="button" class="btn  btn-primary btn-flat">误触发</button>
+                            <button type="button" class="btn  btn-primary btn-flat ">无需校正</button>
+                        </div>
+                    </div>
+                </div>
+                <!--  <div class="modal-footer">
+                 <button type="button" class="btn  btn-default btn-flat  pull-right" data-dismiss="modal">关闭</button>
+               </div> -->
+            </div>
+        </div>
+    </div>
+    <!--查看大图modal-->
+    <div class="modal fade ake-modal " id="look-bigPlate-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">车牌大图</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="big-plate-img">
+                        <img src="../dist/images/plate-test.jpg" alt="车牌大图" style="width:100%;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-right" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../dist/js/timeset.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $(".main-sidebar").mCustomScrollbar({
+                theme: "dark"
+            });
+        }
+        //绑定时间区间控件
+        $('#approachTime').binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY-MM-DD HH:mm',
+            isTimePicker: true,
+            position: 'left'
+        });
+
+
+        //点击强制离场
+        $('#btn-force').on('click', function() {
+            showAffirmModal("强制离场", "确定要对车辆进行强制离场吗？", sureFn);
+        });
+        //点击确认后执行的方法ajax
+        function sureFn() {
+
+        };
+
+        //车牌校正大图片的显示与变化
+        $(document).on('mouseover', '.discern-result-list img', function(e) {
+            var $this = $(e.target);
+            var $bigImgBox = $('.big-plateImg-box');
+            var $bigImg = $('.big-plateImg-box img');
+            var bigImgSrc = $bigImg.attr('src');
+            $this.on('click', function() {
+                bigImgSrc = $this.attr('src');
+                $bigImg.attr('src', bigImgSrc);
+                //$('.big-plateImg-box').removeClass('hidden');
+            });
+            if (!$bigImgBox.hasClass('hidden')) {
+                $bigImg.attr('src', $this.attr('src'));
+                $this.on('mouseout', function() {
+                    $bigImg.attr('src', bigImgSrc);
+                });
+            }
+        });
+
+        //车牌校正车牌首字选择框的显示与隐藏
+        $('#plate-fristWord,#plate-lastword').on('focus', function() {
+            /*$('.check-plate-modal').width(1200);*/
+            /*$('.province-codes-box').removeClass('hidden');*/
+            /*  $('.big-plateImg-box').removeClass('col-xs-4').addClass('col-xs-3');
+              $('.discern-result-list').removeClass('col-xs-8').addClass('col-xs-6');*/
+        });
+
+        $(document).on("click", '.province-codes-box ul li', function(e) {
+            var $this = $(e.target);
+            var val = $this.text();
+            if (!$this.hasClass('plate-last-word')) {
+                $this.siblings('li').removeClass('code-active');
+                $this.addClass('code-active');
+                $('#plate-fristWord').val(val);
+            }
+        });
+        $(document).on("click", '.province-codes-box ul .plate-last-word', function(e) {
+            var $this = $(e.target);
+            var val = $this.text();
+            $this.siblings('li').removeClass('code-active');
+            $this.addClass('code-active');
+            $('#plate-lastword').val(val);
+        });
+        //点击查看大图
+        $(document).on('click', '.look-plsteImg', function(e) {
+            $('#look-bigPlate-modal').modal('show');
+
+        });
+        $("#open-set-restcarport-modal").click(function() {
+            layer.open({
+                type: 2,
+                title: '设置剩余车位数',
+                maxmin: true,
+                shadeClose: false, //点击遮罩关闭层
+                area: ['600px', '60%'],
+                offset: ['30px'],
+                content: ['modal/set-restcarport-modal.html']
+            });
+            return false;
+        });
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-本地车主-编辑车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+</head>
+
+<body class="index-page">
+<div class="modal-content ake-iframe-modal">
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车牌号码:</label>
+                <div class="col-xs-6">
+                   <input type="text" class="form-control" id="car_license_number" placeholder="请输入车牌号码" maxlength="7" style="text-transform: uppercase;" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车辆品牌:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车辆颜色:</label>
+                <div class="col-xs-6">
+                    <select class="form-control" id="">
+                       <option>白色</option>
+                       <option>黑色</option>
+                       <option>银色</option>
+                       <option>蓝色</option>
+                   </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">公私车:</label>
+                <div class="col-xs-6">
+                    <select class="form-control" id="car_type">
+                       <option value="0">私车</option>
+                       <option value="1">公车</option>
+                       <option value="2">未知</option>
+                   </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车辆型号:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车辆类型:</label>
+                <div class="col-xs-6">
+                    <select class="form-control" id="">
+                       <option>小车</option>
+                       <option>大车</option>
+                       <option>超大车</option>
+                       <option>微型客车</option>
+                   </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">行驶证照片:</label>
+                <div class="col-xs-6">
+                    <img src="../../dist/images/default_DL.jpg" width="80px"  height="60px" style="float: left;" />
+                    <input type="file" class="myfile" value="上传" style="width:63px;cursor: pointer;" onchange="document.getElementById('filePath').innerHTML=this.value">
+                    <button type="button" class="btn btn-info btn-flat pull-left ml30" style="border-radius: 4px;margin-top: 28px;cursor: pointer;">上&nbsp;&nbsp;传</button>
+                    <span class="inblock h34 ml10" id="filePath" style="margin-top: 28px;"></span>
+                </div>
+            </div>
+            <div class="form-group mt30 f13 b">
+                <div class="col-xs-offset-2 col-xs-4">最近编辑人&nbsp;&#58;&nbsp;<span class="inblock h34" id="editPeople">***</span></div>
+                <div class="col-xs-6">编辑时间&nbsp;&#58;&nbsp;<span class="inblock h34" id="editTime">2015-11-30 15:15:15</span></div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer">
+        <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">取消</button>
+        <button type="button" class="btn  btn-primary btn-flat pull-right" id="save_carInfo">保存</button>
+    </div>
+</div>
+
+        <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+        <!-- <![endif]-->
+        <!--[if IE]>
+            <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <script src="../../dist/js/bootstrap.min.js"></script>
+         <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+         <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+         <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+        <script src="../../dist/js/public.js"></script>
+        <script type="text/javascript">
+
+            $(function(){
+                if (!$.browser.webkit) {
+                    $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                    $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                     $("body").mCustomScrollbar({theme:"dark"});
+                }
+
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                $("#cancel").on('click',function(){
+                    parent.layer.close(index);
+                })
+
+                //给父页面传值
+                $('#save_carInfo').on('click', function(){
+                    // var car_license_number = '';
+                    // if($("#car_license_number").val().trim()==""){
+                    //     layer.tips('请输入车牌号码', '#car_license_number');
+                    //     return;
+                    // }
+                    // car_license_number = $("#car_license_number").val().trim().toUpperCase();
+
+                    // // console.log(parent.$("#flag").attr("class").substr(-1));
+                    // var flag = parent.$("#flag").attr("class").substr(-1);
+
+                    // // console.log(parent.$("#addLine").nextAll('.form-group.deleteLine').eq(flag));
+                    // parent.$("#addLine").nextAll('.form-group.deleteLine').eq(flag).find("input.add_car_license").val(car_license_number);
+
+                    parent.layer.close(index);
+
+                });
+
+            })
+
+            
+
+        </script>
+</body>
+</html>

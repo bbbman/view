@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-自助缴费机管理-纸/硬币状态</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style type="text/css">
+        .modal-body .form-title{
+            position: relative;
+            text-align: center;
+        }
+        .modal-body .form-title a{
+            position: absolute;
+            right: 50px;
+            top:4px;
+        }
+        .form-group div h4{
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+        .form-horizontal .form-group .control-label{
+            font-weight: 400;
+        }
+        .form-group div .span-control{
+            display: inline-block;
+            height: 34px;
+            line-height: 34px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .form-horizontal .additional-group{
+            margin-top: -20px;
+            margin-bottom: 10px;
+        }
+        .must-tc{
+            text-align: center !important;
+        }
+    </style>
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <div class="form-title">
+                <h3>纸/硬币状态（距上一次初始化时间开始）</h3>
+                <span>2016-07-15 23:40:20</span>
+            </div>
+            <hr />
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">总收取金额：</label>
+                    <div class="col-xs-6"><span class="span-control">1000元</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">剩余找零总金额：</label>
+                    <div class="col-xs-6"><span class="span-control">400元</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">收取纸币金额：</label>
+                    <div class="col-xs-6"><span class="span-control">600元</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">剩余找零纸币：</label>
+                    <div class="col-xs-6"><span class="span-control">400元</span></div>
+                </div>
+                <div class="form-group additional-group">
+                    <label for="" class="col-xs-6 control-label">（上次初始化数量：</label>
+                    <div class="col-xs-6"><span class="span-control">400元</span>）</div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">收取硬币金额：</label>
+                    <div class="col-xs-6"><span class="span-control">400元</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">剩余找零硬币：</label>
+                    <div class="col-xs-6"><span class="span-control">400元</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">（上次初始化数量：</label>
+                    <div class="col-xs-6"><span class="span-control">200元</span>）</div>
+                </div>
+    
+                <div class="modal-footer must-tc">
+                    <button type="button" class="btn  btn-default btn-flat" id="cancel">关闭</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+     <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+        })
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+            $("#cancel").on('click',function(){    
+                parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+            })
+        </script>
+</body>
+</html>

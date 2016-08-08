@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-数据及日志管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+  
+    <div class="content-inner">
+        <div class="con-item data-management">
+            <!--备份数据库-->
+            <div class="form-horizontal data-part">
+                <div class="form-group mt10">
+                    <h4 class="tc">最近备份时间：<span class="cBlue b">2015-11-12 20:30:21</span></h4>
+                </div>
+                <div class="form-group tc">
+                    <button type="button" class="btn btn-primary btn-flat">备份数据库</button>
+                </div>
+                <div class="form-group mt15">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动备份">&nbsp;自动备份
+                    </label>
+                    <div class="col-xs-offset-1 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天备份一次</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动删除">&nbsp;自动删除
+                    </label>
+                    <div class="col-xs-offset-1 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;">
+                        <span class="h30 ml5 f15 pull-left">天前备份数据</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!--恢复数据库-->
+            <div class="form-horizontal  data-part">
+                <div class="form-group mt10">
+                    <h4 class="tc">最近恢复时间：<span class="cBlue b">2015-11-12 20:30:21</span></h4>
+                </div>
+                <div class="form-group mt10 tc">
+                    <button type="button" class="btn btn-primary btn-flat">恢复数据库</button>
+                </div>
+            </div>
+            
+            <!--导出日志-->
+            <div class="form-horizontal data-part export-logger" id="">
+                <div class="form-group mt10">
+                    <h4 class="tc">最近导出时间：<span class="cBlue b">2015-11-12 20:30:21</span></h4>
+                </div>
+                <div class="form-group tc">
+                    <button type="button" class="btn btn-primary btn-flat">导出日志</button>
+                </div>
+                <div class="form-group mt15">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清除">&nbsp;自动清除
+                    </label>
+                    <div class="col-xs-offset-1 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前日志</span>
+                    </div>
+                </div>
+            </div>
+
+            <!--清理垃圾数据-->
+            <div class="form-horizontal data-part" id="clearTrash" style="height: auto;">
+                <div class="form-group">
+                    <h4 class="tc">最近清理时间：<span class="cBlue b">2015-11-12 20:30:21</span></h4>
+                </div>
+                <div class="form-group tc">
+                    <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#clearTrashDataModal">清理垃圾数据</button>
+                </div>
+                <div class="form-group mt15">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清理">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前未识别在场数据</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清理">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前非汽车在场数据</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清理">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前误触发在场数据</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清理">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前无牌车在场数据</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清理">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前有牌车在场数据</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动清理">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前异常在场数据</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!--清理历史数据-->
+            <div class="form-horizontal data-part" id="clearHistory" >
+                <div class="form-group">
+                    <h4 class="tc">最近清理时间：<span class="cBlue b">2015-11-12 20:30:21</span></h4>
+                </div>
+                <div class="form-group tc">
+                    <button type="button" class="btn btn-primary btn-flat" data-toggle="modal" data-target="#clearHistoryDataModal">清理历史数据</button>
+                </div>
+                <div class="form-group mt15">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动备份">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前在场记录</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动备份">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前历史在场图片</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动备份">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前历史离场记录</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline col-xs-offset-1 col-sm-4 col-xs-4">
+                      <input type="checkbox" id="" value="自动备份">&nbsp;自动清理
+                    </label>
+                    <div class="col-md-offset-0 col-xs-offset-1 col-md-7 col-sm-6 col-xs-6">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" maxlength="3" style="display: inline-block; width:40px; height:30px; padding: 4px 4px;" />
+                        <span class="h30 ml5 f15 pull-left">天前历史离场图片</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- 清理垃圾数据modal -->
+        <div class="modal fade ake-modal" id="clearTrashDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-center" id="exampleModalLabel">清理垃圾数据</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label col-xs-4">时间 </label>
+                                <div class="col-sm-7 col-xs-6">
+                                    <input type="text" class="form-control" placeholder="请输入时间" id="clearTrashTime" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group mt30">
+                                <label class="checkbox-inline col-xs-offset-1 col-sm-3 tr col-xs-6">
+                                  <input type="checkbox" id="" value="清理"> 清理
+                                </label>
+                                <div class=" col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">未识别、非汽车、误触发数据</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-inline col-xs-offset-1 col-sm-3 tr col-xs-4">
+                                  <input type="checkbox" id="" value="清理"> 清理
+                                </label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">无牌车在场数据</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-inline col-xs-offset-1 col-sm-3 tr col-xs-6">
+                                  <input type="checkbox" id="" value="清理"> 清理
+                                </label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">有牌车在场数据</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn  btn-primary btn-flat pull-right">确定清理</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--清理垃圾数据modal 结束-->
+
+        <!-- 清理历史数据modal -->
+        <div class="modal fade ake-modal" id="clearHistoryDataModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-center" id="exampleModalLabel">清理历史数据</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label col-xs-4">时间 </label>
+                                <div class="col-sm-6 col-xs-7">
+                                    <input type="text" class="form-control" placeholder="请输入时间" id="clearHistoryTime" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group mt30">
+                                <label class="checkbox-inline col-xs-offset-2 col-sm-3 tr col-xs-6">
+                                  <input type="checkbox" id="" value="清理">&nbsp;清理
+                                </label>
+                                <div class=" col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">历史在场记录</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-inline col-xs-offset-2 col-sm-3 tr col-xs-6">
+                                  <input type="checkbox" id="" value="清理">&nbsp;清理
+                                </label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">历史在场图片</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-inline col-xs-offset-2 col-sm-3 tr col-xs-6">
+                                  <input type="checkbox" id="" value="清理">&nbsp;清理
+                                </label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">历史离场记录</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-inline col-xs-offset-2 col-sm-3 tr col-xs-6">
+                                  <input type="checkbox" id="" value="清理">&nbsp;清理
+                                </label>
+                                <div class="col-sm-6 col-xs-6">
+                                    <span class="h30 f15 pull-left">历史离场图片</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn  btn-primary btn-flat pull-right">确定清理</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--清理历史数据modal 结束-->
+
+        <!--备份数据库modal-->
+        <div class="modal fade ake-modal deleteVipTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title tc">备份数据库</h4>
+                    </div>
+                    <div class="modal-body">
+                       <p class="tc f15">您确定要备份数据库吗？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--备份数据库modal 结束-->
+
+
+    
+
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../../dist/js/timeset.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+        
+        $("#clearHistory").css("height",$("#clearTrash").css("height"));
+  
+    });
+
+    $('#clearHistoryTime,#clearTrashTime').binDaterangepicker({
+        isSingle: false,
+        format: 'YYYY/MM/DD',
+        isTimePicker: false,
+        position:'right'
+    });
+        
+    </script>
+</body>
+
+</html>

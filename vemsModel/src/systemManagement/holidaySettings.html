@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>节假日设置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/jquery-ui.css">
+    <link rel="stylesheet" href="../dist/css/jquery-ui-timepicker-addon.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<style>
+  .modal-backdrop{
+    z-index: 0;
+   }  
+</style>
+<body class="con-page-body">
+            <div class="content-inner clearfix holiday-content" id="akeHolidayCalendar">
+                <div class="con-item role-management">
+                    <div class="row con-item-header  con-item-header-p20 clearfix">
+                      <form class="col-xs-4 form-inline seting-way-box">
+                         <div class='form-group'>
+                          <div class="col-xs-12">
+                            <div class="radio clip-radio radio-inline radiobox radio-active">
+                              <input type="radio" name="radio-group" value="freely" checked="checked">
+                              <label>自由设置</label>
+                            </div>
+                            <div class="radio clip-radio radio-inline radiobox">
+                              <input type="radio" name="radio-group" value="weekly">
+                              <label>按周设置</label>
+                            </div>
+                            <div class="radio clip-radio radio-inline radiobox">
+                              <input type="radio" name="radio-group" value="monthly">
+                              <label>按月设置</label>
+                            </div>
+                            <div class="radio clip-radio radio-inline radiobox">
+                              <input type="radio" name="radio-group" value="themonth">
+                              <label>整月设置</label>
+                            </div>
+                         </div>
+                        </div>   
+                     </form>
+                     <div class="col-xs-4 year-switch-box"> 
+                         <div class="year-show-box">
+                             <a class="btn-arrow-left"></a>
+                             <div class="box-radius year-val">2015</div>
+                             <a class="btn-arrow-right"></a>                
+                         </div> 
+                     </div>
+                     <div class="col-xs-4 btn-box clearfix"> 
+                        <button class="btn btn-primary btn-flat pull-right" title="保存" id="btn-calendar-save" style="margin-left:16px">保存</button>
+                        <button class="btn btn-primary btn-flat pull-right" title="同步详情" id="date-tingtuDetail">同步详情</button>
+                         <label class="radio-inline seting-time-box">
+                            <div class="iradiobox_square-blue seting-time-interval">
+                              <input type="checkbox" class="icheck" name="check-group">
+                              <ins class="iCheck-helper"></ins>
+                            </div>
+                            设置时间段
+                          </label>
+                     </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 calendar-box-wrap">
+                        </div>
+                        
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- 设置时间段modal -->
+    <div class="modal fade ake-iframe-modal set-time-modal" id="setTimeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="z-index:1;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-center" id="exampleModalLabel">设置时间段</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group daterange-box">
+                               <label for="" class="pull-left control-label col-xs-3">时间区间:</label>
+                                <div class="col-xs-8">
+                                    <div class="input-daterange input-group">
+                                      <input type="text" class="form-control input-daterange-start" readonly="" />
+                                      <span class="input-group-addon">至</span>
+                                      <input type="text" class="form-control input-daterange-end" readonly="" />
+                                    </div>
+                                </div>
+                          </div>
+                          <div class="col-xs-offset-3 col-xs-9 error-time-tip hidden">开始时间应大于结束时间！</div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn  btn-primary btn-flat pull-right btn-sure">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script src="../dist/js/jquery-ui.min.js"></script>
+    <script src="../dist/js/jquery-ui-timepicker-addon.min.js"></script>
+    <script src="../dist/js/jquery-ui-timepicker-zh-CN.js"></script>
+    <script src="../dist/js/akecalendarset.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+      }
+      // 为设置时间段的modal绑定时间控件
+      $(".input-daterange-start").timepicker({
+            timeFormat: "HH:mm:ss",
+            defaultValue:"00:00:00"
+        });
+      $('.input-daterange-end').timepicker({
+            timeFormat: "HH:mm:ss",
+            defaultValue:"23:59:59"
+        });
+      
+      //调用节假日设置插件
+      /*
+        初始化日历步骤：
+        1.清除原来的本地存储，格式如下：
+          localStorage.removeItem(calendarTag);
+        2.将数据库中的记录存储到本地，格式如下：
+          localStorage.setItem(calendarTag,JSON.stringify(HolidayData));
+        3.调用如下方法：
+         $('#akeHolidayCalendar').bindakeCalendar({calendarTag:'holiday',//日历唯一标识});
+      */
+      localStorage.removeItem('holiday');
+      var akeHolidayObject=$('#akeHolidayCalendar').bindakeCalendar({
+        calendarTag:'holiday',//日历唯一标识
+      });
+
+       $('#btn-calendar-save').on('click',function(){
+           //打印所选择的节假日日期
+           console.log(akeHolidayObject.getholidays());
+       });
+
+
+       $("#date-tingtuDetail").click(function() {
+           layer.open({
+               type: 2,
+               title: '同步详情',
+               maxmin: true,
+               shadeClose: false, //点击遮罩关闭层
+               area: ['900px', '80%'],
+               offset: ['30px'],
+               content: ['modal/date-tongbu.html']
+           });
+
+           var wrap = $(".layui-layer-content ");
+           browser_ = /iphone|ipad/i.test(navigator.userAgent);
+           if (browser_ == true) {
+               wrap.addClass("iframe-wrap");
+           }
+           return false;
+
+       });
+      
+    });
+    </script>
+</body>
+
+</html>

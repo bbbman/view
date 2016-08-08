@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-外部服务配置-新增外部服务</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+    <style type="text/css">
+        .col-sm-3{ width:25%; float: left;padding-top: 7px; margin-bottom: 0;text-align: right; }
+        .col-sm-6{ width: 50%; float: left;}
+    </style>
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">停车场:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>停车场A</option>
+                           <option>停车场B</option>
+                           <option>停车场C</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">服务类型:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>服务类型1</option>
+                           <option>服务类型1B</option>
+                           <option>服务类型1C</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">名称:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">优先级:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>1</option>
+                           <option>2</option>
+                           <option>3</option>
+                           <option>4</option>
+                           <option>5</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">开启接口:</label>
+                    <div class="col-xs-6" >
+                       <div class="portBox">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value=""> 接口a
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value=""> 接口b
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value=""> 接口c
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value=""> 接口b
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value=""> 接口c
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">IP地址:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">端口:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">请求URl:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">是否签名:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>是</option>
+                           <option>否</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">签名类型:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>签名类型1</option>
+                           <option>签名类型2</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">签名秘钥:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">是否加密:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>是</option>
+                           <option>否</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">加密类型:</label>
+                    <div class="col-sm-6">
+                       <select class="form-control" id="">
+                           <option>加密类型1</option>
+                           <option>加密类型2</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-sm-3 control-label">加密秘钥:</label>
+                        <div class="col-sm-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">是否启用:</label>
+                    <div class="col-xs-6">
+                       <select class="form-control" id="">
+                           <option>未启用</option>
+                           <option>启用</option>
+                           <option>禁用</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" id="cancel">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+     <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+        })
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        });
+
+    </script>
+</body>
+</html>

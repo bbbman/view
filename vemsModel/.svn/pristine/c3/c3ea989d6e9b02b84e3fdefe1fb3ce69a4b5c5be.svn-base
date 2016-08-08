@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-自助缴费机管理-自检状态</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style type="text/css">
+        .modal-body .form-title{
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .modal-body .form-title a{
+            position: absolute;
+            right: 50px;
+            top:4px;
+        }
+        .form-group div h4{
+            margin-top: 7px;
+            margin-bottom: 0px;
+        }
+        .form-horizontal .form-group .control-label{
+            font-weight: 400;
+        }
+        .form-group div .span-control{
+            display: block;
+            height: 34px;
+            line-height: 34px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .must-tc{
+            text-align: center !important;
+        }
+        .popover-box{
+          position: absolute;
+          top: 38px;
+          right: 50px;
+          width: auto;
+          min-width: 240px;
+          max-width: 320px;
+          max-height: 200px;
+          height: auto;
+          background: #FFF;
+          border:1px solid #CCC;
+          border-radius: 6px;
+          z-index: 100;
+        }
+        .popover-box > .arrow,
+        .popover-box > .arrow::after{
+          position: absolute;
+          display: block;
+          top:-14px;
+          left: 82%;
+          width: 0;
+          height: 0;
+          margin-left: -7px;
+          border-style: solid;
+          border-color:transparent;
+          border-radius: 2px;
+        }
+        .popover-box > .arrow{
+          background: transparent;
+          border-width: 14px 7px;
+          border-top-width: 0;
+          border-bottom-color: #CCC;
+        }
+        .popover-box > .arrow::after{
+          content: '';
+          top: 2px;
+          right: -13px;
+          margin-left: -6px;
+          border-width: 13px 6px;
+          border-top-width: 0;
+          border-bottom-color: #FFF;
+        }
+
+        .popover-box .close {
+          position: absolute;
+          top:3px;
+          right: 10px;
+          font-size: 24px;
+        }
+
+        .popover-box .popover-box-body{
+          color: #515151;
+          text-align: left;
+          padding: 20px 10px 10px;
+          margin-bottom: 0;
+          letter-spacing: 0.4px;
+          font-size: 13px;
+          max-width: 320px;
+          min-width: 240px;
+          max-height: 198px;
+          overflow: auto;
+        }
+        .popover-box .popover-box-body li{
+            padding: 6px 10px;
+            font-size: 15px;
+            border-bottom: 1px dashed #CCCCCC;
+        }
+        .popover-box .popover-box-body li:last-child{
+            border-bottom: 0;
+        }
+        .popover-box .popover-box-body li label{
+            margin-right: 5px;
+            margin-bottom: 0px;
+        }
+    </style>
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <div class="form-title">
+                <h3>自检状态</h3>
+                <a class="additional-explain" id="errorCode">错误代码说明</a>
+                <span>2016-07-15 23:40:20</span>
+                <div id="popoverBox" class="popover-box hidden">
+                  <div class="arrow"></div>
+                  <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  <ul class="popover-box-body list-unstyled">
+                      <li><label>1:</label><span>找零纸币余额不足</span></li>
+                      <li><label>1:</label><span>找零硬币余额不足</span></li>
+                      <li><label>1:</label><span>找零纸币找零故障</span></li>
+                      <li><label>1:</label><span>找零纸币找零故障</span></li>
+                  </ul>
+                </div>
+            </div>
+            <hr />
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">软件版本：</label>
+                    <div class="col-xs-6"><h4>V2.1.0</h4></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">硬币接收器：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">硬币找零器：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">纸币接收器：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">凭条打印机：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">非接触式读卡器：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">条码扫描仪：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">银联加密银盘：</label>
+                    <div class="col-xs-6"><span class="span-control">正常</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">纸币找零器：</label>
+                    <div class="col-xs-6"><span class="span-control">异常<a class="error-code">（12）</a></span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-6 control-label">羊城通：</label>
+                    <div class="col-xs-6"><span class="span-control">未发现</span></div>
+                </div>
+    
+                <div class="modal-footer must-tc">
+                    <button type="button" class="btn  btn-default btn-flat" id="cancel">关闭</button>
+                    <!-- <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+     <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+        })
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+
+        $('#errorCode').off('click').on('click',function(e){
+            e.stopPropagation();
+            popBoxToggle();
+        })
+        $('.error-code').off('click').on('click',function(e){
+            e.stopPropagation();
+            popBoxToggle();
+        })
+
+        $('#popoverBox .close').off('click').on('click',function(e){
+            e.stopPropagation();
+            popBoxHide();
+        })
+
+        $(document).off('click').on('click',function(e){
+            e.stopPropagation();
+            var $This = $(e.target);
+            if(!($This.hasClass('additional-explain') || $This.hasClass('error-code') || $This.hasClass('popover-box') || $This.closest('.popover-box').length > 0)) {
+                popBoxHide();
+            }
+        })
+
+        function popBoxToggle(){
+            var $PopBox = $('#popoverBox');
+            if($PopBox.is(':hidden')){
+                popBoxShow();
+            }else{
+                popBoxHide();
+            }
+        }
+        function popBoxShow(){
+            $('#popoverBox').removeClass('hidden');
+        }
+        function popBoxHide(){
+            $('#popoverBox').addClass('hidden');
+        }
+        </script>
+</body>
+</html>

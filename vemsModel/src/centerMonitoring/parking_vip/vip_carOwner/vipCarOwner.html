@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP车主管理-VIP车主管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+  
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <nav class="con-item-nav">
+                    <ul class="clearfix">
+                        <li class="con-nav-item active"><a href="../../parking_vip/vip_carOwner/vipCarOwner.html" class="ake-third-menu" >VIP车主管理</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/vip_carOwner/vipOperateReport.html" class="ake-third-menu">VIP操作流水</a></li>
+                    </ul>
+                </nav>
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">车主姓名</label>
+                        <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-user"></div>
+                            <input type="text" class="form-control" id="" placeholder="请输入车主姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">车主电话</label>
+                        <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-earphone"></div>
+                            <input type="tel" class="form-control" id="" placeholder="请输入车主电话">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">车牌号</label>
+                        <div class="input-group">
+                          <div class="input-group-addon glyphicon glyphicon-picture"></div>
+                          <input type="text" class="form-control" id="" placeholder="请输入车牌号码" style="text-transform:upperCase;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">VIP别称</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">VIP别称</div>
+                            <input type="tel" class="form-control" id="" placeholder="请输入VIP别称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">VIP状态</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">VIP状态</div>
+                            <select class="form-control" id="" style="width:auto">
+                               <option>全部</option>
+                               <option>未购买VIP</option>
+                               <option>已过期VIP</option>
+                               <option>已生效VIP</option>
+                               <option>待生效VIP</option>
+                           </select>
+                        </div>
+                    </div>
+                                        
+                      <div class="form-group">
+                          <button type="button" id="a" class="btn btn-primary">搜索</button>
+                      </div>
+                  </div>
+                <div class="function pull-right clearfix">
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button">导 &nbsp;出</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="batchVIP">批量开通或续期VIP</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="renewalVIP">续期VIP</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="openVIP">开通VIP</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="vipCarOwner-table" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" id="ake-all-items">
+                                        </label>
+                                    </th>
+                                    <th>序号</th>
+                                    <th>车主姓名</th>
+                                    <th>手机号码</th>
+                                    <th>车牌号码</th>
+                                    <th>车位号</th>
+                                    <th>VIP别称</th>
+                                    <th>有效期</th>
+                                    <th>VIP状态</th>
+                                    <th>操作员</th>
+                                    <th>操作时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace">
+                                        </label>
+                                    </td>
+                                    <td>1</td>
+                                    <td>孙悟空</td>
+                                    <td>11011011110</td>
+                                    <td>粤Y12345</td>
+                                    <td>车位1</td>
+                                    <td>超级VIP</td>
+                                    <td>1990/11/32-2999/2/31</td>
+                                    <td>已生效VIP</td>
+                                    <td>admin</td>
+                                    <td>2015-10-10</td>
+                                </tr>
+                                 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                 <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">...</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+
+    <!-- 开通VIP表单modal -->
+    <div class="modal fade ake-modal" id="openVIPModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">开通VIP</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">VIP别称:</label>
+                            <div class="col-sm-5">
+                               <select class="form-control" id="">
+                                   <option>AVIP</option>
+                               </select>
+                            </div>
+                            <span class="col-sm-4" style="height:34px; line-height: 34px;padding-left: 0;">停车场：佛山A停车场</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">车主姓名:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control carOwner_name" placeholder="">
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <a class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" role="button" id="pickCarOwner">选择车主</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">手机号:</label>
+                            <div class="col-sm-5">
+                                <input type="tel" class="form-control" id="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">车牌:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control car_license_number" placeholder="手动输入车牌号码" maxlength="7" style="text-transform: uppercase;">
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <button type="button" class="btn btn-default btn-flat pull-left acl addCarLicense" style="border-radius: 4px;">添加</button>
+                            </div>
+                            <div class="col-sm-5 show-choose oweCarList">
+                               <label class="checkbox-inline col-sm-10">
+                                 <input type="checkbox" name="car_license" id="" value="湘A98878">湘A98878
+                               </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">车位类型:</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" id="">
+                                   <option>固定车位</option>
+                                   <option>临时车位</option>
+                               </select>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <button type="button" class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" id="pickCarPosition">选择车位</button>
+                            </div>
+                            <div class="col-sm-5 show-choose carPositionList">
+                               <span class="list-item mt5">100001</span>
+                            </div>
+                        </div>
+                        <div class="form-group addLine">
+                            <label for="" class="col-sm-3 control-label">结算类型:</label>
+                            <div class="col-sm-5">
+                                 <select id="" class="form-control pull-left" style="width:60%;">
+                                    <option>时间结算</option>
+                                    <option>次数结算</option>
+                                    <option>余额结算</option>
+                                </select>
+                                <input type="text" id="" class="form-control pull-right" placeholder="" style="display: inline-block; width:20%;">
+                                <span class="h34 mr10 pull-right">值</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">VIP有效期:</label>
+                            <div class="col-sm-5">
+                                <select class="form-control mychoose vip_expiry">
+                                   <option value="1">自然月</option>
+                                   <option value="2">自定义</option>
+                               </select>
+                            </div>
+                            <!-- <div class="col-sm-4" style="padding-left: 0px;">
+                                <input type="text" class="form-control" style="width:50%;display:inline-block" /><span> &nbsp;个月</span>
+                            </div> -->
+                            <div class="col-md-offset-3 col-sm-5">
+                                <input type="text" class="form-control mydate-icon mt10 choose-date" placeholder="请选择日期区间" />
+                            </div>
+                            <div class="col-sm-5 show-choose">
+                               <span class="list-item mt7 mydate choose-detail">15年1月，15年2月(自然月) 或 2015/02/22-2015/03/22(自定义)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">价格:</label>
+                            <div class="col-sm-6">
+                                <span class="price h34 ml10 f15">100</span><span class="h34 f15"> 元</span>
+                            </div>
+                        </div>
+                        <div class="form-group addLine">
+                            <label for="" class="col-sm-3 control-label">折扣价:</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="" class="form-control pull-left" placeholder="" style="display: inline-block; width:85%;">
+                                <span class="h34 ml15 f15"> 元</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认开通</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--开通VIP表单modal 结束-->
+
+    <!-- 续期VIP表单modal -->
+    <div class="modal fade ake-modal" id="renewalVIPModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">续期VIP</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">VIP别称:</label>
+                            <div class="col-sm-5">
+                               <select class="form-control" id="">
+                                   <option>AVIP</option>
+                               </select>
+                            </div>
+                            <span class="col-sm-4" style="height:34px; line-height: 34px;padding-left: 0;">停车场：佛山A停车场</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">车主姓名:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control carOwner_name" id="" placeholder="">
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <a class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" role="button" id="renewPickCarOwner">选择车主</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">手机号:</label>
+                            <div class="col-sm-5">
+                                <input type="tel" class="form-control" id="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">车牌:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control car_license_number" placeholder="手动输入车牌号码" maxlength="7" style="text-transform: uppercase;">
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <button type="button" class="btn btn-default btn-flat pull-left acl addCarLicense" style="border-radius: 4px;">添加</button>
+                            </div>
+                            <div class="col-sm-5 show-choose oweCarList">
+                               <label class="checkbox-inline col-sm-10">
+                                 <input type="checkbox" name="car_license" id="" value="湘A98878">湘A98878
+                               </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">车位类型:</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" id="">
+                                   <option>固定车位</option>
+                                   <option>临时车位</option>
+                               </select>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <button type="button" class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" id="renewPickCarPosition">选择车位</button>
+                            </div>
+                            <div class="col-sm-5 show-choose carPositionList">
+                               <span class="list-item mt5">100001</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label" style="padding-top: 15px;">现有有效期:</label>
+                             <div class="col-sm-5 show-choose" style="margin-left: 15px;">
+                                <span class="list-item mt7 mydate chosen-detail">15年1月，15年2月(自然月) 或 2015/02/22-2015/03/22(自定义)</span>
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">续期日期:</label>
+                            <div class="col-sm-5">
+                                <select class="form-control mychoose vip_expiry">
+                                   <option value="1">自然月</option>
+                                   <option value="2">自定义</option>
+                               </select>
+                            </div>
+                            <div class="col-sm-4" style="padding-left: 0px;">
+                                <input type="text" class="form-control" style="width:50%;display:inline-block" /><span> &nbsp;个月</span>
+                            </div>
+                            <div class="col-md-offset-3 col-sm-5">
+                                <input type="text" class="form-control mydate-icon mt10 choose-date" placeholder="请选择日期区间" />
+                            </div>
+                            <div class="col-sm-5 show-choose">
+                               <span class="list-item mt7 mydate choose-detail">15年1月，15年2月(自然月) 或 2015/02/22-2015/03/22(自定义)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">价格:</label>
+                            <div class="col-sm-6">
+                                <span class="price h34 ml10 f15">100</span><span class="h34 f15"> 元</span>
+                            </div>
+                        </div>
+                        <div class="form-group addLine">
+                            <label for="" class="col-sm-3 control-label">折扣价:</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="" class="form-control pull-left" placeholder="" style="display: inline-block; width:85%;text-transform: uppercase;">
+                                <span class="h34 ml15 f15"> 元</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认续期</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--续期VIP表单modal 结束-->
+    
+    <!--批量续期或开通modal-->
+    <div class="modal fade ake-modal" id="batchVIPModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">批量开通或续期VIP</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="notice">
+                        <span class="col-sm-12 orange mb20">
+                            <h5>温馨提示：请按照以下步骤进行导入</h5>
+                            <p>1、请先下载模板文件，严格按照模板文件格式进行填写，不可更改文件格式.</p>
+                            <p>2、模板文件填写完成后，浏览选择文件，然后点击上传。</p>
+                            <p>3、如果上传失败，请下载失败文件，并注意失败原因的提示。重新填写上传。</p>
+                            <p>PS：此步骤仅供页面样式测试，请开发人员按具体情况自行填写。</p>
+                        </span>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="businesskey" class="col-sm-3 control-label">下载模板:</label>
+                            <div class="col-sm-8">
+                                <span class="col-sm-8 uploaded-file ellipsis">XXX.xls</span>
+                                <input type="button" value="下载" class="upload-btn col-sm-2 pull-right" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="businesskey" class="col-sm-3 control-label">上传文件:</label>
+                            <div class="col-sm-8">
+                                <input type='text' name='textfield' id='textfield' class='form-control pull-left txt' style="width:60%;" />  
+                                <input type='button' class='upload-btn col-sm-2 ml15' value='浏览...' />
+                                    <input type="file" name="fileField" class="file upload-btn col-sm-offset-7 col-sm-2" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                                <input type="button" name="upload" class="upload-btn col-sm-2 pull-right" value="上传" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span id="upload-fail-tip" class="col-sm-offset-3 col-sm-8 red fail-tip">上传失败，文档格式错误，请下载失败文件！</span>
+                        </div>
+                        <div class="form-group orange">
+                            <label for="businesskey" class="col-sm-3 control-label">下载失败文件:</label>
+                            <div class="col-sm-8">
+                                <span class="col-sm-8 uploaded-file ellipsis">XXX.xls</span>
+                                <input type="button" value="下载" class="upload-btn col-sm-2 pull-right" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-flat pull-right">确认开通或续期</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--批量续期或开通modal end-->
+    
+    <!--删除modal-->
+    <div class="modal fade ake-modal deleteLocalCarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tc">删除本地车辆</h4>
+                </div>
+                <div class="modal-body">
+                   <p class="tc f15">您是否确定删除此车辆记录？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除modal结束-->
+
+
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+     <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+     <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+     <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/main.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+
+    });
+
+    $("#openVIP").click(function(){
+        layer.open({
+            type: 2,
+            title: '开通VIP',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['80%' , '85%'],
+            offset : ['10px'],
+            content: ['modal/openVIPModal.html']
+        });
+        var wrap =  $(".layui-layer-content ");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+    })
+
+    $("#renewalVIP").click(function(){
+        layer.open({
+            type: 2,
+            title: '续期VIP',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['80%' , '85%'],
+            offset : ['10px'],
+            content: ['modal/renewalVIPModal.html']
+        });
+        var wrap =  $(".layui-layer-content ");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+    })
+
+    $("#batchVIP").click(function(){
+        layer.open({
+            type: 2,
+            title: '开通VIP',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['60%' , '62%'],
+            offset : ['20px'],
+            content: ['modal/batchVIPModal.html']
+        });
+        var wrap =  $(".layui-layer-content ");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+    })
+
+
+    $(".ake-third-menu").on('click',function(){
+        var src = $(this).attr('href');
+        parent.$("#ake-iframe").attr("src",src);
+    })
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP类型管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+  
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">VIP类型组</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">VIP类型组</div>
+                            <select class="form-control" id="" style="width:auto">
+                                <option>全部</option>
+                                <option>普通类型</option>
+                                <option>访客类型</option>
+                                <option>黑名单类型</option>
+                            </select>
+                        </div>
+                    </div>                  
+                      <div class="form-group">
+                          <button type="button" id="a" class="btn btn-primary">搜索</button>
+                      </div>
+                  </div>
+                <div class="function clearfix">
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="addVipType">新 &nbsp;增</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="localCarOwner-table" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>VIP名称</th>
+                                    <th>VIP类型</th>
+                                    <th>适用停车场</th>
+                                    <th>通行权限</th>
+                                    <th>按月结算金额</th>
+                                    <th>多车多位上限</th>
+                                    <th>适用日期</th>
+                                    <th>适用时段</th>
+                                    <th>组编号</th>
+                                    <th>最近操作员</th>
+                                    <th>最近操作时间</th>
+                                    <th class="hidden-480">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>超级VIP</td>
+                                    <td>普通类型</td>
+                                    <td>艾科停车场</td>
+                                    <td><a id="showLimit" class="pointer">查看权限</a></td>
+                                    <td>10000</td>
+                                    <td>5</td>
+                                    <td><a id="showDate" class="pointer">查看日期</a></td>
+                                    <td>9:00-11:00</td>
+                                    <td>01</td>
+                                    <td>admin</td>
+                                    <td>2015-11-17</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info modifyVipType" title="修改" >
+                                            <i class="icon-edit bigger-120"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger ml5" title="删除" data-toggle="modal" data-target=".deleteVipTypeModal">
+                                            <i class="icon-trash bigger-120"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-info ml5 synchronousDetail" title="同步详情">
+                                        同步详情
+                                        </button>
+                                    </td>
+                                </tr>
+                                 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                 <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">...</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+
+     <!--删除modal-->
+     <div class="modal fade ake-modal deleteVipTypeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title tc">删除VIP类型</h4>
+                 </div>
+                 <div class="modal-body">
+                    <p class="tc f15">您确定删除该条记录吗？</p>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                     <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <!--删除modal结束-->
+
+
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../dist/js/akecalendarset.js"></script>
+     <script type="text/javascript" src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+
+    });
+
+    $("#addVipType").click(function(){
+        layer.open({
+            type: 2,
+            title: '新增VIP类型',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['60%' , '77%'],
+            offset : ['30px'],
+            content: ['modal/addVipTypeModal.html'],
+            success : function(layero,index){
+              layero.find('iframe').addClass("add");
+            }
+        });
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $(".modifyVipType").click(function(){
+        layer.open({
+            type: 2,
+            title: '修改VIP类型',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['60%' , '77%'],
+            offset : ['30px'],
+            content: ['modal/modifyVipTypeModal.html'],
+            success : function(layero,index){
+              layero.find('iframe').addClass("modify");
+
+            }
+        });
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $("#synchronousDetail,.synchronousDetail").on('click',function(){
+        layer.open({
+            type: 2,
+            title: '同步详情',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['80%' , '80%'],
+            offset : ['30px'],
+            content: ['modal/synchronousDetailModal.html'],
+            success : function(layero,index){
+              layero.find('iframe').addClass("add");
+            }
+        });
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $("#showDate").on('click',function(){
+        var index = layer.open({
+            type: 2,
+            title: '查看日期',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['90%' , '90%'],
+            offset : ['30px'],
+            content: ['modal/showDateListModal.html']
+        });
+        layer.full(index);
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $("#showLimit").on('click',function(){
+        layer.open({
+            type: 2,
+            title: '查看通行权限',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['50%' , '60%'],
+            offset : ['30px'],
+            content: ['modal/showLimitModal.html']
+        });
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-自助缴费机管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style type="text/css">
+        table td a:hover{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body class="con-page-body">
+  
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">自助缴费机名称</label>
+                        <div class="input-group">
+                            <div class="input-group-addon text-center">自助缴费机名称</div>
+                            <input type="text" class="form-control" id="" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </div>
+                </div>
+                <div class="function clearfix">
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="addPayment">新 &nbsp;增</a>
+                    <a class="btn btn-default pull-right ake-add-btn" role="button" id="adPicSetting">默认广告图片设置</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="updatePassword">修改管理员密码</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" data-toggle="modal" data-target="#disabledScreenModal">禁 &nbsp;用</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" data-toggle="modal" data-target="#openScreenModal">启 &nbsp;用</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="outsideScreen-table" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" id="ake-all-items">
+                                        </label>
+                                    </th>
+                                    <th>名称</th>
+                                    <th>状态</th>
+                                    <th>自检状态</th>
+                                    <th>纸/硬币状态</th>
+                                    <th>是否启用</th>
+                                    <th>品牌</th>
+                                    <th>型号</th>
+                                    <th>缴费机IP</th>
+                                    <th>缴费机端口</th>
+                                    <th>是否支持反向寻车</th>
+                                    <th>广告图片</th>
+                                    <th>最后清算时间</th>
+                                    <th class="hidden-480">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace">
+                                        </label>
+                                    </td>
+                                    <td>自助缴费机1</td>
+                                    <td>未知/在线/离线</td>
+                                    <td><a class="self-check-status">正常</a></td>
+                                    <td><a class="money-status">正常(未到告警值)</a></td>
+                                    <td>是</td>
+                                    <td>艾科</td>
+                                    <td>型号2</td>
+                                    <td>172.18.44.245</td>
+                                    <td>8080</td>
+                                    <td>是</td>
+                                    <td><a class='look-plateImg'>点击查看</a></td>
+                                    <td>2016-07-20 10:00</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info modifyPayment" title="修改">
+                                            <i class="icon-edit bigger-120"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" title="删除" data-toggle="modal" data-target=".deleteScreenModal">
+                                            <i class="icon-trash bigger-120"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-info" title="参数设置">参数设置</button>
+                                        <button class="btn btn-sm btn-info reckoning-btn" title="清算日志" data-toggle="modal" data-target="">清算日志</button><br />
+                                        <button class="btn btn-sm btn-info mt5 open-door-log" title="开门日志">开门日志</button>
+                                        <button class="btn btn-sm btn-info mt5" title="下载录像">下载录像</button>
+                                    </td>
+                                </tr>
+                                 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                 <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">...</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+    
+    <!--启用modal-->
+    <div class="modal fade ake-modal" id="openScreenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tc">启用自助缴费机</h4>
+                </div>
+                <div class="modal-body">
+                   <p class="tc f15">您确定启用该自助缴费机吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--启用modal结束-->
+
+    <!--禁用modal-->
+    <div class="modal fade ake-modal" id="disabledScreenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tc">禁用自助缴费机</h4>
+                </div>
+                <div class="modal-body">
+                   <p class="tc f15">您确定禁用该自助缴费机吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--禁用modal结束-->
+    
+    <!--删除modal-->
+    <div class="modal fade ake-modal deleteScreenModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tc">删除自助缴费机</h4>
+                </div>
+                <div class="modal-body">
+                   <p class="tc f15">您确定删除该条记录吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除modal结束-->
+    
+
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $("body").mCustomScrollbar({theme:"dark"});
+        }
+  
+    });
+
+    $('#addPayment').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '新增自助缴费机',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['50%' , '75%'],
+            offset : ['10px'],
+            content: ['modal/addPaymentModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('.modifyPayment').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '修改自助缴费机',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['50%' , '75%'],
+            offset : ['10px'],
+            content: ['modal/modifyPaymentModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('#updatePassword').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '修改管理员密码',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['50%' , '60%'],
+            offset : ['40px'],
+            content: ['modal/updatePasswordModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('#adPicSetting').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '默认广告图片设置',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['60%' , '80%'],
+            offset : ['20px'],
+            content: ['modal/defaultadPicModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('.look-plateImg').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '广告图片设置',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['60%' , '80%'],
+            offset : ['20px'],
+            content: ['modal/adPicSettingModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('.self-check-status').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '自检状态',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['50%' , '90%'],
+            offset : ['10px'],
+            content: ['modal/selfCheckModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('.money-status').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '纸/硬币状态',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['50%' , '90%'],
+            offset : ['10px'],
+            content: ['modal/moneyStatusModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('.open-door-log').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '开门日志',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['70%' , '80%'],
+            offset : ['10px'],
+            content: ['modal/openDoorLogModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+
+    $('.reckoning-btn').on('click',function(){
+        layer.open({
+            type: 2,
+            title: '清算日志',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['70%' , '80%'],
+            offset : ['10px'],
+            content: ['modal/reckoningModal.html']
+        });
+        var wrap =  $(".layui-layer-content");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+    
+    
+        
+    </script>
+</body>
+
+</html>

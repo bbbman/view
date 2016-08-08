@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>¸ßµÂµØÍ¼DEMO</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui"/> 
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta content="telephone=no" name="format-detection" /> 
+    <meta content="email=no" name="format-detection" />
+    <meta name="full-screen" content="yes">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="MobileOptimized" content="320">
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="dist/js/html5shiv.js"></script>
+        <script src="dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<style>
+   #newMap{
+     width:800px;
+     height:400px;
+   } 
+   .appMarkerStyle,.webMarkerStyle{
+     background:url('dist/images/biao_bigapp.png') no-repeat center;
+     width:42px;
+     height:66px;
+   }
+   .webMarkerStyle{
+     background-image:url('dist/images/biao_bigweb.png');
+   }
+   .appMarkerStyle span,.webMarkerStyle span{
+      display: block;
+      color:#fff;
+      font-size: 18px;
+      font-weight: 700;
+      width:42px;
+      text-align: center;
+      height:40px;
+      line-height: 40px;
+   }
+   .marker-tip{
+     position: absolute;
+     top:10px;
+     left:15px;
+     width:130px;
+     height:80px;
+     background: #fff;
+     z-index:1;
+     border:1px solid rgba(0,0,0,0.3);
+    }
+    .marker-tip p{
+        height:30px;
+        padding-left:30px;
+        margin:5px 0 5px 0;
+        line-height: 30px;
+        margin-left: 15px;
+        font-size: 12px;   
+    }
+     .marker-tip p span{
+        font-weight: 700;
+        padding-right: 3px;
+     }
+    .app-tip{
+       background:url('dist/images/biao_app.png') no-repeat left center;
+       background-size: 20px 30px; 
+    } 
+    .web-tip{
+       background:url('dist/images/biao_web.png') no-repeat left center;
+       background-size: 20px 30px; 
+    }
+    .infoWindow{
+        text-align: center;
+        padding:0 8px;
+    }
+    .infoWindow h3{
+        font-size: 16px;
+        font-weight: 700;
+        margin-top:10px;
+        text-align: left;
+    }
+    .infoWindow-content ul{
+        list-style: none;
+        margin:0;
+        padding:0;
+    }
+    .infoWindow-content ul li{
+        margin: 5px 0 5px 0;
+        font-size: 12px;
+        text-align: left;
+    }
+    .infoWindow-content ul li span{
+        display:block;
+        margin-top:-16px;
+        margin-left: 35px;
+    }
+    .detail-btn{
+        padding: 4px 20px;
+        background: #578cff;
+        font-size: 12px;
+        width:100px;
+        color:#fff;
+        display: inline-block;
+        margin:8px 0 5px 0;
+    }
+    .detail-btn:hover{
+        color:#fff;
+    }
+    .amap-info-close:hover{
+        text-decoration: none;
+    }
+ /*   .infowindow{
+  background: #fff;
+  width:250px;
+ 
+ }
+ .infowindow-title{
+   font-size: 18px;
+   background-color:rgba(0,155,255,0.8);
+   width:250px;
+   color:#fff;
+   height:35px;
+   line-height: 35px;
+   text-align: center;
+ } */
+</style>
+
+<body class="con-page-body" style="overflow:hidden;">
+   <div id="newMap"></div>
+   <div class="marker-tip">
+       <p class="app-tip"><span>App</span>端上报</p>
+       <p class="web-tip"><span>Web</span>端上报</p>
+   </div>     
+  
+
+
+
+    <!--[if !IE]> -->
+    <script src="dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=75acc694639cb9fa8e8ab8b33b8d5214"></script>
+    <script type="text/javascript">
+        var showMarker=null,hideMarker=null;
+        $(function() { 
+            var map = new AMap.Map('newMap',{
+              zoom: 10,
+            });
+            /*AMap.plugin(['AMap.ToolBar','AMap.Scale','AMap.OverView'],function(){
+                var toolBar = new AMap.ToolBar();
+                var scale = new AMap.Scale();
+                var OverView = new AMap.OverView();
+                map.addControl(toolBar);
+                map.addControl(scale);
+                map.addControl(OverView);
+            });*/
+            map.setCenter([116.480983, 39.989628]);
+            setMarkerParking({
+                map:map,
+                position:[116.480983, 39.989628],
+                freeCarport:50,
+                isApp:true,
+                title:"瀚天科技城停车场",
+                carport:'50/268',
+                address:"瀚天科技城",
+                detailID:1,
+            });
+            setMarkerParking({
+                map:map,
+                position:[116.200983, 39.889628],
+                freeCarport:40,
+                isApp:true,
+                title:"瀚天科技城",
+                carport:'50/268',
+                address:"瀚天科技城瀚天科技城瀚天科技城瀚天科技城瀚天科技城",
+                detailID:2,
+            });
+            setMarkerParking({
+                map:map,
+                position:[116.240983, 39.889628],
+                freeCarport:40,
+                isApp:false,
+                title:"瀚天科技城",
+                carport:'50/268',
+                address:"瀚天科技城",
+                detailID:3,
+            });
+            setMarkerParking({
+                map:map,
+                position:[116.250983, 39.789628],
+                freeCarport:40,
+                isApp:false,
+                title:"瀚天科技城",
+                carport:'50/268',
+                address:"瀚天科技城",
+                detailID:4,
+            });
+           
+        });
+
+
+      function setMarkerParking(params){
+           var iconImg,makerClass=null;
+           if(params.isApp){
+             iconImg='dist/images/biao_app.png';
+             makerClass='appMarkerStyle';
+           }else{
+             iconImg='dist/images/biao_web.png';
+             makerClass='webMarkerStyle';
+           }
+            var icon = new AMap.Icon({
+                image : iconImg,
+                size : new AMap.Size(38,59)
+            });
+            var marker = new AMap.Marker({
+                    icon : icon,
+                    position: params.position,
+                    map:params.map
+            });
+            var tagDiv='<div class="'+makerClass+'"><span>'+params.freeCarport+'</span></div>';
+            var marker0 = new AMap.Marker({
+                 content: tagDiv,
+                 offset: new AMap.Pixel(-12,-32),
+                 position: params.position,
+            });
+            marker0.setMap(params.map);
+            marker0.hide();
+            var infowindow = new AMap.InfoWindow({
+                 content: '<div class="infoWindow"><h3 class="infoWindow-title">'+ params.title+'</h3><div class="infoWindow-content"><ul><li>车位:<span>'+params.carport+'</span></li><li>地址:<span>'+params.address+'</span></li></ul><a class="btn detail-btn" data-id="'+params.detailID+'">详情</a></div></div>',
+                 offset: new AMap.Pixel(0, -30),
+                 size:new AMap.Size(230,0)
+            });
+            AMap.event.addListener(marker, 'click', function() {
+                infowindow.open(params.map, marker.getPosition());
+                if(showMarker!=null){
+                  showMarker.hide();
+                  hideMarker.show();
+                }
+                marker.hide();
+                marker0.show();
+                showMarker=marker0;
+                hideMarker=marker;
+                // AMap.event.removeListener($('.amap-info-close').get(0));
+             /*   AMap.event.addDomListener($('.amap-info-close').get(0), 'click', function() {
+                    if(showMarker!=null){
+                      showMarker.hide();
+                      hideMarker.show();
+                    }
+                });*/
+            });
+         /* AMap.event.addListener($('.amap-info-close').get(0), 'click', function() {
+                infowindow.open(map, marker.getPosition());
+                if(showMarker!=null){
+                  showMarker.hide();
+                  hideMarker.show();
+                }
+            });*/ 
+           /* AMap.event.addListener($('.amap-overlays').get(0), 'click', function() {
+                
+            });*/ 
+        }  
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>统计分析-图表分析</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/ling.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<style>
+
+</style>
+<body class="con-page-body" style="overflow:hidden;">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                          <label class="sr-only" for="">分析维度</label>
+                          <div class="input-group">
+                            <div class="input-group-addon">分析维度</div>
+                            <select class="form-control"  id="time-dimension">
+                               <option value="day">日</option>
+                               <option value="month">月</option>
+                            </select>
+                          </div>
+                      </div>              
+                      <div class="form-group">
+                          <label class="sr-only" for="">时间</label>
+                          <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-time"></div>
+                            <input type="text" class="form-control time-input" id="dataTime" placeholder="请选择时间" readonly style="width:180px;">
+                          </div>
+                      </div>
+                
+                      <div class="form-group">
+                          <button type="button" class="btn btn-primary" id='serchBtn'>搜索</button>
+                      </div>
+                  </div>
+            </div>
+            <div class="">
+                <div class="main-height" style="overflow-y:auto; position:relative;background-color:#fff;">
+                    <aside class="menu-tree-container left-con">
+                        <div class="search-box form-inline">
+                           <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="请输入搜索条件" id="keyVal">
+                                    <span class="input-group-btn">
+                                     <a role="button" class="btn  btn-info btn-flat pull-left" id="treeSearch">搜索</a>
+                                    </span>
+                                </div>
+                            </div>
+                         </div>
+                        <div class="tree-box">
+                           <ul id="tree-item" class="ztree"></ul>
+                        </div>
+                        <div class="tree-bar-switch">
+                            <i class="fa   icon-chevron-left fa-2x tree-open"></i>
+                        </div>
+                    </aside>
+                    <div class="right-con">
+                      <div class="parking-dataChart-box">
+                         <div class="parking-dataChart" id="ecLine"></div> 
+                         <div class="parking-dataChart hidden" id="ec-heart-wrap">
+                             <div class="ec-heart-header ">
+                                 <ul class="list-unstyled">
+                                     <li>
+                                        <span class="spanMark spanMarkA"></span>
+                                        <span>总车位</span>
+                                     </li>
+                                     <li>
+                                        <span class="spanMark spanMarkB spanMark-none"></span>
+                                        <span>临时车位</span>
+                                     </li>
+                                     <li>
+                                        <span class="spanMark spanMarkC spanMark-none"></span>
+                                        <span>固定车位</span>
+                                     </li>
+                                     <li>
+                                        <span class="spanMark spanMarkD spanMark-none"></span>
+                                        <span>租用车位</span>
+                                     </li>
+                                     <li>
+                                        <span class="spanMark spanMarkE spanMark-none"></span>
+                                        <span>免费车位</span>
+                                     </li>
+                                     <li>
+                                        <span class="spanMark spanMarkF spanMark-none"></span>
+                                        <span>预定车位</span>
+                                     </li>
+                                 </ul>
+                             </div>
+                             <div id="ecHeart" class="ec-heart"></div>
+                         </div> 
+                      </div>
+                      <div class="table-responsive parking-dataTable-box">
+                        <table id="outsideService-table" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                  <th>名称</th>
+                                  <th>总车位数</th>
+                                  <th>临时车位数</th>
+                                  <th>固定车位数</th>
+                                  <th>租用车位数</th>
+                                  <th>免费车位数</th>
+                                  <th>预定车位数</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>南海区瀚天科技城停车场</td>
+                                    <td>600</td>
+                                    <td>200</td>
+                                    <td>100</td>
+                                    <td>200</td>
+                                    <td>50</td>
+                                    <td>50</td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                   
+              </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../dist/js/echarts.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../dist/js/moment.min.js"></script>
+     <script type="text/javascript" src="../dist/js/daterangepicker.js"></script>
+     <script type="text/javascript" src="../dist/js/timeset.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+        (function setMainConHeight() {
+            var headHeight = parseInt($(".con-item-header").height());
+            $('.main-height').css('height',($('body').height()- headHeight)+ "px");
+        })();
+         //保证左侧树伸缩时，图标自适应
+            $('.tree-bar-switch').on('click',function(e){
+                setTimeout(function(){
+                    chart2.resize();
+                    chart3.resize();
+                },300);
+            });
+  //初始化时间控件
+          $('#dataTime').binDaterangepicker({
+                    isSingle: true,
+                    format: 'YYYY-MM-DD',
+                    isTimePicker: true,
+                    dimensionVal:'day',
+                    position:'right',
+                    drops: 'down'
+          });
+         $('#time-dimension').on('change',function(){
+            // alert($(this).val());
+             var Val=$(this).val();
+             var format='YYYY-MM-DD';
+             switch(Val){
+                case 'day'  : format='YYYY/MM/DD';
+                               $('.line-box').fadeIn(300);
+                               $('.heart-box').fadeOut();
+                               // chart2.resize({width:540,height:450});
+                               break;
+                case 'month': format='YYYY/MM';
+                               $('.line-box').fadeOut();
+                               $('.heart-box').fadeIn(300);
+                               // chart3.resize({width:540,height:450});
+                              break;
+                default     : break;
+              }
+             $('#dataTime').val('');
+             $('#dataTime').binDaterangepicker({
+                isSingle: true,
+                format: format,
+                isTimePicker:true,
+                dimensionVal:Val,
+                position:'right',
+                drops: 'down'  //日历显示位置，不写默认为向左靠
+             });
+         });
+        $('.tree-bar-switch').on('click',function(e){
+            var $this = $(e.currentTarget);
+            if($this.find('i').hasClass('tree-open')){
+                $('.menu-tree-container').animate({'width':'20px'},300);
+                $('.main-table-container').animate({'left':'35px'},300);
+                $('.tree-box').addClass('hidden');
+                $this.find("i").removeClass('tree-open  icon-chevron-left').addClass(' icon-chevron-right');
+                $(this).addClass('tree-close');
+                $('.right-con').css('margin-left',"30px");
+            }else{
+                $('.menu-tree-container').animate({'width':'260px'},300);
+                $('.main-table-container').animate({'left':'275px'},300);
+                $('.tree-box').removeClass('hidden');
+                $this.find("i").removeClass(' icon-chevron-right').addClass('tree-open  icon-chevron-left');
+                $this.removeClass('tree-close');
+                $('.right-con').css('margin-left',"270px");
+            }
+
+        });
+
+        //热力图切换事件
+        $('.ec-heart-header ul li .spanMark').on('click',function(){
+            var $this=$(this);
+            var val=$this.siblings('span').text();//获得请求参数
+            var parkingObj={"selected":{"总车位":false,"临时车位":false,"固定车位":false,"租用车位":false,"免费车位":false,"预定车位":false}};
+            parkingObj["selected"][val]=true;
+            refreshTable(parkingObj);
+            if($this.hasClass('spanMark-none')){
+               $('.ec-heart-header ul li .spanMark').addClass('spanMark-none');
+               $this.removeClass('spanMark-none');
+               //此处初始化热力图
+            }
+        });
+
+         //绑定图标切换事件
+        chart2.on('legendselectchanged',function(params){
+            refreshTable(params);  
+        });
+         
+         $('#serchBtn').on('click',function(){
+             //此处获取热力图对应的所有数据或折线图数据
+            //此处初始化表格
+            if($('#time-dimension').val()=="month"){ 
+               $('#ecLine').addClass('hidden');
+               $('#ec-heart-wrap').removeClass('hidden');
+               chart3.resize();
+               $('.ec-heart-header ul li .spanMark').eq(0).click();
+            }else{
+                $('#ec-heart-wrap').addClass('hidden');
+                $('#ecLine').removeClass('hidden');
+                chart2.resize();
+                $('.parking-dataTable-box table tr td,.parking-dataTable-box table tr th').each(function(){
+                          $(this).removeClass('hidden');
+                });
+                //此处初始化折线图
+            }
+         });
+        //表格变换公用方法
+        function refreshTable(params){
+            // var iName=params.name;
+            var isShow=false;
+            var Index=0;
+            // console.log(JSON.stringify(params));
+            $.each(params.selected,function(key,value){
+               Index++; 
+               isShow=value;
+               if(isShow){
+                    $('.parking-dataTable-box table tr th').eq(Index).removeClass('hidden');
+                    $('.parking-dataTable-box table tr td').each(function(){
+                       if($(this).index()==Index){
+                          $(this).removeClass('hidden');
+                       }
+                    });
+                  }else{
+                    $('.parking-dataTable-box table tr th').eq(Index).addClass('hidden');
+                    $('.parking-dataTable-box table tr td').each(function(){
+                       if($(this).index()==Index){
+                          $(this).addClass('hidden');
+                       }
+                    });
+               }
+            });
+        }
+        //初始化左侧树
+        $.fn.zTree.init($("#tree-item"), setting, zNodes);
+        $('#treeSearch').on('click',searchNode);
+
+        // var treeObj = $.fn.zTree.getZTreeObj("tree-item");
+        // var nodes = treeObj.getNodes();
+        // if (nodes.length>0) {
+        //     getFirstChildNode(nodes[0]);
+        // }
+        // //获取并默认选择当前树的第一个叶子节点，对于异步加载树可能无效
+        // function getFirstChildNode(treeNode){
+        //     if(treeNode.isParent){
+        //         var childNodes = treeNode.children;
+        //         getFirstChildNode(childNodes[0]);
+        //     }else{
+        //         treeObj.selectNode(treeNode);//选择当前叶子节点
+        //     }
+        // }
+    
+});
+   
+
+var setting = {
+    view: {
+      showIcon: false,
+      showLine: false,
+      fontCss: getFontCss
+    },
+    data: {
+        simpleData: {
+            enable: true
+        },
+        key: {
+            checked: "isChecked"
+        }
+    },
+    async: { //异步加载
+        enable: false,//需要异步加载的将enable置为true
+        type:"get",
+        url:"",
+        autoParam:["id"],
+        dataFilter: null
+    }
+};
+
+var zNodes =[
+    { id:1, pId:0, name:"父节点1", open:true},
+    { id:11, pId:1, name:"父节点11"},
+    { id:111, pId:11, name:"叶子节点111"},
+    { id:112, pId:11, name:"叶子节点112"},
+    { id:113, pId:11, name:"叶子节点113"},
+    { id:114, pId:11, name:"叶子节点114"},
+    { id:12, pId:1, name:"父节点12"},
+    { id:121, pId:12, name:"父节点121"},
+    { id:1211, pId:121, name:"叶子节点1211"},
+    { id:1212, pId:122, name:"叶子节点1212"},
+    { id:122, pId:12, name:"叶子节点122"},
+    { id:123, pId:12, name:"叶子节点123"},
+    { id:124, pId:12, name:"父节点124"},
+    { id:1241, pId:124, name:"父节点1241"},
+    { id:12411, pId:1241, name:"叶子节点12411"},
+    { id:13, pId:1, name:"父节点13", isParent:true},
+    { id:2, pId:0, name:"父节点2"},
+    { id:21, pId:2, name:"父节点21", open:true},
+    { id:211, pId:21, name:"叶子节点211"},
+    { id:212, pId:21, name:"叶子节点212"},
+    { id:213, pId:21, name:"叶子节点213"},
+    { id:214, pId:21, name:"叶子节点214"},
+    { id:22, pId:2, name:"父节点22"},
+    { id:221, pId:22, name:"叶子节点221"},
+    { id:222, pId:22, name:"叶子节点222"},
+    { id:223, pId:22, name:"叶子节点223"},
+    { id:224, pId:22, name:"叶子节点224"},
+    { id:23, pId:2, name:"父节点23"},
+    { id:231, pId:23, name:"叶子节点231"},
+    { id:232, pId:23, name:"叶子节点232"},
+    { id:233, pId:23, name:"叶子节点233"},
+    { id:234, pId:23, name:"叶子节点234"},
+    { id:3, pId:0, name:"父节点3", isParent:true}
+];
+    var nodeList =[];
+    function searchNode(e) {
+        var zTree = $.fn.zTree.getZTreeObj("tree-item"),
+        value = $.trim($("#keyVal").val());
+        updateNodes(false);
+        if(value!=''){
+            nodeList = zTree.getNodesByParamFuzzy("name", value);
+            updateNodes(true);
+        }
+    }
+    function updateNodes(highlight) {
+        var zTree = $.fn.zTree.getZTreeObj("tree-item"); 
+        for( var i=0, l=nodeList.length; i<l; i++) {
+            nodeList[i].highlight = highlight;
+             if(highlight&&nodeList[i].getParentNode()){
+                zTree.expandNode(nodeList[i].getParentNode(), true, false, true);
+            }
+            zTree.updateNode(nodeList[i]);
+        }
+    }
+
+    function getFontCss(treeId, treeNode) {
+        return (!!treeNode.highlight) ? {color:"#A60000", "font-weight":"bold","font-size":"16px"} : {color:"#333", "font-weight":"normal","font-size":"16px"};
+    }
+
+
+        var option = {
+            title: {
+                  left: 'center',
+                  top:'20',
+                  text: '2016年5月10日南海瀚天科技城停车场实时车位使用率',
+            },
+            tooltip : {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['总车位','临时车位','固定车位','租用车位','免费车位','预定车位']
+            },
+            toolbox: {
+                show : true,
+                right: '10%',
+                top: '5%',
+                feature : {
+                    dataZoom : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis : [
+                {
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['周一','周二','周三','周四','周五','周六','周日']
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value'
+                }
+            ],
+            series : [
+                {
+                    name:'总车位',
+                    type:'line',
+                    // stack: '总量',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'top'
+                        }
+                    },
+                    areaStyle: {normal: {}},
+                    data:[820, 932, 901, 934, 1290, 1330, 1320]
+                },
+                {
+                    name:'临时车位',
+                    type:'line',
+                    // stack: '总量',
+                    areaStyle: {normal: {}},
+                    data:[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name:'固定车位',
+                    type:'line',
+                    // stack: '总量',
+                    areaStyle: {normal: {}},
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name:'租用车位',
+                    type:'line',
+                    // stack: '总量',
+                    areaStyle: {normal: {}},
+                    data:[150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name:'免费车位',
+                    type:'line',
+                    // stack: '总量',
+                    areaStyle: {normal: {}},
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                 {
+                    name:'预定车位',
+                    type:'line',
+                    // stack: '总量',
+                    areaStyle: {normal: {}},
+                    data:[100, 202, 101, 234, 360, 320, 300]
+                }
+            ]
+            };
+
+                var chart2 = echarts.init(document.getElementById('ecLine'), null, {
+                                    renderer: 'canvas'
+                                });
+                // var chart2 = echarts.init(document.getElementById('ecLine'));
+                                chart2.setOption(option);
+        var chart3 = echarts.init(document.getElementById('ecHeart'));
+
+                var hours = ['12a', '1a', '2a', '3a', '4a', '5a', '6a',
+                        '7a', '8a', '9a','10a','11a',
+                        '12p', '1p', '2p', '3p', '4p', '5p',
+                        '6p', '7p', '8p', '9p', '10p', '11p', '8p', '9p', '10p', '11p'];
+                var days = ['Saturday', 'Friday', 'Thursday',
+                        'Wednesday', 'Tuesday', 'Monday', 'Sunday','Tuesday', 'Monday', 'Sunday'];
+
+                var data = [[0,0,500],[0,1,100],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8,0],[0,9,0],[0,10,0],[0,11,200],[0,12,400],[0,13,1],[0,14,1],[0,15,3],[0,16,4],[0,17,6],[0,18,4],[0,19,400],[0,20,300],[0,21,3],[0,22,2],[0,23,5],[1,0,7],[1,1,0],[1,2,0],[1,3,0],[1,4,0],[1,5,0],[1,6,0],[1,7,0],[1,8,0],[1,9,0],[1,10,5],[1,11,2],[1,12,2],[1,13,6],[1,14,9],[1,15,110],[1,16,6],[1,17,7],[1,18,8],[1,19,12],[1,20,5],[1,21,5],[1,22,7],[1,23,2],[2,0,1],[2,1,1],[2,2,0],[2,3,0],[2,4,0],[2,5,0],[2,6,0],[2,7,0],[2,8,0],[2,9,0],[2,10,3],[2,11,2],[2,12,1],[2,13,9],[2,14,8],[2,15,10],[2,16,6],[2,17,5],[2,18,5],[2,19,500],[2,20,700],[2,21,4],[2,22,2],[2,23,4],[3,0,7],[3,1,3],[3,2,0],[3,3,0],[3,4,0],[3,5,0],[3,6,0],[3,7,0],[3,8,1],[3,9,0],[3,10,5],[3,11,4],[3,12,7],[3,13,14],[3,14,13],[3,15,12],[3,16,9],[3,17,5],[3,18,5],[3,19,10],[3,20,6],[3,21,4],[3,22,4],[3,23,1],[4,0,1],[4,1,3],[4,2,0],[4,3,0],[4,4,0],[4,5,1],[4,6,0],[4,7,0],[4,8,0],[4,9,2],[4,10,4],[4,11,4],[4,12,2],[4,13,4],[4,14,4],[4,15,14],[4,16,12],[4,17,1],[4,18,8],[4,19,5],[4,20,3],[4,21,7],[4,22,3],[4,23,0],[5,0,2],[5,1,1],[5,2,0],[5,3,3],[5,4,0],[5,5,0],[5,6,0],[5,7,0],[5,8,2],[5,9,0],[5,10,4],[5,11,1],[5,12,5],[5,13,10],[5,14,5],[5,15,7],[5,16,11],[5,17,6],[5,18,0],[5,19,5],[5,20,3],[5,21,4],[5,22,2],[5,23,0],[6,0,1],[6,1,0],[6,2,0],[6,3,0],[6,4,0],[6,5,0],[6,6,0],[6,7,0],[6,8,0],[6,9,0],[6,10,1],[6,11,0],[6,12,2],[6,13,1],[6,14,3],[6,15,4],[6,16,0],[6,17,0],[6,18,0],[6,19,0],[6,20,1],[6,21,2],[6,22,2],[6,23,6]];
+
+                data = data.map(function (item) {
+                    return [item[1], item[0], item[2] || '-'];
+                });
+
+                chart3.setOption({
+                    title: {
+                        x: 'center',
+                        text: '南海保利水城2016-12热力图数据',
+                    },
+                    tooltip: {
+                        position: 'right'
+                    },
+                    toolbox: {
+                        show : true,
+                        right: '10%',
+                        top: '1%',
+                        feature : {
+                            dataZoom : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    animation: false,
+                    grid: {
+                        show:false,
+                        height: 300
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: hours,
+                        splitLine:false,
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: days,
+                        splitLine:false,
+                    },
+                   visualMap: {
+                        type: 'continuous',
+                        min: 0,
+                        max: 500,
+                        text:['High','Low'],
+                        realtime: false,
+                        calculable : true,
+                        color: ['orangered','yellow','lightskyblue'],
+                         x:'right',
+                         y:'top',
+                    },
+                    series: [{
+                        name: 'Punch Card',
+                        type: 'heatmap',
+                        data: data,
+                        label: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }]
+                });
+    </script>
+</body>
+
+</html>

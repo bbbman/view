@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-车辆管理-红名单车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+  
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <nav class="con-item-nav">
+                    <ul class="clearfix">
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/localCarManage.html" class="ake-third-menu" >本地车辆</a></li>
+                        <li class="con-nav-item active"><a href="../../parking_vip/car_manage/redlistCarManage.html" class="ake-third-menu">红名单车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/blacklistCarManage.html" class="ake-third-menu">黑名单车辆</a></li>
+                    </ul>
+                </nav>
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group addLine">
+                        <label class="sr-only" for="">停车场名称:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">停车场名称</div>
+                            <select id="" class="form-control pull-right">
+                               <option>全部</option>
+                               <option>停车场A</option>
+                               <option>停车场B</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">车牌号码</label>
+                        <div class="input-group">
+                          <div class="input-group-addon glyphicon glyphicon-picture"></div>
+                          <input type="text" class="form-control" id="" placeholder="请输入车牌号码" style="text-transform:upperCase;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          <label class="sr-only" for="">进场时间</label>
+                          <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-time"></div>
+                            <input type="text" class="form-control mydate-icon" id="enterTime" placeholder="请选择进场时间" style="width:270px;height:34px;">
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="sr-only" for="">离场时间</label>
+                          <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-time"></div>
+                            <input type="text" class="form-control mydate-icon" id="leaveTime" placeholder="请选择离场时间" style="width:270px;height:34px;">
+                          </div>
+                      </div>
+                                        
+                      <div class="form-group">
+                          <button type="button" class="btn btn-primary">搜索</button>
+                      </div>
+                  </div>
+                <div class="function clearfix">
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button">导 &nbsp;出</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="redlistRule">红名单规则设置</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="outsideService-table" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>车牌号码</th>
+                                    <th>停车时长</th>
+                                    <th>停车场名称</th>
+                                    <th>进场时间</th>
+                                    <th>进场通道</th>
+                                    <th>进场车牌图片</th>
+                                    <th>离场时间</th>
+                                    <th>离场通道</th>
+                                    <th>离场车牌图片</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="carLicense">京HG9175</td>
+                                    <td>3小时</td>
+                                    <td>艾科停车场</td>
+                                    <td>2015-03-01 16:16:16</td>
+                                    <td>通道1</td>
+                                    <td><a class="img pointer" bigsrc="../../dist/images/carBig.jpg" title="获取大图">点击获取大图</a></td>
+                                    <td>2015-03-01 16:16:16</td>
+                                    <td>通道5</td>
+                                    <td><a class="img pointer" bigsrc="../../dist/images/carBig.jpg" title="获取大图">点击获取大图</a></td>
+                                </tr>
+                                 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                 <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">...</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+
+    <!-- 红名单规则设置表单modal -->
+    <div class="modal fade ake-modal" id="redlistRuleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">红名单规则设置</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group addLine">
+                            <label for="" class="col-sm-2 control-label">车牌号规则:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control carLicense_rule" placeholder="" />
+                            </div>
+                            <div class="col-sm-2" style="padding-left: 0px;">
+                                <button type="button" class="btn btn-info btn-flat pull-left addLineBtn" style="border-radius: 4px;">添加一行</button>
+                            </div>
+                            <span class="cRed h34 tip ml5" style="display:block">*</span>
+                            <span class="cRed h34 tip-null ml5" style="display: none"><img src="../../dist/images/alarm.png" />&nbsp;车牌规则不能为空</span>
+                        </div>
+                        <div class="notice" style="height:190px;">
+                            <span class="col-md-offset-1 col-sm-10 orange mb20">
+                                <h5 class="tc">规则说明</h5>
+                                <p>(红名单车辆会免费放行，放行规则已临时车通行规则为准) 规则中可使用通配符，具体说明如下：</p>
+                                <p>?表示一位数字、字母或汉字</p>
+                                <p>*表示多位数字、字母或汉字</p>
+                                <p>例如：</p>
+                                <p>规则1：警*，表示所有以警字开头的车辆都为红名单车辆</p>
+                                <p>规则2：*学，表示所有以学字结尾的车辆都是红名单车辆</p>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--红名单规则设置modal 结束-->
+
+    <!-- 点击显示大图 modal -->
+    <div class="modal fade bs-example-modal-lg" id="showBigImgModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content p10 tc">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title tc f20 b" id="carBigImgTit">大图显示</h4>
+          </div>
+          <img class="mt10 mb10" src="" id="showImg" style="height: 420px;width: 570px;">
+        </div>
+      </div>
+    </div>
+    <!--显示大图modalend-->
+
+
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+    <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/main.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+
+        $('#enterTime').binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY/MM/DD HH:mm',
+            isTimePicker: false,
+            position:'right'
+        });
+
+        $('#leaveTime').binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY/MM/DD HH:mm',
+            isTimePicker: false,
+            position:'left'
+        });
+
+        $('#enterTime').on('apply.daterangepicker',function(ev,pick){
+            var start = pick.startDate.format('YYYY/MM/DD'),
+                end = pick.endDate.format('YYYY/MM/DD');
+            var optionSet = {
+                isSingle: false,
+                setMinDate:  end,
+                format: 'YYYY/MM/DD HH:mm',
+                isTimePicker: false,
+                position:'left'
+            }
+            $('#leaveTime').binDaterangepicker(optionSet);
+            alert(1);
+        })
+
+        $('#leaveTime').on('apply.daterangepicker',function(ev,pick){
+            var start = pick.startDate.format('YYYY/MM/DD'),
+                end = pick.endDate.format('YYYY/MM/DD');
+            var optionSet = {
+                isSingle: false,
+                setMaxDate: start,
+                format: 'YYYY/MM/DD HH:mm',
+                isTimePicker: false,
+                position:'right'
+            }
+            $('#enterTime').binDaterangepicker(optionSet);
+            alert(2);
+        })
+
+        $('#enterTime').on('cancel.daterangepicker',function(ev, picker) {
+                // console.log("cancel event fired");
+            var optionSet = {
+                isSingle: false,
+                format: 'YYYY/MM/DD HH:mm',
+                isTimePicker: false,
+                position:'left'
+            }
+            $('#leaveTime').binDaterangepicker(optionSet);
+            alert(3);
+        });
+
+        $('#leaveTime').on('cancel.daterangepicker',function(ev, picker) {
+                // console.log("cancel event fired");
+            var optionSet = {
+                isSingle: false,
+                format: 'YYYY/MM/DD HH:mm',
+                isTimePicker: false,
+                position:'right'
+            }
+            $('#enterTime').binDaterangepicker(optionSet);
+            alert(4);
+        });
+
+        // $("#enterTime").on('apply.daterangepicker',function(){
+        //     $('#leaveTime').binDaterangepicker({
+
+        //     })
+        // })
+            
+        
+
+        // laydate.skin('molv')
+        // var start = {
+        //     elem: '#enterTime',
+        //     format: 'YYYY/MM/DD hh:mm:ss',
+        //     min: '1990-06-16 23:59:59',
+        //     max: laydate.now(), //设定最大日期为当前日期
+        //     istime: true,
+        //     istoday: true,
+        //     choose: function(datas){
+        //          end.min = datas; //开始日选好后，重置结束日的最小日期
+        //          end.start = datas; //将结束日的初始值设定为开始日
+        //          // $("#laydate_clear").click(function(){
+        //          //    end.start = '1990-06-16 23:59:59';
+        //          // })
+        //     }
+        // };
+        // var end = {
+        //     elem: '#leaveTime',
+        //     format: 'YYYY/MM/DD hh:mm:ss',
+        //     max: '2299-06-16 23:59:59',
+        //     istime: true,
+        //     istoday: true,
+        //     choose: function(datas){
+        //         start.max = datas; //结束日选好后，重置开始日的最大日期
+        //         // $("#laydate_clear").click(function(){
+        //         //     start.max = laydate.now();
+        //         //  })
+        //     }
+        // };
+        // laydate(start);
+        // laydate(end);
+
+    });
+
+    $(".ake-third-menu").on('click',function(){
+        var src = $(this).attr('href');
+        parent.$("#ake-iframe").attr("src",src);
+    })
+
+    $("#redlistRule").click(function(){
+        layer.open({
+            type: 2,
+            title: '红名单规则设置',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['65%' , '55%'],
+            offset : ['30px'],
+            content: ['modal/redlistRuleModal.html']
+        });
+    })
+
+    //点击显示大图
+    $(".img").click(function(){
+       $("#carBigImgTit").text($(this).parent().siblings(".carLicense").text());
+       $("#showImg").attr("src",$(this).attr("bigsrc"));
+       $("#showBigImgModal").modal('show');
+    })
+
+    
+        
+    </script>
+</body>
+
+</html>

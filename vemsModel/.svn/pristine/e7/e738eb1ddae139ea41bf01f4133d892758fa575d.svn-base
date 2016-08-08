@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP车主管理-VIP车主管理-暂停VIP</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../../dist/css/font-awesome.min-4.3.0.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">VIP别称:</label>
+                    <div class="col-xs-5"><span class="inblock h34">黄金VIP</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车主姓名:</label>
+                    <div class="col-xs-5"><span class="inblock h34">小红</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">手机号:</label>
+                    <div class="col-xs-5"><span class="inblock h34">18888008800</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车辆:</label>
+                    <div class="col-xs-5"><span class="inblock h34">车辆</span></div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">暂停开始时间:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" id="stopStartTime" placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">暂停结束时间:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" id="stopEndTime" placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../../dist/js/timeset.js"></script>
+    <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+    <script src="../../../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $("body").mCustomScrollbar({
+                theme: "dark"
+            });
+        };
+        
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click', function() {
+            parent.layer.close(index); //点击关闭  会关闭iframe弹出框
+        })
+
+        $("#stopStartTime").binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY-MM-DD HH:mm',
+            isTimePicker: true,
+            position: 'right'
+        });
+
+        $("#stopEndTime").binDaterangepicker({
+            isSingle: false,
+            format: 'YYYY-MM-DD HH:mm',
+            isTimePicker: true,
+            position: 'right'
+        });
+
+        
+    })
+
+
+
+    </script>
+</body>
+
+</html>

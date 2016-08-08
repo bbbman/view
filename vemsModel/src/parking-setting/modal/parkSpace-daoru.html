@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="businesskey" class="col-xs-3 control-label">上传文件:</label>
+                            <div class="col-xs-8">
+                                <input type='text' name='textfield' id='textfield' class='form-control pull-left txt' style="width:60%;" />
+                                <input type='button' class='upload-btn col-xs-2 ml15 btn-primary' value='浏览...' />
+                                <input type="file" name="fileField" class="file upload-btn col-xs-9" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-box col-xs-offset-3">
+                    <a href="#" class="col-sm-offset-3 btn btn-primary">下载模板</a>
+                </div>
+                <div class="form-group" style="margin-top:20px">
+                    <div id="upload-fail-tip" class="col-xs-offset-3 col-xs-8 red fail-tip">上传失败，文档格式错误，请下载失败文件！</div>
+                </div>
+                <div class="form-group orange">
+                    <label for="businesskey" class="col-xs-3 control-label">下载失败文件:</label>
+                    <div class="col-xs-8">
+                        <span class="col-xs-8 uploaded-file ellipsis">XXX.xls</span>
+                        <input type="button" value="下载" class="upload-btn col-xs-2 pull-right btn-primary" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left close-modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+    <script>
+    $(function() {
+        $(".close-modal").on("click", function() {
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+
+
+
+    })
+    </script>
+</body>
+
+</html>

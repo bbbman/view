@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-支付二维码配置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+        html,body {
+          height: auto;
+        }
+        body {
+          background-color: #e5e5e5;
+        }
+        .ydt_wrapper {
+          margin:0 12px;
+          background: #fff;
+          padding-bottom: 40px;
+        }
+        .bd h3 {
+          text-align: center;
+          font-size: 30px;
+          line-height: 50px;
+          font-weight: 500;
+          padding-top: 60px;
+          padding-bottom: 40px;
+          margin-top: 4px;
+          vertical-align: middle;
+          letter-spacing: 2px;
+          color:#555;
+        }
+        .pay_QRCode_form {
+          width: 500px;
+          margin:0 auto;
+        }
+        .pay_QRCode_form .input-group {
+          width: 500px;
+        }
+        .pay_QRCode_form .input-group:not(:last-child) {
+          margin-bottom: 15px;
+        }
+        .pay_QRCode_form .input-group-addon {
+          width: 95px;
+        }
+        .pay_QRCode_form .form_ation {
+          text-align: center;
+        }
+        .pay_QRCode_form .params-box{
+          display: block;
+          width: 500px;
+          margin:40px auto 20px;
+        }
+        .pay_QRCode_form .params-box .params-title{
+          margin-top:5px;
+          margin-bottom: 20px;
+        }
+        .pay_QRCode_form .params-box .params-title span{
+          display: inline-block;
+          height: 34px;
+          line-height: 34px;
+          font-size: 16px;
+          font-weight: 600;
+        }
+        .pay_QRCode_form .params-box .params-title .params-title-item{
+          width: 200px;
+          float: left;
+        }
+        .pay_QRCode_form .params-box .params-group{
+          margin-bottom: 15px;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item{
+          float: left;
+          position: relative;
+          width: 180px;
+          padding: 0px;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item:not(:first-child){
+          padding-left: 20px;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item .form-control{
+          border-radius: 4px;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item.paramsSelectDiv{
+          width: 190px;
+        }
+        .pay_QRCode_form .params-box .params-group .paramsSelectDiv .form-control{
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item .select-btn{
+          position: absolute;
+          right: -30px;
+          top:0px;
+          display: inline-block;
+          width: 30px;
+          height: 34px;
+          line-height: 36px;
+          font-weight: 400;
+          font-size: 16px;
+          background: #3399CC;
+          text-align: center;
+          cursor: pointer;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item .select-btn:hover,
+        .pay_QRCode_form .params-box .params-group .params-group-item .select-btn:active,
+        .pay_QRCode_form .params-box .params-group .params-group-item .select-btn:focus,
+        .pay_QRCode_form .params-box .params-group .params-group-item .select-btn.select-btn-active {
+          background: #068DD0;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item .select-btn i{
+          color:#FFF;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item ul{
+          position: absolute;
+          top:34px;
+          left: 20px;
+          width: 200px;
+          border: 1px solid #dedede;
+          background-color: #FFF;
+          padding-left: 15px;
+          overflow: auto;
+          max-height: 100px;
+          border-top:0;
+          margin: 0;
+          padding-top: 3px;
+          padding-bottom: 3px;
+          border-radius: 4px;
+          z-index: 50;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item ul li{
+          margin:4px;
+          font-size: 14px;
+          cursor: pointer;
+        }
+        .pay_QRCode_form .params-box .params-group .params-group-item ul li:hover{
+          color:#3399CC;
+        }
+        .pay_QRCode_form .params-box .params-group .params-btn-group-item{
+          float: left;
+          width: 80px;
+          height: 34px;
+          line-height: 34px;
+          margin-left: 48px;
+        }
+        .pay_QRCode_form .params-box .params-group .params-btn-group-item .btn{
+          background: #3399CC;
+          border-color: #3399CC;
+        }
+        .pay_QRCode_form .params-btn-group{
+          margin-top: 30px;
+        }
+        .pay_QRCode_form .params-group .params-group-addbtn{
+          display: block;
+          width: 400px;
+          height: 34px;
+          line-height: 34px;
+          border:2px dashed #3399CC;
+          border-radius: 5px;
+          margin-left: 0px;
+          text-align: center;
+        }
+        .pay_QRCode_form .params-group .params-group-addbtn span{
+          font-size: 24px;
+          color:#3399CC;
+        }
+        .status_detail {
+          width: 600px;
+          margin: 20px auto 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ydt_wrapper">
+        <div class="bd">
+            <h3>支付二维码配置</h3>
+            <form class="pay_QRCode_form">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">服务地址(IP或域名)</span>
+                    <input type="text" class="form-control" placeholder="IP或域名">
+                </div>
+                <div class="input-group params-box">
+                    <div class="params-title clearfix">
+                        <div class="params-title-item text-center">
+                            <span>参数名</span>
+                        </div>
+                        <div class="params-title-item text-center">
+                          <span>值</span>
+                        </div>
+                    </div>
+                    <div class="params-group clearfix">
+                        <div class="params-group-item">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="params-group-item paramsSelectDiv">
+                            <input type="text" class="form-control">
+                            <span class="select-btn"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            <ul class="list-unstyled select-region hidden">
+                                <li>params01</li>
+                                <li>params02</li>
+                                <li>params03</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="params-group clearfix">
+                        <div class="params-group-item">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="params-group-item paramsSelectDiv">
+                            <input type="text" class="form-control">
+                            <span class="select-btn"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                            <ul class="list-unstyled select-region hidden">
+                                <li>params01</li>
+                                <li>params02</li>
+                                <li>params03</li>
+                            </ul>
+                        </div>
+                        <div class="params-btn-group-item">
+                            <a href="javascript:;" class="btn btn-primary delete-params">删除参数</a>
+                        </div>
+                    </div>
+                    <div class="params-group params-btn-group clearfix">
+                        <a href="javascript:;" id="addParamsLine" class="params-group-addbtn">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                    </div>
+                </div>
+                <!-- <div class="form_ation">
+                  <a href="javascript:;" class="btn btn-primary">确认连接一点停</a>
+                </div> -->
+            </form>
+
+            <!-- <div class="status_detail">
+              <textarea name="name" rows="15" cols="80" class="form-control" disabled>djfokldsjflskdjfklsdjfklsd<br>是否会思考的幅度上看<br>是否会思考的幅度上看</br>是否会思考的幅度上看</br>
+                  是否会思考的幅度上看<br>
+                  是否会思考的幅度上看<br>
+              </textarea>
+            </div> -->
+        </div>
+    </div>
+
+</body>
+
+<!--[if !IE]> -->
+<script src="../dist/js/jquery-2.0.3.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+    <script src="../dist/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/main.js"></script>
+<script src="../dist/js/public.js"></script>
+<script type="text/javascript">
+  $(function(){
+    //点击添加行
+    $('#addParamsLine').on('click',function(e){
+      e.stopPropagation();
+      var $Parent=$(this).closest('.params-btn-group'),html = '';
+      html += '<div class="params-group clearfix">'
+                  +'<div class="params-group-item">'
+                      +'<input type="text" class="form-control">'
+                  +'</div>'
+                  +'<div class="params-group-item paramsSelectDiv">'
+                      +'<input type="text" class="form-control">'
+                      +'<span class="select-btn"><i class="glyphicon glyphicon-chevron-down"></i></span>'
+                      +'<ul class="list-unstyled select-region hidden">'
+                          +'<li>params01</li>'
+                          +'<li>params02</li>'
+                          +'<li>params03</li>'
+                      +'</ul>'
+                  +'</div>'
+                  +'<div class="params-btn-group-item">'
+                      +'<a href="javascript:;" class="btn btn-primary delete-params">删除参数</a>'
+                  +'</div>'
+              +'</div>';
+      $Parent.before(html);
+    })
+    //点击删除参数
+    $(document).on('click','.delete-params',function(e){
+      e.stopPropagation();
+      $(this).closest('.params-group').remove();
+    })
+
+    //点击选择下拉框
+    $(document).on('click','.select-btn',function(e){
+      e.stopPropagation();
+      var $This = $(this),
+          $Ul = $This.next('ul');
+      if($Ul.find('li').length < 1){
+        return;
+      }
+      $This.addClass('select-btn-active');
+      $Ul.removeClass('hidden');
+      $('body:not(".selectBtn")').off('click');
+      $('body:not(".selectBtn")').on('click',function(){
+          $('.select-btn').removeClass('select-btn-active');
+          $('.select-region').addClass('hidden');
+      });
+    })
+
+    //点击选择下拉列表项
+    $(document).on('click','.select-region li',function(e){
+      var $Ul = $(this).closest('.select-region'),
+          $Btn = $Ul.prev('select-btn'),
+          $Input = $Ul.prevAll('.form-control'),
+          Val = $(this).text();
+      $Input.val(Val);
+      $Btn.removeClass('select-btn-active');
+      $Ul.addClass('hidden');
+    })
+
+  })
+</script>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-车辆管理-红名单车辆-红名单规则设置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group addLine">
+                    <label for="" class="col-xs-2 control-label">车牌号规则:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control carLicense_rule" placeholder="" />
+                    </div>
+                    <div class="col-xs-2" style="padding-left: 0px;">
+                        <button type="button" class="btn btn-info btn-flat pull-left addLineBtn" style="border-radius: 4px;">添加一行</button>
+                    </div>
+                    <span class="cRed h34 tip ml5" style="display:block">*</span>
+                    <span class="cRed h34 tip-null ml5" style="display: none"><img src="../../../dist/images/alarm.png" />&nbsp;车牌规则不能为空</span>
+                </div>
+                <div class="notice" style="height:190px;">
+                    <span class="col-md-offset-1 col-xs-10 orange mb20">
+                        <h5 class="tc">规则说明</h5>
+                        <p>(红名单车辆会免费放行，放行规则已临时车通行规则为准) 规则中可使用通配符，具体说明如下：</p>
+                        <p>?表示一位数字、字母或汉字</p>
+                        <p>*表示多位数字、字母或汉字</p>
+                        <p>例如：</p>
+                        <p>规则1：警*，表示所有以警字开头的车辆都为红名单车辆</p>
+                        <p>规则2：*学，表示所有以学字结尾的车辆都是红名单车辆</p>
+                    </span>
+                </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+               </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+     <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+    <script src="../../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+        })
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+        
+
+        $(".carLicense_rule").focus(function(){
+            $('.addLineBtn').parent().nextAll('.tip-null').css("display","none");
+            $('.addLineBtn').parent().nextAll('.tip').fadeIn();
+        })
+
+        $(".addLineBtn").click(function(){
+            var $license_rule = $(this).parent().prev('div').find('.carLicense_rule'),html='';
+            if($license_rule.val().trim() == ""){
+                $(this).parent().nextAll('.tip').css("display","none");
+                $(this).parent().nextAll('.tip-null').fadeIn();
+                $license_rule.val("");
+                return;
+            }
+            html += '<div class="form-group deleteLine">'
+                        +'<div class="col-xs-offset-2 col-xs-5">'
+                            +'<input type="text" class="form-control carLicense_rule" placeholder="" readonly value="'+$license_rule.val()+'">'
+                        +'</div>'
+                        +'<div class="col-xs-2" style="padding-left: 0px;">'
+                            +'<button type="button" class="btn btn-default btn-flat pull-left deleteLineBtn" style="border-radius: 4px;">删 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 除</button>'
+                        +'</div>'
+                    +'</div>';
+            $(this).parent().parent('.addLine').after(html);
+            $license_rule.val("");
+            bindListener();
+        })
+        
+        function bindListener(){
+            $("button.deleteLineBtn").unbind().click(function(){
+                $(this).closest('.deleteLine').remove();
+            })
+        }
+
+    </script>
+</body>
+</html>

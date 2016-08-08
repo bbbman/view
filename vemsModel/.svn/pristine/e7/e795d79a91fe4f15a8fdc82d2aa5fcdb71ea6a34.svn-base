@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP车主管理-VIP车主管理-续期VIP</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">VIP别称:</label>
+                    <div class="col-xs-5">
+                       <select class="form-control" id="">
+                           <option>AVIP</option>
+                       </select>
+                    </div>
+                    <span class="col-xs-4" style="height:34px; line-height: 34px;padding-left: 0;">停车场：佛山A停车场</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车主姓名:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" id="carOwner_name" placeholder="">
+                    </div>
+                    <div class="col-xs-4" style="padding-left: 0px;">
+                        <a class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" role="button" id="renewPickCarOwner">选择车主</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">手机号:</label>
+                    <div class="col-xs-5">
+                        <input type="tel" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车牌:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control car_license_number" placeholder="手动输入车牌号码" maxlength="7" style="text-transform: uppercase;">
+                    </div>
+                    <div class="col-xs-4" style="padding-left: 0px;">
+                        <button type="button" class="btn btn-default btn-flat pull-left" id="addCarLicense" style="border-radius: 4px;">添加</button>
+                    </div>
+                    <div class="col-xs-5 show-choose" id="oweCarList" style="display:none;">
+                       <!-- <label class="checkbox-inline col-xs-10">
+                         <input type="checkbox" name="car_license" id="" value="湘A98878">湘A98878
+                       </label> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车位类型:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" id="">
+                           <option>固定车位</option>
+                           <option>临时车位</option>
+                       </select>
+                    </div>
+                    <div class="col-xs-4" style="padding-left: 0px;">
+                        <button type="button" class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" id="renewPickCarPosition">选择车位</button>
+                    </div>
+                    <div class="col-xs-5 show-choose" id="carPositionList" style="display:none">
+                       <!-- <span class="list-item mt5">100001</span> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label" style="padding-top: 15px;">现有有效期:</label>
+                     <div class="col-xs-5 show-choose" style="min-height:34px;margin-left: 15px;">
+                        <span class="list-item mt7" id="">15年1月，15年2月(自然月) 或 2015/02/22-2015/03/22(自定义)</span>
+                     </div>
+                </div>
+                <div class="form-group">
+                     <label for="" class="col-xs-3 control-label">结算类型:</label>
+                     <div class="col-xs-5">
+                        <p class="form-control-static">时间结算</p>
+                     </div>
+                     <div id="settle-bytime-money" class="col-xs-12 settleMoney mt10" style="display:block;">
+                         <label for="" class="col-xs-3 control-label">续期开通</label>
+                         <div class="col-xs-5">
+                            <input type="text" class="form-control" id="" placeholder="" style="display:inline-block;width:40%;margin-left: -7px;margin-right: 10px;">月
+                         </div>
+                     </div>
+                     <div id="settle-bycount-money" class="col-xs-12 settleMoney mt10" style="display:none;">
+                         <label for="" class="col-xs-3 control-label">续期开通</label>
+                         <div class="col-xs-5">
+                            <input type="text" class="form-control" id="" placeholder="" style="display:inline-block;width:40%;margin-left: -7px;margin-right: 10px;">次
+                         </div>
+                     </div>
+                     <div id="settle-bybalance-money" class="col-xs-12 settleMoney mt10" style="display:none;">
+                         <label for="" class="col-xs-3 control-label">充值金额</label>
+                         <div class="col-xs-5">
+                            <input type="text" class="form-control" id="" placeholder="" style="display:inline-block;width:40%;margin-left: -7px;margin-right: 10px;">
+                         </div>
+                     </div>
+                 </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">续期日期:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" id="vip_expiry">
+                           <option value="1">自然月</option>
+                           <option value="2">自定义</option>
+                       </select>
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-5">
+                        <input type="text" class="form-control mydate-icon mt10" id="choose-date" placeholder="请选择日期区间" />
+                    </div>
+                    <div class="col-xs-5 show-choose" style="height:34px;">
+                       <span class="list-item mt7" id="choose-detail">15年1月，15年2月(自然月) 或 2015/02/22-2015/03/22(自定义)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">价格:</label>
+                    <div class="col-xs-6">
+                        <span class="price h34 ml10 f15">100</span><span class="h34 f15"> 元</span>
+                    </div>
+                </div>
+                <div class="form-group addLine">
+                    <label for="" class="col-xs-3 control-label">折扣价:</label>
+                    <div class="col-xs-5">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" style="display: inline-block; width:85%;text-transform: uppercase;">
+                        <span class="h34 ml15 f15"> 元</span>
+                    </div>
+                </div>
+                 <div class="form-group addLine">
+                    <label for="" class="col-xs-3 control-label">备注:</label>
+                    <div class="col-xs-5">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" style="display: inline-block; width:85%;">
+                    </div>
+                </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+               </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+    <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../../dist/js/timeset.js"></script>
+    <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+    <script src="../../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+            //温馨提示alert框
+            layer.alert('该车辆在场,进场记录时间为:2015-5-23 11:00,请续期包含该时间。', {
+                title:'温馨提示',
+                skin: 'layui-layer-molv',
+                closeBtn: 0,
+                shift: 0 //动画类型
+            });
+
+            $('#choose-date').binDaterangepicker({
+                isSingle: false,
+                format: 'YYYY/MM/DD',
+                isTimePicker: false,
+                position:'right'
+            });
+            setPickDateVal();
+
+        })
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+        
+        $("#vip_expiry").on('change',function(){
+            $('#choose-date').val('');
+            $('#choose-detail').text('');
+            if($(this).val() == 2){
+                format = 'YYYY/MM/DD';
+            }else{
+                format = 'YYYY/MM';
+            }
+            $('#choose-date').binDaterangepicker({
+                isSingle: false,
+                format: format,
+                isTimePicker: false,
+                position:'right'
+            });
+            setPickDateVal();
+        })
+
+        function setPickDateVal(){   //选择VIP有效期时 自然月和自定义日期显示格式
+            $('#choose-date').on('apply.daterangepicker',function(ev, picker) {
+                // console.log(picker.startDate.format('YYYY/MM/DD'));
+                var start = picker.startDate,
+                    end = picker.endDate;
+                var choose_date = '';
+                if($("#vip_expiry option:checked").attr("value") == 1){
+                    var ye = end.format("YYYY"),
+                        ys = start.format("YYYY"),
+                        me = end.format("M"),
+                        ms = start.format("M");
+                    if((ye-ys) == 0){
+                        if((me-ms) == 0){
+                            choose_date = end.format("YYYY年MM月");
+                        }else{
+                            choose_date = start.format("YYYY年MM月"+",");
+                            for(var i=1;i<(me-ms);i++){
+                                var k = parseInt(ms)+i;
+                                if(k<10){
+                                    k="0"+k;
+                                }
+                                choose_date += ys+"年"+k+"月"+",";
+                            }
+                            choose_date += end.format("YYYY年MM月");
+                        }
+                    }else{
+                        choose_date = start.format("YYYY年MM月"+",");
+                        for(var i=0;i<(ye-ys);i++){
+                            if(i==0){
+                                for(var j=parseInt(ms)+1;j<=12;j++){
+                                    var k = j;
+                                    if(k<10){
+                                        k = "0"+k;
+                                    }
+                                    choose_date += ys+"年"+k+"月"+",";
+                                }
+                            }else{
+                                for(var j=1;j<=12;j++){
+                                    var k=j;
+                                    if(k<10){
+                                        k = "0"+k;
+                                    }
+                                    choose_date += (parseInt(ys)+i)+"年"+k+"月"+",";
+                                }
+                            }
+                        }
+                        for(var j=1;j<me;j++){
+                            var k =j;
+                            if(k<10){k="0"+k;}
+                            choose_date += ye+"年"+k+"月"+",";
+                        }
+                        choose_date += end.format("YYYY年MM月");
+                    }
+
+                }else{
+                    choose_date = start.format("YYYY/MM/DD")+' - '+end.format("YYYY/MM/DD");
+                }
+                // console.log(choose_date);
+                $("#choose-detail").text(choose_date);
+            });
+        }
+
+        $('#renewPickCarOwner').on('click', function(){
+            layer.open({
+                type: 2,
+                title: '选择车主',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['92%' , '94%'],
+                offset : ['10px'],
+                content: '../iframe/pickCarOwner.html'
+            });
+        });
+
+        $('#renewPickCarPosition').on('click', function(){
+            layer.open({
+                type: 2,
+                title: '选择车位',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['92%' , '94%'],
+                content: ['../iframe/pickCarPosition.html']
+            });
+        });
+
+        $("#addCarLicense").on('click',function(){
+            var $car_license = $(this).parent().prev().children(".car_license_number"),car_license = $car_license.val().trim().toUpperCase(),html='';
+            if(car_license == ""){
+               layer.tips('请输入车牌号码', this);
+               return;
+            }
+            if($("#oweCarList").css("display") == "none"){
+                $("#oweCarList").css("display","block");
+            }
+            html += '<label class="checkbox-inline col-xs-10">'
+                            +'<input type="checkbox" name="car_license" id="" value="'+car_license
+                            +'">'+car_license+'</label>';
+               $(this).parent().next('#oweCarList').append(html);
+            $car_license.val('');
+            html='';
+        })
+
+        $("#settle-type").on('change',function(){
+          // alert($(this).val());
+          if($(this).val() == "time"){
+            $("#settle-bytime").nextAll(".settleType").css("display","none");
+            $("#settle-bytime").css("display","block");
+            $(this).parent().nextAll(".settleMoney").css("display","none");
+            $("#settle-bytime-money").css("display","block");
+          }else if($(this).val() == "count"){
+            $("#settle-type").nextAll(".settleType").css("display","none");
+            $("#settle-bycount").css("display","block");
+            $(this).parent().nextAll(".settleMoney").css("display","none");
+            $("#settle-bycount-money").css("display","block");
+          }else{
+            $("#settle-bybalance").prevAll(".settleType").css("display","none");
+            $("#settle-bybalance").css("display","block");
+            $(this).parent().nextAll(".settleMoney").css("display","none");
+            $("#settle-bybalance-money").css("display","block");
+          }
+        })
+
+    </script>
+</body>
+</html>

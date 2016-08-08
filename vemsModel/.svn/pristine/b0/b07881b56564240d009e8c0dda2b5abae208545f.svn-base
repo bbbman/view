@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/jquery-ui.css">
+    <link rel="stylesheet" href="../../dist/css/jquery-ui-timepicker-addon.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+       <div class="modal-body">
+           <form class="form-horizontal">  
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">停车场名称:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>停车场a</option>
+                           <option>停车场b</option>
+                           <option>停车场c</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通道名称:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control" placeholder="">
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通道编码:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control" placeholder="2-20个字符，含字母和数字">
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通道状态:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>开启</option>
+                           <option>关闭</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通道类型:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>未确认</option>
+                           <option>进口</option>
+                           <option>出口</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">临时车放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>手动验证放行</option>
+                           <option>自动验证放行</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">本地VIP放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>手动验证放行</option>
+                           <option>自动验证放行</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">第三方VIP放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>手动验证放行</option>
+                           <option>自动验证放行</option>
+                       </select>
+                   </div>
+               </div>
+                 <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">无牌车放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>入场自动出场确认</option>
+                           <option>自动放行</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">红名单放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>手动验证放行</option>
+                           <option>自动验证放行</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">黑名单放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>手动验证放行</option>
+                           <option>自动验证放行</option>
+                       </select>
+                   </div>
+               </div>
+                <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">黑名单放行模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>手动验证放行</option>
+                           <option>自动验证放行</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">高峰模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control" id="fastigium-pattern">
+                           <option>关闭</option>
+                           <option>手动开启</option>
+                           <option value="manual">自动开启</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group fastigium-pattern-con hidden">
+                   <label for="" class="col-xs-3 control-label">延时落闸时间:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control" placeholder="单位秒">
+                   </div>
+               </div>
+               <div class="form-group fastigium-pattern-con hidden">
+                   <label for="" class="col-xs-3 control-label">自动开启时间段:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control fastigium-pattern-input" placeholder="">
+                   </div>
+                    <div class="col-xs-2">
+                      <button type="button" class="btn  btn-primary btn-flat add-time-input fastigium-pattern-add">添加一行(最多3段)</button>
+                   </div>
+               </div>
+               
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">常开模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control" id="neutral-pattern">
+                           <option>关闭</option>
+                           <option>手动开启</option>
+                           <option value="manual">自动开启</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group neutral-pattern-con hidden">
+                   <label for="" class="col-xs-3 control-label">自动开启时间段:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control neutral-pattern-input" placeholder="">
+                   </div>
+                    <div class="col-xs-2">
+                      <button type="button" class="btn  btn-primary btn-flat add-time-input neutral-pattern-add">添加一行(最多3段)</button>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">是否开启卡/票机:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>关闭</option>
+                           <option>开启</option>
+                       </select>
+                   </div>
+               </div>
+                <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">取卡/票的识别阀值:</label>
+                   <div class="col-xs-5">
+                      <input type="number" class="form-control" min="1" max="100" placeholder="">
+                   </div>
+               </div>
+                 <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">车牌与卡联合模式:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>卡验证或车牌验证</option>
+                           <option>卡与车牌都验证</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">语音开启时间:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control vioce-open-time" placeholder="">
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">是否设置计费组:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>否</option>
+                           <option>是</option>
+                       </select>
+                   </div>
+               </div>
+                <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">计费组名称:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>计费组001</option>
+                           <option>计费组002</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left close-modal" >取消</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">确认</button>
+               </div>
+           </form>
+       </div>
+    </div>
+ <!--[if !IE]> -->
+ <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+ <!-- <![endif]-->
+ <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+  <script src="../../dist/js/jquery-ui.min.js"></script>
+  <script src="../../dist/js/jquery-ui-timepicker-addon.min.js"></script>
+  <script src="../../dist/js/jquery-ui-timepicker-zh-CN.js"></script>
+ <script>
+      $(function(){
+        $(".close-modal").on("click",function(){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        })
+        
+        $('#fastigium-pattern').on('change',function(){
+           if($(this).val()=='manual'){
+              $('.fastigium-pattern-con').removeClass('hidden');
+           }else{
+              $('.fastigium-pattern-con').addClass('hidden');
+           }
+        });
+
+        $('#neutral-pattern').on('change',function(){
+           if($(this).val()=='manual'){
+              $('.neutral-pattern-con').removeClass('hidden');
+           }else{
+              $('.neutral-pattern-con').addClass('hidden');
+           }
+        });
+
+        $(document).on('click','.delete-time-input',function(e){
+             var $this=$(e.target);
+             $this.closest('.form-group').remove();
+        });      
+       $(".fastigium-pattern-input").timepicker({
+            timeFormat: "HH:mm:ss"
+        });
+       $('.neutral-pattern-input').timepicker({
+            timeFormat: "HH:mm:ss"
+        });
+
+        $(document).on('click','.add-time-input',function(e){
+             var $this=$(e.target);
+             var inputName='fastigium-pattern-con fastigium-pattern-input';
+             var Id='';
+             if($this.hasClass('neutral-pattern-add')){
+                  if($('.neutral-pattern-input').length>2){
+                     return;
+                   }
+                   inputName='neutral-pattern-con neutral-pattern-input';
+                   Id='neutral'+($('.neutral-pattern-input').length-1);
+             }else{
+                 if($('.fastigium-pattern-input').length>2){
+                   return;
+                 }
+                 Id='fastigium'+$('.fastigium-pattern-input').length-1;
+             }
+             var timeInputStr=' <div class="form-group '+inputName+'"><div class="col-xs-offset-3 col-xs-5"><input type="text" class="form-control" placeholder="" id="'+Id+'"></div><div class="col-xs-2"><button type="button" class="btn  btn-default btn-flat delete-time-input">删除</button></div></div>';
+             $this.closest('.form-group').after(timeInputStr); 
+             $("#"+Id).timepicker({
+                  timeFormat: "HH:mm:ss"
+              });
+
+        });
+
+      })
+ </script>
+</body>
+
+</html>

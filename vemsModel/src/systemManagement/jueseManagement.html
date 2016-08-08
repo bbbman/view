@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>异常出场</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header con-item-header-pb14 clearfix">
+                <div class="search-box pull-left  form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">角色名称</label>
+                        <div class="input-group">
+                            <div class="input-group-addon glyphicon glyphicon-user"></div>
+                            <input type="text" class="form-control" id="" placeholder="角色名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </div>
+                </div>
+                <!-- 单个搜索框样式-end -->
+                <div class="function pull-right">
+                    <a class="btn btn-default pull-left ake-add-btn" id="open-JueSeModal">新增</a>
+                    <a class="btn btn-default pull-left ake-add-btn" href="#" role="button" data-toggle="modal" data-target="#delete-modal">删除</a>
+                    <a class="btn btn-default pull-left ake-add-btn" href="#" role="button" data-toggle="modal" data-target="#setting-function-modal">设置功能权限</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" id="ake-all-items">
+                                        </label>
+                                    </th>
+                                    <th>角色名称</th>
+                                    <th>描述</th>
+                                    <th>创建时间</th>
+                                    <th>最后更新时间</th>
+                                    <th class="hidden-480">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace">
+                                        </label>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        </th>
+                                        <td>
+                                            <button class="btn btn-xs btn-info open-editJueseModal" title="修改">
+                                                <i class="icon-edit bigger-120"></i>
+                                            </button>
+                                            <button class="btn btn-xs btn-danger" title="删除" data-toggle="modal" data-target="">
+                                                <i class="icon-trash bigger-120"></i>
+                                            </button>
+                                            <button class="btn btn-xs btn-primary" title="查看" data-toggle="modal" data-target="">
+                                                <i class="icon-zoom-in bigger-120"></i>
+                                            </button>
+                                        </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                      首页
+                                   </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                       上一页
+                                   </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">...</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                      下一页
+                                   </a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                       尾页
+                                   </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /span -->
+            <!-- /span -->
+        </div>
+        <!-- /row -->
+    </div>
+    </div>
+    <!--ake-add-madal -->
+    <!-- 表单modal -->
+    <div class="modal fade ake-modal" id="new-juese-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">新增用户</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="" class="col-sm-3 control-label">角色名称:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="explainTxt" class="col-sm-3 control-label">描述:</label>
+                            <div class="col-sm-5">
+                                <textarea class="form-control " id='explainTxt' rows="3"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade ake-modal  tips-modal" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">删除用户</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您确定要删除该用户吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade ake-modal" id="setting-function-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">设置功能权限</h4>
+                </div>
+                <div class="modal-body">
+                    <ul id="treeDemo" class="ztree"></ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../dist/js/timeset.js"></script>
+    <script src="../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script>
+    if (!$.browser.webkit) {
+        $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+        $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+        $(".main-sidebar").mCustomScrollbar({
+            theme: "dark"
+        });
+    }
+
+
+    // tree setting
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        }
+    };
+    // 数据格式一
+    var zNodes = [{
+        id: 1,
+        pId: 0,
+        name: "随意勾选 1",
+        open: true,
+        iconOpen: "dist/css/img/diy/1_open.png",
+        iconClose: "dist/css/img/diy/1_close.png"
+    }, {
+        id: 11,
+        pId: 1,
+        name: "随意勾选 1-1",
+        open: true,
+        iconOpen: "dist/css/img/diy/1_open.png",
+        iconClose: "dist/css/img/diy/1_close.png"
+    }, {
+        id: 111,
+        pId: 11,
+        name: "随意勾选 1-1-1",
+        icon: "dist/css/img/diy/9.png"
+    }, {
+        id: 112,
+        pId: 11,
+        name: "随意勾选 1-1-2",
+        icon: "dist/css/img/diy/9.png"
+    }, {
+        id: 12,
+        pId: 1,
+        name: "随意勾选 1-2",
+        open: true
+    }, {
+        id: 121,
+        pId: 12,
+        name: "随意勾选 1-2-1"
+    }, {
+        id: 122,
+        pId: 12,
+        name: "随意勾选 1-2-2"
+    }, {
+        id: 2,
+        pId: 0,
+        name: "随意勾选 2",
+        checked: true,
+        open: true
+    }, {
+        id: 21,
+        pId: 2,
+        name: "随意勾选 2-1"
+    }, {
+        id: 22,
+        pId: 2,
+        name: "随意勾选 2-2",
+        open: true
+    }, {
+        id: 221,
+        pId: 22,
+        name: "随意勾选 2-2-1",
+        checked: true
+    }, {
+        id: 222,
+        pId: 22,
+        name: "随意勾选 2-2-2"
+    }, {
+        id: 23,
+        pId: 2,
+        name: "随意勾选 2-3"
+    }];
+    //标准格式
+    // var zNodes =[
+    //       { name:"父节点1 - 展开", open:true,
+    //         children: [
+    //           { name:"父节点11 - 折叠",
+    //             children: [
+    //               { name:"叶子节点111"},
+    //               { name:"叶子节点112"},
+    //               { name:"叶子节点113"},
+    //               { name:"叶子节点114"}
+    //             ]},
+    //           { name:"父节点12 - 折叠",
+    //             children: [
+    //               { name:"叶子节点121"},
+    //               { name:"叶子节点122"},
+    //               { name:"叶子节点123"},
+    //               { name:"叶子节点124"}
+    //             ]},
+    //           { name:"父节点13 - 没有子节点", isParent:true}
+    //         ]},
+    //       { name:"父节点2 - 折叠",
+    //         children: [
+    //           { name:"父节点21 - 展开", open:true,
+    //             children: [
+    //               { name:"叶子节点211"},
+    //               { name:"叶子节点212"},
+    //               { name:"叶子节点213"},
+    //               { name:"叶子节点214"}
+    //             ]},
+    //           { name:"父节点22 - 折叠",
+    //             children: [
+    //               { name:"叶子节点221"},
+    //               { name:"叶子节点222"},
+    //               { name:"叶子节点223"},
+    //               { name:"叶子节点224"}
+    //             ]},
+    //           { name:"父节点23 - 折叠",
+    //             children: [
+    //               { name:"叶子节点231"},
+    //               { name:"叶子节点232"},
+    //               { name:"叶子节点233"},
+    //               { name:"叶子节点234"}
+    //             ]}
+    //         ]},
+    //       { name:"父节点3 - 没有子节点", isParent:true}
+
+    //     ];
+    //初始化tree
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+    //获取节点数据
+
+    $("#setting-function-modal button").on("click", function() {
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = treeObj.getCheckedNodes(true); //获取tree被勾选的节点
+        for (var i = 0; i < nodes.length; i++) {
+            console.log(nodes[i].id)
+        };
+    });
+
+
+
+    //弹出新增一体机服务窗口
+    $("#open-JueSeModal").click(function() {
+        layer.open({
+            type: 2,
+            title: '新增角色',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['600px', '80%'],
+            offset: ['30px'],
+            content: ['modal/new-juese-modal.html']
+        });
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    });
+    $(document).on("click", ".open-editJueseModal", function() {
+        layer.open({
+            type: 2,
+            title: '新增角色',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['600px', '80%'],
+            offset: ['30px'],
+            content: ['modal/editJueseModal.html']
+        });
+        var wrap =  $(".layui-layer-content ");
+        browser_ = /iphone|ipad/i.test(navigator.userAgent);
+        if(browser_ == true) {
+            wrap.addClass("iframe-wrap");
+        }
+        return false;
+    })
+    </script>
+</body>
+
+</html>

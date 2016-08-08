@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="ake-modal-body" style="overflow-x:hidden">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">停车场名称:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">停车场编号:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">停车场经纬度:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="" id="park-gpsXY">
+                    </div>
+                    <div class="class-col-xs-3">
+                      <a href="#" class="btn btn-primary choose-xy">选择经纬度</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">停车场图片:</label>
+                    <div class="col-xs-5">
+                        <input type="file" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">区域:</label>
+                    <div class="col-xs-5">
+                        <textarea class="form-control" rows="3" readonly></textarea>
+                    </div>
+                    <button type="button" class="btn  btn-primary btn-flat pull-left" id="chooseArea">选择区域</button>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">地址:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">总车位数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">固定车位数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                 <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">租用车位数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">临时车位总数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                 <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">免费车位数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">可预订车位总数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">出入方案:</label>
+                    <div class="col-xs-9 checkbox ake-checkbox">
+                        <label>
+                            <input type="checkbox">无
+                        </label>
+                        <label>
+                            <input type="checkbox">视频一体式控制机
+                        </label>
+                        <label>
+                            <input type="checkbox">手持拍照咪表
+                        </label>
+                        <label>
+                            <input type="checkbox">手持刷卡咪表
+                        </label>
+                        <label>
+                            <input type="checkbox">固定咪表
+                        </label>
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">引导方案:</label>
+                    <div class="col-xs-9 checkbox ake-checkbox">
+                        <label>
+                            <input type="checkbox">无
+                        </label>
+                        <label>
+                            <input type="checkbox">超声波
+                        </label>
+                        <label>
+                            <input type="checkbox">视频
+                        </label>
+                        <label>
+                            <input type="checkbox">红外
+                        </label>
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车场类型:</label>
+                    <div class="col-xs-9 checkbox ake-checkbox">
+                        <label>
+                            <input type="checkbox">路外
+                        </label>
+                        <label>
+                            <input type="checkbox">路内
+                        </label>
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">露天类型:</label>
+                    <div class="col-xs-9 checkbox ake-checkbox">
+                        <label>
+                            <input type="checkbox">室外
+                        </label>
+                        <label>
+                            <input type="checkbox">室内
+                        </label>
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">是否开启模糊匹配:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>开启</option>
+                            <option>关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">模糊匹配阀值:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">是否开启满位控制:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>开启</option>
+                            <option>关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">满位控制阀值:</label>
+                    <div class="col-xs-3">
+                      <a href="#" class="btn btn-primary seting-val">配置阀值</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">停车场属性:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>商业</option>
+                            <option>住宅</option>
+                            <option>私人</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">是否开启多车位:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>开启</option>
+                            <option>关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">是否收费:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>免费</option>
+                            <option>收费</option>
+                        </select>
+                    </div>
+                    <span class="require-tip text-danger">*</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">免费时长:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">收费图片:</label>
+                    <div class="col-xs-5">
+                        <input type="file" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">交费后出场时间:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">停车场属性:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>商业</option>
+                            <option>住宅</option>
+                            <option>私人</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">默认车牌简称:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option value=""></option>
+                            <option>京</option>
+                            <option>津</option>
+                            <option>冀</option>
+                            <option>晋</option>
+                            <option>蒙</option>
+                            <option>辽</option>
+                            <option>吉</option>
+                            <option>黑</option>
+                            <option>沪</option>
+                            <option>苏</option>
+                            <option>浙</option>
+                            <option>皖</option>
+                            <option>闽</option>
+                            <option>赣</option>
+                            <option>鲁</option>
+                            <option>豫</option>
+                            <option>鄂</option>
+                            <option>湘</option>
+                            <option>粤</option>
+                            <option>桂</option>
+                            <option>琼</option>
+                            <option>渝</option>
+                            <option>川</option>
+                            <option>贵</option>
+                            <option>云</option>
+                            <option>藏</option>
+                            <option>陕</option>
+                            <option>甘</option>
+                            <option>宁</option>
+                            <option>疆</option>
+                            <option>港</option>
+                            <option>澳</option>
+                            <option>台</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">描述:</label>
+                    <div class="col-xs-5">
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left close-modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+    <script src="../../dist/js/layer/layer.js"></script>
+    <script>
+    $(function() {
+        $(".close-modal").on("click", function() {
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+
+      $(".choose-xy").on("click",function(){
+        layer.open({
+            type: 2,
+            title: '选择经纬度',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['600px' , '90%'],
+            offset : ['30px'],
+            content: ['xy-modal.html']
+        });
+        return false;
+      });
+
+      $("#chooseArea").on("click",function(){
+        layer.open({
+            type: 2,
+            title: '选择区域',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['600px' , '90%'],
+            offset : ['30px'],
+            content: ['chooseAreaModal.html']
+        });
+        return false;
+      });
+
+        $(".seting-val").on("click",function(){
+        layer.open({
+            type: 2,
+            title: '满位阈值配置',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['600px' , '90%'],
+            offset : ['30px'],
+            content: ['seting-val.html']
+        });
+        return false;
+      });
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP车主管理-VIP车主管理-选择车位</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="dist/js/html5shiv.js"></script>
+        <script src="dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="index-page">
+    <div class="content-inner" style="border-top:none;">
+        <div class="con-item role-management">
+            <div class="con-item-header clearfix fixedHeader">
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group">
+                        <label class="sr-only" for="">编号</label>
+                        <div class="input-group">
+                          <div class="input-group-addon glyphicon glyphicon-user"></div>
+                          <input type="text" class="form-control" id="" placeholder="请输入车位编号" style="width:170px;">
+                        </div>
+                    </div>    
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary ml20" id="search_carPositon">搜索</button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary ml10" id="choose_carPosition">确定</button>
+                    </div>
+                </div>
+            </div>
+             <div class="row" style="margin-top: 65px; ">
+                <div class="col-xs-12" style="margin-bottom: 40px;">
+                    <div class="table-responsive">
+                         <table id="carPositionTable" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" id="ake-all-items">
+                                        </label>
+                                    </th>
+                                    <th>序号</th>
+                                    <th>车位编号</th>
+                                    <th>车位别称</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" name="carPosition">
+                                        </label>
+                                    </td>
+                                    <td>1</td>
+                                    <td class="car_position">A001</td>
+                                    <td>A区1号</td>
+                                </tr>
+                                 <tr>
+                                    <td class="center">
+                                        <label>
+                                            <input type="checkbox" class="ace" name="carPosition">
+                                        </label>
+                                    </td>
+                                    <td>1</td>
+                                    <td class="car_position">A002</td>
+                                    <td>A区2号</td>
+                                </tr>
+                            </tbody>
+                         </table>
+                     </div>
+                     
+                 </div>
+                 <div class="modal-table-footer table-footer"><!-- modal-table-footer --> 
+                     <div class="table-pageNum col-xs-4">
+                         当前第N项到N项，总共N项
+                     </div>
+                     <div class="table-pagination col-xs-5">
+                         <nav>
+                             <ul class="pagination">
+                                 <li class="disabled">
+                                     <a href="#" aria-label="Previous">
+                                        首页
+                                     </a>
+                                 </li>
+                                 <li class="disabled">
+                                     <a href="#" aria-label="Previous">
+                                         上一页
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="#" aria-label="Next">
+                                        下一页
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="#" aria-label="Next">
+                                         尾页
+                                     </a>
+                                 </li>
+                             </ul>
+                         </nav>
+                     </div>
+                     <div class="table-showNum col-xs-3 text-right">
+                         <label>显示&nbsp;
+                             <select name="" class="form-control input-xs">
+                                 <option value="10">10</option>
+                                 <option value="25">25</option>
+                                 <option value="50">50</option>
+                                 <option value="100">100</option>
+                             </select>&nbsp;条
+                        </label>&nbsp;
+                     </div>
+                 </div>
+            </div>
+            </div>
+        </div>
+        <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+        <!-- <![endif]-->
+        <!--[if IE]>
+            <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <script src="../../../dist/js/bootstrap.min.js"></script>
+         <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+         <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+         <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+        <script type="text/javascript">
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+            //给父页面传值
+            $('#choose_carPosition').on('click', function(){
+                var carPosition = '';
+                $("input[name=carPosition]").each(function(){
+                    if($(this).attr("checked")){
+                        if(parent.$('#carPositionList').css("display") == "none"){
+                            parent.$('#carPositionList').css("display","block");
+                        }
+                        var position = $(this).parent().parent('td').next().next('.car_position').text();
+                        carPosition += '<span class="list-item mt5">'+position+'</span>';
+                        parent.$('#carPositionList').append(carPosition);
+                        carPosition='';
+                    }
+                })
+                
+                parent.layer.close(index);
+                
+            });
+        </script>
+</body>
+</html>

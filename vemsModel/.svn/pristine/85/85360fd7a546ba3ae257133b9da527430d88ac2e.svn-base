@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-自助缴费机管理-新增缴费机</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]> 
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style type="text/css">
+        .relative{
+            position: relative;
+        }
+        .form-group div img{
+            width: 100%;
+            height: 200px;
+        }
+        .modal-body .form-horizontal .form-img-group{
+            margin-top: 30px;
+            position: relative;
+        }
+        .form-img-group .img-left-group{
+            margin-left: 12.5%;
+        }
+        .form-img-group .btn-right-group{
+            position: absolute;
+            right: 35px;
+            bottom: 50%;
+            margin-bottom: -17px;
+        }
+        .form-horizontal .form-group .params-group-addbtn{
+            display: block;
+            width: 100%;
+            height: 36px;
+            line-height: 36px;
+            color:#3399CC;
+            border:2px dashed #3399CC;
+            border-radius: 5px;
+            font-size: 17px;
+            text-align: center;
+        }
+        .form-horizontal .form-group .params-group-addbtn:hover{
+            border-color:#0099FF;
+            color:#0099FF;
+        }
+        .form-group .upload-img{
+            position: absolute;
+            top:0px;
+            left: 20px;
+             opacity: 0; 
+             z-index: -1; 
+        }
+    </style>
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-2 control-label" style="padding-right: 0px;">图片停留时间(秒)：</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" id="" placeholder="" maxlength="20">
+                    </div>
+                    <div class="col-xs-3 h34 cRed">*</div>
+                </div>
+                <div class="form-group form-img-group">
+                    <div class="col-xs-offset-2 col-xs-7">
+                        <img src="../../dist/images/plate-test.jpg" alt="默认图片">
+                    </div>
+                    <div class="col-xs-2 btn-right-group" style="margin-left: 20px;">
+                        <button type="button" class="btn btn-info btn-flat pull-left delete-pic">删除</button>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 40px;">
+                    <div class="col-xs-offset-2 col-xs-7 relative">
+                        <a href="javascript:;" id="addPicLine" class="params-group-addbtn">
+                          <span class="glyphicon glyphicon-plus"></span>
+                        </a>
+                        <input type="file" class="upload-img" id="uploadImg" accept=".jpg,.jpeg,.png">
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" id="cancel">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+     <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+        })
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+
+        //点击添加图片，相当于点击input[type=file]选择上传图片
+        $('#addPicLine').on('click',function(e){
+            e.stopPropagation();
+            var imgLen = $('.form-img-group').length;
+            if(imgLen < 10){
+                $('#uploadImg').click();
+            }else{
+                layer.alert('广告图片不可以超过10张', { icon:2});
+            }
+        })
+
+        //当点击选择图片后。
+        $('#uploadImg').on('change',function(e){
+            var $btnParent = $(this).closest('.form-group'),
+                html = '';
+            var fileName = $(this).val();//获取input[type=file]上传图片的路径
+
+            html += '<div class="form-group form-img-group">'
+                        +'<div class="col-xs-offset-2 col-xs-7">'
+                            +'<img src="../../dist/images/plate-test.jpg" alt="默认图片">'
+                        +'</div>'
+                        +'<div class="col-xs-2 btn-right-group" style="margin-left: 20px;">'
+                            +'<button type="button" class="btn btn-info btn-flat pull-left delete-pic">删除</button>'
+                        +'</div>'
+                    +'</div>';
+            $btnParent.before(html);
+        })
+
+        //点击删除图片
+        $(document).on('click','.delete-pic',function(e){
+            e.stopPropagation();
+            var $Parent = $(this).closest('.form-img-group');
+            $Parent.remove();
+        })
+
+        
+        </script>
+</body>
+</html>

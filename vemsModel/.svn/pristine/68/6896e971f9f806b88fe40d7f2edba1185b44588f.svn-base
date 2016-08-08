@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>优惠券-本地优惠券-新增本地优惠券</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+    <style type="text/css">
+        .col-sm-3{ width:25%; float: left;padding-top: 7px; margin-bottom: 0;text-align: right; }
+        .col-sm-6{ width: 50%; float: left;}
+    </style>
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">优惠券名称:</label>
+                        <div class="col-xs-6">
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">适用停车场:</label>
+                    <div class="col-xs-6 apply-parking">
+                        <label class="checkbox-inline col-xs-10">
+                            <input type="checkbox" name="parking" id="" value="停车场A">停车场A
+                        </label>
+                        <label class="checkbox-inline col-xs-10">
+                            <input type="checkbox" name="parking" id="" value="停车场B">停车场B
+                        </label>
+                        <label class="checkbox-inline col-xs-10">
+                            <input type="checkbox" name="parking" id="" value="停车场C">停车场C
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">类型:</label>
+                    <div class="col-xs-6">
+                       <select class="form-control" id="">
+                           <option>时间券</option>
+                           <option>免费券</option>
+                           <option>金额扣减券</option>
+                           <option>金额折扣券</option>
+                           <option>金额固定值券</option>
+                           <option>不同计价券</option>
+                       </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">面值:</label>
+                        <div class="col-xs-6">
+                        <input type="text" class="form-control time-input" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">有效期:</label>
+                    <div class="col-xs-6">
+                        <input type="text" class="form-control mydate-icon" id="expiryDay" placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">备注:</label>
+                    <div class="col-xs-6">
+                        <textarea rows="5" style="width:100%;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+            $('#expiryDay').binDaterangepicker({
+                isSingle: false,
+                format: 'YYYY/MM/DD',
+                isTimePicker: false,
+                position:'right'
+            });
+
+        })
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+
+    </script>
+</body>
+</html>

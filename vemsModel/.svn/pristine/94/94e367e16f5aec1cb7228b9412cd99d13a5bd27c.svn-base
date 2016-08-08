@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ake计费系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="dist/css/font-awesome.min-4.3.0.css">
+    <link rel="stylesheet" href="dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="dist/js/html5shiv.js"></script>
+        <script src="dist/js/respond.min.js"></script>
+        <![endif]-->
+    <script>
+    </script>
+</head>
+
+<body class="index-page">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index2.html" class="logo">
+                <img src="dist/images/logo.png" alt="">
+            </a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown messages-menu">
+                            <span class="top-menu-item" id="show-user-box">
+                                <img src="dist/images/account.png" alt="">
+                            </span>
+                        </li>
+                        <li class="dropdown messages-menu">
+                            <span class="top-menu-item" data-toggle="modal" data-target=".exit-modal">
+                                <img src="dist/images/Logout.png" alt="">
+                            </span>
+                        </li>
+                        <li class="dropdown messages-menu">
+                            <span class="top-menu-item">
+                                <img src="dist/images/Theme.png" alt="">
+                            </span>
+                        </li>
+                        <div class="menu-con-overlay"></div>
+                        <div class="menu-con ake-hidden">
+                            <div class="menu-title clearfix">
+                                <a href="#" class="user-menu-item active">个人信息</a>
+                                <a href="#" class="user-menu-item">修改密码</a>
+                            </div>
+                            <div class="tab-con">
+                                <div class="tab-item user-info">
+                                    <div class="user-info-detail ">
+                                        <div class="user-head"><img src="dist/images/touxiang.png" /></div>
+                                        <div class="user-welcome">欢迎，Admin</div>
+                                        <div class="user-info-list">
+                                            <ul>
+                                                <li>
+                                                    <span class="item-label">用户名：</span>
+                                                    <span class="item-con">Admin</span>
+                                                </li>
+                                                <li>
+                                                    <span class="item-label">手机号：</span>
+                                                    <span class="item-con">13579089809</span>
+                                                </li>
+                                                <li>
+                                                    <span class="item-label">地址：</span>
+                                                    <span class="item-con">瀚天科技城</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="clearfix edit-info-btn">
+                                            <button type="botton" class="btn btn-default center-block" id="edit-user-info">编辑</button>
+                                        </div>
+                                    </div>
+                                    <div class="user-info-edit ake-hidden">
+                                        <div class="user-head">
+                                            <img src="dist/images/touxiang.png" />
+                                        </div>
+                                        <div class="user-welcome">欢迎，Admin</div>
+                                        <form class="form-horizontal">
+                                            <div class="form-group">
+                                                <label for="inputEmail3" class="col-sm-3 control-label">用户名:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="inputEmail3" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-3 control-label">手机号:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" id="inputPassword3" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPassword3" class="col-sm-3 control-label">地址:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-group warning-box">
+                                                <label for="inputPassword3" class="col-sm-3 control-label">密码:</label>
+                                                <div class="col-sm-9">
+                                                    <input type="password" class="form-control" id="inputPassword3" placeholder="">
+                                                </div>
+                                                <div class="warning-tips"><img src="dist/images/alarm.png" alt="">密码错误</div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="clearfix user-info-btn">
+                                                    <button type="submit" class="btn btn-default pull-left">提交</button>
+                                                    <button type="submit" class="btn btn-default pull-right">取消</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="tab-item password-info ake-hidden ">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="inputEmail3" class="col-sm-3 control-label">旧密码:</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" id="inputEmail3" placeholder="旧密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputPassword3" class="col-sm-3 control-label">新密码:</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" id="inputPassword3" placeholder="新密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group waring-info-box">
+                                            <label for="inputPassword3" class="col-sm-3 control-label">确认密码:</label>
+                                            <div class="col-sm-9">
+                                                <input type="password" class="form-control" id="inputPassword3" placeholder="确认密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <!-- 成功 -->
+                                            <div class="class-user-tips tips-success col-xs-offset-3 text-success" style="color:#fff;font-size:20px">
+                                                <i class="fa fa-check"></i>操作成功
+                                            </div>
+                                            <!-- 失败 -->
+                                            <div class="class-user-tips tips-error col-xs-offset-3 text-success" style="color:red;font-size:20px">
+                                                <i class="fa fa-close"></i>操作失败
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="clearfix password-info-btn">
+                                                <button type="submit" class="btn btn-default pull-left">提交</button>
+                                                <button type="submit" class="btn btn-default pull-right">取消</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="main-sidebar">
+            <section class="sidebar" style="height: 100%;">
+                <ul class="sidebar-menu">
+                    <li><a href="parking-Operations/parking.html" target="ake-index-iframe" class="ake-link-item park-icon"><span class="ake-link-title">停车场运营管理</span></a></li>
+                    <li><a href="parking_vip/con-top.html" target="ake-index-iframe" class="ake-link-item parkVip-icon"><span class="ake-link-title">车场VIP</span></a></li>
+                    <li><a href="coupon/con-top.html" target="ake-index-iframe" class="ake-link-item coupon-icon"><span class="ake-link-title">优惠券</span></a></li>
+                    <li><a href="centerMonitoring/centerMonitoring.html" target="ake-index-iframe" class="ake-link-item center-icon"><span class="ake-link-title">中央监控</span></a></li>
+                    <li><a href="reportManagement/con-top.html" target="ake-index-iframe" class="ake-link-item report-icon"><span class="ake-link-title">报表管理</span></a></li>
+                    <li><a href="statisticAnalysis/con-top.html" target="ake-index-iframe" class="ake-link-item statistics-icon"><span class="ake-link-title">统计分析</span></a></li>
+                     <li><a href="systemManagement/system-top-nav.html" target="ake-index-iframe" class="ake-link-item system-icon"><span class="ake-link-title">系统管理</span></a></li>
+                    <li><a href="parking-setting/parking.html" target="ake-index-iframe" class="ake-link-item park-icon"><span class="ake-link-title">停车场配置管理</span></a></li>
+                    <li><a href="manage_configure/con-top.html" target="ake-index-iframe" class="ake-link-item manage-icon"><span class="ake-link-title">管理端配置</span></a></li>
+                    <li><a href="aioConfigure/aioConfigure.html" target="ake-index-iframe" class="ake-link-item ytj-icon"><span class="ake-link-title">一体机配置</span></a></li> 
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            <iframe id="ake-index-iframe" src frameborder="0" width="100%" height="100%" name="ake-index-iframe"></iframe>
+        </div>
+    </div>
+    <!--logOut-madal -->
+    <div class="modal fade bs-example-modal-sm exit-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="sign-out">
+                    <div class="sign-out-header">
+                        退出登录
+                    </div>
+                    <div class="line"></div>
+                    <div class="sign-out-body">
+                        你确定退出吗?
+                    </div>
+                    <div class="sign-out-footer clearfix">
+                        <a href="#" class="pull-left" data-dismiss="modal">取消</a>
+                        <a href="#" class="pull-right">确定</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="dist/js/layer/layer.js"></script>
+    <script src="dist/js/public.js"></script>
+    <script src="dist/js/main.js"></script>
+    <!--<script src="dist/js/public.js"></script> -->
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $(".main-sidebar").mCustomScrollbar({
+                theme: "dark"
+            });
+        }
+
+    });
+    </script>
+</body>
+
+</html>

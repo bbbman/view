@@ -1,0 +1,376 @@
+﻿(function($) {
+    $.fn.extend({
+        bindakeCalendar: function(options) {
+            var defaults = {
+                setingWays: '.seting-way-box .radiobox',
+                setingTime:'.seting-time-interval',
+                setTimeModal:"#setTimeModal",
+                yearSwitch: '.year-switch-box a',
+                yearBox: '.year-switch-box .year-val',
+                calendarWrap: '.calendar-box-wrap',
+                calendarTag:'',
+            };
+            options = $.extend(defaults, options);
+            /*var ranges=new Array();*/
+            var akeHolidayObject = null;
+            this.each(function() {
+                var o = options;
+                var This = $(this);
+                var timeInterval="00:00:00~23:59:59";
+                This.find(o.yearSwitch).on('click', function() {
+                    var Val = This.find(o.yearBox).text();
+                    var yearVal = parseInt(Val);
+                    var newYear = null;
+                    if ($(this).hasClass('btn-arrow-left')) {
+                        //点击左边按钮，时间向后退
+                        newYear = yearVal - 1;
+                    } else {
+                        //点击右边按钮，时间向前进
+                        newYear = yearVal + 1;
+                    }
+                    localSaveHolidays(This, o);
+                    updatecalendar(This, o, newYear); //刷新日历
+                });
+                //节假日选择方式的切换
+                This.find(o.setingWays).on('click', function() {
+                    var $radiobox = This.find(o.setingWays);
+                    var $this = $(this);
+                    $radiobox.removeClass('radio-active');
+                    $radiobox.find('input:radio').removeAttr('checked');
+                    $this.addClass('radio-active');
+                    $this.find('input:radio').attr('checked', "checked");
+                 
+                });
+                //是否设置时间段
+                This.find(o.setingTime).on('click', function(event) {
+                    event.preventDefault();
+                    var $radiobox = This.find(o.setingTime);
+                    var $this = $(this);
+                    if($this.hasClass('checked')){
+                        $radiobox.removeClass('checked');
+                        $radiobox.find('input:checkbox').removeAttr('checked');
+                    }else{
+                        $this.addClass('checked');
+                        $this.find('input:checkbox').attr('checked', "checked");
+                    }
+                });
+                //选择节假日的事件绑定
+                $(document).on('click', '#' + This.attr('id') + ' ' + o.calendarWrap + ' span', function(e) {
+                    var $this = $(e.target);
+                    var wayVal = This.find(o.setingWays + ' input:radio:checked').val();
+                    if ($this.attr('num') != "0") {
+                        if(!$this.hasClass('active-num')&& This.find(o.setingTime).hasClass('checked')){
+                             var $startInput=$(o.setTimeModal).find('.input-daterange-start');
+                             var $endInput=$(o.setTimeModal).find('.input-daterange-end');
+                             var $tip=$(o.setTimeModal).find('.error-time-tip'); 
+                             $startInput.val("00:00:00");
+                             $endInput.val("23:59:59");
+                             $tip.addClass('hidden');
+                             $(o.setTimeModal).modal('show');  
+                             var $sureBtn= $(o.setTimeModal).find('.modal-footer .btn-sure');
+                             $sureBtn.off('click');
+                             $sureBtn.on('click',function(){
+                                    var startTime=$startInput.val();
+                                    var endTime=$endInput.val();
+                                    if(!timeCompare(startTime,endTime)){
+                                       $tip.removeClass('hidden');
+                                       return false;  
+                                    }
+                                    $tip.addClass('hidden');
+                                    timeInterval=startTime+"~"+endTime;
+                                    $(o.setTimeModal).modal('hide');  
+                                    setDateTime(This,o,wayVal,$this,timeInterval); 
+                             });
+                        }else{
+                            timeInterval="00:00:00~23:59:59";
+                            setDateTime(This,o,wayVal,$this,timeInterval); 
+                        } 
+                    }
+                });
+                initcalendar(This, o); //初始化日历
+                akeHolidayObject = {
+                    //获取设置好的节假日
+                    getholidays: function() {
+                        localSaveHolidays(This, o);
+                        var holidayStr = null;
+                        holidayStr = localStorage.getItem(o.calendarTag);
+                        if(holidayStr!=undefined&&holidayStr!=null){
+                            holidayStr=JSON.stringify(holidayStr);
+                        }
+                        return holidayStr;
+                    },
+                    //初始化节假日日历
+                    initAkeCalendar: function() {
+                        initcalendar(This, o);
+                    }
+                };
+            });
+
+            //选中与取消日期-时间段
+            function setDateTime(This,option,wayVal,$this,timeInterval){
+                 switch (wayVal) {
+                    case 'freely':
+                        if (!$this.hasClass('active-num')) {
+                            $this.addClass('active-num');
+                            if(timeInterval!="00:00:00~23:59:59"){
+                                $this.addClass('part-time');
+                            }else{
+                               $this.removeClass('part-time');
+                            }
+                            $this.attr('data-time',timeInterval);
+                        } else {
+                            var thisNum = parseInt($this.attr('num'));
+                            $this.removeClass('active-num');
+                            $this.removeClass('part-time');
+                            $this.removeAttr('data-time');
+                            //var Index=$this.parent().index()+1;
+                            // $('.calendar-box-wrap .calendar-box table tbody tr>td:nth-child('+Index+') span').removeClass('active-num');
+                            // $('.calendar-box-wrap span[num="'+thisNum+'"]').removeClass('active-num');
+                        };
+                        break;
+                    case 'weekly':
+                        if (!$this.hasClass('active-num')) {
+                            var Index = $this.parent().index() + 1;
+                            var weekSpan = This.find(option.calendarWrap + ' table tbody tr>td:nth-child(' + Index + ') span');
+                            for (var i = 0; i < weekSpan.length; i++) {
+                                if (!weekSpan.eq(i).hasClass('space-num')) {
+                                    weekSpan.eq(i).addClass('active-num');
+                                    if(timeInterval!="00:00:00~23:59:59"){
+                                       weekSpan.eq(i).addClass('part-time');
+                                    }else{
+                                       weekSpan.eq(i).removeClass('part-time');
+                                    }
+                                    weekSpan.eq(i).attr('data-time',timeInterval);
+                                }
+                            }
+                        } else {
+                            //var thisNum=parseInt($this.attr('num'));
+                            var Index = $this.parent().index() + 1;
+                            var $span=This.find(option.calendarWrap + ' .calendar-box table tbody tr>td:nth-child(' + Index + ') span');
+                            $span.removeClass('active-num');
+                            $span.removeClass('part-time');
+                            $span.removeAttr('data-time');
+                            // $('.calendar-box-wrap span[num="'+thisNum+'"]').removeClass('active-num');
+                        };
+                        break;
+                    case 'monthly':
+                        if (!$this.hasClass('active-num')) {
+                            var thisNum = parseInt($this.attr('num'));
+                            var $span= This.find(option.calendarWrap + ' span[num="' + thisNum + '"]');
+                            $span.addClass('active-num');
+                            if(timeInterval!="00:00:00~23:59:59"){
+                                $span.addClass('part-time');
+                            }else{
+                                $span.removeClass('part-time');
+                            }
+                            $span.attr('data-time',timeInterval);
+                        } else {
+                            var thisNum = parseInt($this.attr('num'));
+                            var $span=This.find(option.calendarWrap + ' span[num="' + thisNum + '"]');
+                            // var Index=$this.parent().index()+1;
+                            //$('.calendar-box-wrap .calendar-box table tbody tr>td:nth-child('+Index+') span').removeClass('active-num');
+                            $span.removeClass('active-num');
+                            $span.removeClass('part-time');
+                            $span.removeAttr('data-time');
+                        };
+                        break;
+                    case 'themonth':
+                        var $span=$this.closest('.calendar-box').find('span[num!="0"]');
+                        if (!$this.hasClass('active-num')) {
+                            $span.addClass('active-num');
+                            if(timeInterval!="00:00:00~23:59:59"){
+                                $span.addClass('part-time');
+                            }else{
+                                $span.removeClass('part-time');
+                            }
+                            $span.attr('data-time',timeInterval);
+                        } else {
+                            $span.removeClass('active-num');
+                            $span.removeClass('part-time');
+                            $span.removeAttr('data-time');
+                        };
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            //判断两个时间的大小
+            function timeCompare(starttime,endtime){ 
+              var  starttime="2016-5-26"+" "+starttime;
+              var endtime="2016-5-26"+" "+endtime;
+              var d1=new Date(starttime.replace(/\-/g,'/')),
+                  d2=new Date(endtime.replace(/\-/g,'/'));    
+              var flag = false;    
+              if(d1<d2){    
+                flag = true;    
+              }
+               return flag; 
+            }
+            //初始化日历方法
+            function initcalendar(This, option) {
+                var currentDate = new Date();
+                var currentYear = currentDate.getFullYear();
+                updatecalendar(This, option, currentYear);
+            }
+
+
+            //本地存储日历信息
+            function localSaveHolidays(This, option) {
+                var holidayDateStr = '';
+                var $holidaySpan = This.find(option.calendarWrap + ' .calendar-box table tbody .active-num');
+                var thisYear = This.find(option.yearBox).text();
+                for (var i = 0; i < $holidaySpan.length; i++) {
+                    var thisMonth = parseInt($holidaySpan.eq(i).closest('.calendar-box').find('caption').attr('month'));
+                    if (thisMonth < 10) {
+                        thisMonth = '0' + thisMonth;
+                    }
+                    var thisDay = parseInt($holidaySpan.eq(i).text());
+                    if (thisDay < 10) {
+                        thisDay = '0' + thisDay;
+                    }
+                    var thisTime=$holidaySpan.eq(i).attr('data-time');
+                    holidayDateStr = holidayDateStr + ',' + thisYear + '-' + thisMonth + "-" + thisDay+" "+thisTime;
+                }
+                var localData=localStorage.getItem(option.calendarTag);
+                if ($holidaySpan.length > 0) {
+                    var newData={};
+                    newData[thisYear]=holidayDateStr;
+                    if(localData!= undefined && localData != null) {
+                       newData = $.extend(JSON.parse(localData), newData);
+                    }
+                    localStorage.setItem(option.calendarTag, JSON.stringify(newData));
+                } else if (localData!= undefined && localData != null) {
+                    var localData=JSON.parse(localData);
+                    if(localData[thisYear]!= undefined && localData != null){
+                        delete localData[thisYear];
+                        localStorage.setItem(option.calendarTag,JSON.stringify(localData));
+                    } 
+                }
+                //console.log(holidayDateStr);
+            }
+
+            //刷新日历方法
+            function updatecalendar(This, option, year) {
+                    //刷新日历母体的头部
+                    This.find(option.yearBox).text(year);
+                    This.find(option.calendarWrap + ' .calendar').remove();
+                    var localHolidays = localStorage.getItem(option.calendarTag);
+                    var localDate=new Array();
+                    var localTime={};
+                    if (localHolidays != null || localHolidays != undefined) {
+                        localHolidays=JSON.parse(localHolidays);
+                        if(localHolidays[''+year]!= null || localHolidays[''+year] != undefined){
+                            localHolidays = localHolidays[''+year].split(",");
+                            $.each(localHolidays,function(n,value){
+                                if(value!=""){
+                                    var str=value.split(" ");
+                                    localDate.push(str[0]);
+                                    localTime[str[0]]=str[1];
+                                }
+                            });
+                        }
+                    }
+                    for (var month = 1; month <= 12; month++) {
+                        //每次生成一个月份的日历块
+                        var $calendarTemplate = $(getCalendarTemplate());
+                        var MonthDateNum = new Date(year, month, 0).getDate(); //获取指定月份的天数（28-31）
+                        var MonthOneDay = new Date(year, month - 1, 1).getDay(); //获取指定月份的第一天是星期几（0-6）
+                        //修改日历块头部
+                        var monthCN = getCNcaption(month);
+                        $calendarTemplate.find('caption').attr('month', month).text(monthCN);
+                        var $calendarTemplateSpan = $calendarTemplate.find('span');
+                        //生成日历块的主体
+                        for (var i = 0; i < $calendarTemplateSpan.length; i++) {
+                            if (i < MonthOneDay) {
+                                $calendarTemplateSpan.eq(i).attr('num', '0').text('0').addClass('space-num');
+                            } else {
+                                var newNum = parseInt($calendarTemplateSpan.eq(i).attr('num')) - MonthOneDay;
+                                if (newNum > MonthDateNum) {
+                                    $calendarTemplateSpan.eq(i).attr('num', '0').text('0').addClass('space-num');
+                                } else {
+                                    $calendarTemplateSpan.eq(i).attr('num', newNum).text(newNum);
+                                    var date = year + '-' + (month < 10 ? '0' + month : month) + '-' + (newNum < 10 ? '0' + newNum : newNum);
+                                    if (localHolidays != null && localHolidays != undefined && localHolidays.length > 1) {
+                                        if ($.inArray(date, localDate) != -1) {
+                                             $calendarTemplateSpan.eq(i).addClass('active-num');
+                                             $calendarTemplateSpan.eq(i).attr('data-time',localTime[date]);
+                                            if(localTime!=undefined&&localTime[date]!="00:00:00~23:59:59"){
+                                               $calendarTemplateSpan.eq(i).addClass('part-time');
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //添加进日历母体
+                        This.find(option.calendarWrap).append($calendarTemplate);
+                    }
+
+
+                }
+            //数字月份转换成中文月份
+            function getCNcaption(month) {
+                var monthCN = '';
+                switch (month) {
+                    case 1:
+                        monthCN = '一月';
+                        break;
+                    case 2:
+                        monthCN = '二月';
+                        break;
+                    case 3:
+                        monthCN = '三月';
+                        break;
+                    case 4:
+                        monthCN = '四月';
+                        break;
+                    case 5:
+                        monthCN = "五月";
+                        break;
+                    case 6:
+                        monthCN = "六月";
+                        break;
+                    case 7:
+                        monthCN = '七月';
+                        break;
+                    case 8:
+                        monthCN = '八月';
+                        break;
+                    case 9:
+                        monthCN = '九月';
+                        break;
+                    case 10:
+                        monthCN = '十月';
+                        break;
+                    case 11:
+                        monthCN = "十一月";
+                        break;
+                    case 12:
+                        monthCN = "十二月";
+                        break;
+                    default:
+                        break;
+                }
+                return monthCN;
+            }
+
+            //获取一个日历块的模板
+            function getCalendarTemplate() {
+                var templateStr = '<div class="col-xs-4 col-sm-3  calendar"><div class="calendar-box"><table  class="table table-bordered">';
+                templateStr = templateStr + '<caption></caption><thead><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></thead>';
+                templateStr = templateStr + '<tbody><tr><td><span num="1"></span></td><td><span num="2"></span></td><td><span num="3"></span></td><td><span num="4"></span></td><td><span num="5"></span></td><td><span num="6"></span></td><td><span num="7"></span></td></tr>';
+
+                templateStr = templateStr + '<tr><td><span num="8"></span></td><td><span num="9"></span></td><td><span num="10"></span></td><td><span num="11"></span></td><td><span num="12"></span></td><td><span num="13"></span></td><td><span num="14"></span></td></tr>';
+                templateStr = templateStr + '<tr><td><span num="15"></span></td><td><span num="16"></span></td><td><span num="17"></span></td><td><span num="18"></span></td><td><span num="19"></span></td><td><span num="20"></span></td><td><span num="21"></span></td></tr>';
+                templateStr = templateStr + '<tr><td><span num="22"></span></td><td><span num="23"></span></td><td><span num="24"></span></td><td><span num="25"></span></td><td><span num="26"></span></td><td><span num="27"></span></td><td><span num="28"></span></td></tr>';
+                templateStr = templateStr + '<tr><td><span num="29"></span></td><td><span num="30"></span></td><td><span num="31"></span></td><td><span num="32"></span></td><td><span num="33"></span></td><td><span num="34"></span></td><td><span num="35"></span></td></tr>';
+                templateStr = templateStr + '<tr><td><span num="36"></span></td><td><span num="37"></span></td><td><span num="38"></span></td><td><span num="39"></span></td><td><span num="40"></span></td><td><span num="41"></span></td><td><span num="42"></span></td></tr>';
+                templateStr = templateStr + '</tbody></table> </div></div>';
+                return templateStr;
+            }
+            return akeHolidayObject;
+        }
+    });
+
+})(jQuery);

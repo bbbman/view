@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>出入口监控</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+            <div class="content-inner">
+                <div class="con-item role-management">
+                    <div class="con-item-header  con-item-header-pb14 clearfix">
+                        <div class="search-box pull-left form-inline">
+                                <div class="form-group">
+                                    <label class="sr-only" for="">停车场名称</label>
+                                    <div class="input-group">
+                                      <div class="input-group-addon text-center">停车场名称</div>
+                                      <input type="text" class="form-control" id="" placeholder="">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label class="sr-only" for="">通道类型</label>
+                                    <div class="input-group">
+                                       <div class="input-group-addon text-center">通道类型</div>
+                                       <select class="form-control">
+                                           <option>全部</option>
+                                           <option>类型1</option>
+                                           <option>类型2</option>
+                                           <option>类型3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="">通道名称</label>
+                                    <div class="input-group">
+                                      <div class="input-group-addon text-center">通道名称</div>
+                                      <input type="text" class="form-control" id="" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary">搜索</button>
+                                </div>
+                                
+                            </div>
+                            <div class="function clearfix">
+                                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="photoRecord">拍照日志</a>
+                                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="switchGate">开关闸日志</a>
+                                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="displayVoice">显示及语音日志</a>
+                                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="basicSeting">基础设置</a>
+                                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" id="startVedioImg">全部显示视频</a>
+                                </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 inlet-outlet-list">
+                            <div class="col-xs-4 inlet-outlet-item">
+                                <h3 class="item-titile">东大门出口</h3>
+                                <div class="iteml-info clearfix">
+                                    <span class="pull-left">瀚天科技城</span>
+                                    <span class="pull-right">2015-12-10 12:10:20</span>
+                                </div>
+                                <div class="car-media">
+                                    <div class="switch-box">
+                                      <span title="进场图片" class="switch-btn switch-img check-img pull-left"></span>
+                                      <span title="进场监控" class="switch-btn switch-vedio switch-total-vedio pull-left"></span>
+                                    </div>
+                                    <div class="vedio-box hidden" style="width:366px;height:274px;">
+                                        <ul class="list-unstyled switch-vedio-list">
+                                          <li class="switch-btn switch-vedio">5</li>
+                                          <li class="switch-btn switch-vedio">4</li>
+                                          <li class="switch-btn switch-vedio">3</li>
+                                          <li class="switch-btn switch-vedio" data-src="rtsp://172.18.3.15">2</li>
+                                          <li class="switch-btn switch-vedio check-vedio" data-src="rtsp://172.18.3.14">1</li>
+                                        </ul>
+                                         <object type='application/x-vlc-plugin' pluginspage="http://www.videolan.org/" id='vlc0' events='false' width="295" height="274">
+                                         <param name='mrl' value='rtsp://172.18.3.14' />
+                                         <param name='volume' value='50' />
+                                         <param name='autoplay' value='true' />
+                                         <param name='loop' value='false' />
+                                         <param name='fullscreen' value='true' />
+                                         <param name='controls' value='true' />
+                                         <EMBED class="hidden" pluginspage="http://www.videolan.org" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"  text="Waiting for video" name="vlc" src="rtsp://172.18.3.15" controls="console"></EMBED>
+                                        </object>
+                                    </div>
+                                  <img class="img-self" src="../dist/images/plate-test.jpg" style="width:100%;">
+                                </div>
+                                <div class="item-btn-group clearfix">
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-left">开闸</button>
+                                    <button type="button" class="btn  btn-default btn-flat btn-close pull-left open-close-gate-modal">关闸</button>
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-right open-send-info-modal">
+                                    发送消息</button>
+                                    <button type="button" class="btn  btn-primary btn-flat btn-photo pull-left">拍照</button>
+                                </div>
+                            </div>
+                           <div class="col-xs-4 inlet-outlet-item">
+                                <h3 class="item-titile">东大门出口</h3>
+                                <div class="iteml-info clearfix">
+                                    <span class="pull-left">瀚天科技城</span>
+                                    <span class="pull-right">2015-12-10 12:10:20</span>
+                                </div>
+                                <div class="car-media">
+                                    <div class="switch-box">
+                                      <span title="进场图片" class="switch-btn switch-img check-img pull-left"></span>
+                                      <span title="进场监控" class="switch-btn switch-vedio switch-total-vedio pull-left"></span>
+                                    </div>
+                                    <div class="vedio-box hidden" style="width:366px;height:274px;">
+                                        <ul class="list-unstyled switch-vedio-list">
+                                          <li class="switch-btn switch-vedio">5</li>
+                                          <li class="switch-btn switch-vedio">4</li>
+                                          <li class="switch-btn switch-vedio">3</li>
+                                          <li class="switch-btn switch-vedio">2</li>
+                                          <li class="switch-btn switch-vedio check-vedio">1</li>
+                                        </ul>
+                                         <object type='application/x-vlc-plugin' pluginspage="http://www.videolan.org/" id='vlc0' events='false' width="295" height="274">
+                                         <param name='mrl' value='rtsp://172.18.3.15' />
+                                         <param name='volume' value='50' />
+                                         <param name='autoplay' value='true' />
+                                         <param name='loop' value='false' />
+                                         <param name='fullscreen' value='true' />
+                                         <param name='controls' value='true' />
+                                         <EMBED class="hidden" pluginspage="http://www.videolan.org" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"  text="Waiting for video" name="vlc" src="rtsp://172.18.3.15" controls="console"></EMBED>
+                                        </object>
+                                    </div>
+                                  <img class="img-self" src="../dist/images/plate-test.jpg" style="width:100%;">
+                                </div>
+                                <div class="item-btn-group clearfix">
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-left">开闸</button>
+                                    <button type="button" class="btn  btn-default btn-flat btn-close pull-left">关闸</button>
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-right open-send-info-modal">发送消息</button>
+                                    <button type="button" class="btn  btn-primary btn-flat btn-photo pull-left">拍照</button>
+                                </div>
+                            </div>
+                           <div class="col-xs-4 inlet-outlet-item">
+                                <h3 class="item-titile">东大门出口</h3>
+                                <div class="iteml-info clearfix">
+                                    <span class="pull-left">瀚天科技城</span>
+                                    <span class="pull-right">2015-12-10 12:10:20</span>
+                                </div>
+                                <div class="car-media">
+                                    <div class="switch-box">
+                                      <span title="进场图片" class="switch-btn switch-img check-img pull-left"></span>
+                                      <span title="进场监控" class="switch-btn switch-vedio switch-total-vedio pull-left"></span>
+                                    </div>
+                                    <div class="vedio-box hidden" style="width:366px;height:274px;">
+                                        <ul class="list-unstyled switch-vedio-list">
+                                          <li class="switch-btn switch-vedio">5</li>
+                                          <li class="switch-btn switch-vedio">4</li>
+                                          <li class="switch-btn switch-vedio">3</li>
+                                          <li class="switch-btn switch-vedio">2</li>
+                                          <li class="switch-btn switch-vedio check-vedio">1</li>
+                                        </ul>
+                                         <object type='application/x-vlc-plugin' pluginspage="http://www.videolan.org/" id='vlc0' events='false' width="295" height="274">
+                                         <param name='mrl' value='rtsp://172.18.3.14' />
+                                         <param name='volume' value='50' />
+                                         <param name='autoplay' value='true' />
+                                         <param name='loop' value='false' />
+                                         <param name='fullscreen' value='true' />
+                                         <param name='controls' value='true' />
+                                         <EMBED class="hidden" pluginspage="http://www.videolan.org" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"  text="Waiting for video" name="vlc" src="rtsp://172.18.3.15" controls="console"></EMBED>
+                                        </object>
+                                    </div>
+                                  <img class="img-self" src="../dist/images/plate-test.jpg" style="width:100%;">
+                                </div>
+                                <div class="item-btn-group clearfix">
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-left">开闸</button>
+                                    <button type="button" class="btn  btn-default btn-flat btn-close pull-left">关闸</button>
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-right open-send-info-modal">发送消息</button>
+                                    <button type="button" class="btn  btn-primary btn-flat btn-photo pull-left">拍照</button>
+                                </div>
+                            </div>
+                           <div class="col-xs-4 inlet-outlet-item">
+                                <h3 class="item-titile">东大门出口</h3>
+                                <div class="iteml-info clearfix">
+                                    <span class="pull-left">瀚天科技城</span>
+                                    <span class="pull-right">2015-12-10 12:10:20</span>
+                                </div>
+                                <div class="car-media">
+                                    <div class="switch-box">
+                                      <span title="进场图片" class="switch-btn switch-img check-img pull-left"></span>
+                                      <span title="进场监控" class="switch-btn switch-vedio switch-total-vedio pull-left"></span>
+                                    </div>
+                                    <div class="vedio-box hidden" style="width:366px;height:274px;">
+                                        <ul class="list-unstyled switch-vedio-list">
+                                          <li class="switch-btn switch-vedio">5</li>
+                                          <li class="switch-btn switch-vedio">4</li>
+                                          <li class="switch-btn switch-vedio">3</li>
+                                          <li class="switch-btn switch-vedio">2</li>
+                                          <li class="switch-btn switch-vedio check-vedio">1</li>
+                                        </ul>
+                                         <object type='application/x-vlc-plugin' pluginspage="http://www.videolan.org/" id='vlc0' events='false' width="295" height="274">
+                                         <param name='mrl' value='rtsp://172.18.3.14' />
+                                         <param name='volume' value='50' />
+                                         <param name='autoplay' value='true' />
+                                         <param name='loop' value='false' />
+                                         <param name='fullscreen' value='true' />
+                                         <param name='controls' value='true' />
+                                         <EMBED class="hidden" pluginspage="http://www.videolan.org" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"  text="Waiting for video" name="vlc" src="rtsp://172.18.3.15" controls="console"></EMBED>
+                                        </object>
+                                    </div>
+                                  <img class="img-self" src="../dist/images/plate-test.jpg" style="width:100%;">
+                                </div>
+                                <div class="item-btn-group clearfix">
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-left">开闸</button>
+                                    <button type="button" class="btn  btn-default btn-flat btn-close pull-left">关闸</button>
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-right open-send-info-modal">发送消息</button>
+                                    <button type="button" class="btn  btn-primary btn-flat btn-photo pull-left">拍照</button>
+                                </div>
+                            </div>
+                           <div class="col-xs-4 inlet-outlet-item">
+                                <h3 class="item-titile">东大门出口</h3>
+                                <div class="iteml-info clearfix">
+                                    <span class="pull-left">瀚天科技城</span>
+                                    <span class="pull-right">2015-12-10 12:10:20</span>
+                                </div>
+                                <div class="car-media">
+                                    <div class="switch-box">
+                                      <span title="进场图片" class="switch-btn switch-img check-img pull-left"></span>
+                                      <span title="进场监控" class="switch-btn switch-vedio switch-total-vedio pull-left"></span>
+                                    </div>
+                                    <div class="vedio-box hidden" style="width:366px;height:274px;">
+                                        <ul class="list-unstyled switch-vedio-list">
+                                          <li class="switch-btn switch-vedio">5</li>
+                                          <li class="switch-btn switch-vedio">4</li>
+                                          <li class="switch-btn switch-vedio">3</li>
+                                          <li class="switch-btn switch-vedio">2</li>
+                                          <li class="switch-btn switch-vedio check-vedio">1</li>
+                                        </ul>
+                                         <object type='application/x-vlc-plugin' pluginspage="http://www.videolan.org/" id='vlc0' events='false' width="295" height="274">
+                                         <param name='mrl' value='rtsp://172.18.3.14' />
+                                         <param name='volume' value='50' />
+                                         <param name='autoplay' value='true' />
+                                         <param name='loop' value='false' />
+                                         <param name='fullscreen' value='true' />
+                                         <param name='controls' value='true' />
+                                         <EMBED class="hidden" pluginspage="http://www.videolan.org" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"  text="Waiting for video" name="vlc" src="rtsp://172.18.3.15" controls="console"></EMBED>
+                                        </object>
+                                    </div>
+                                  <img class="img-self" src="../dist/images/plate-test.jpg" style="width:100%;">
+                                </div>
+                                <div class="item-btn-group clearfix">
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-left">开闸</button>
+                                    <button type="button" class="btn  btn-default btn-flat btn-close pull-left">关闸</button>
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-right open-send-info-modal">发送消息</button>
+                                    <button type="button" class="btn  btn-primary btn-flat btn-photo pull-left">拍照</button>
+                                </div>
+                            </div>
+                            <div class="col-xs-4 inlet-outlet-item">
+                                <h3 class="item-titile">东大门出口</h3>
+                                <div class="iteml-info clearfix">
+                                    <span class="pull-left">瀚天科技城</span>
+                                    <span class="pull-right">2015-12-10 12:10:20</span>
+                                </div>
+                                <div class="car-media">
+                                    <div class="switch-box">
+                                      <span title="进场图片" class="switch-btn switch-img check-img pull-left"></span>
+                                      <span title="进场监控" class="switch-btn switch-vedio switch-total-vedio pull-left"></span>
+                                    </div>
+                                    <div class="vedio-box hidden" style="width:366px;height:274px;">
+                                        <ul class="list-unstyled switch-vedio-list">
+                                          <li class="switch-btn switch-vedio">5</li>
+                                          <li class="switch-btn switch-vedio">4</li>
+                                          <li class="switch-btn switch-vedio">3</li>
+                                          <li class="switch-btn switch-vedio" data-src="rtsp://172.18.3.15">2</li>
+                                          <li class="switch-btn switch-vedio check-vedio" data-src="rtsp://172.18.3.14">1</li>
+                                        </ul>
+                                         <object type='application/x-vlc-plugin' pluginspage="http://www.videolan.org/" id='vlc0' events='false' width="295" height="274">
+                                         <param name='mrl' value='rtsp://172.18.3.14' />
+                                         <param name='volume' value='50' />
+                                         <param name='autoplay' value='true' />
+                                         <param name='loop' value='false' />
+                                         <param name='fullscreen' value='true' />
+                                         <param name='controls' value='true' />
+                                         <EMBED class="hidden" pluginspage="http://www.videolan.org" type="application/x-vlc-plugin" version="VideoLAN.VLCPlugin.2"  text="Waiting for video" name="vlc" src="rtsp://172.18.3.15" controls="console"></EMBED>
+                                        </object>
+                                    </div>
+                                  <img class="img-self" src="../dist/images/plate-test.jpg" style="width:100%;">
+                                </div>
+                                <div class="item-btn-group clearfix">
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-left">开闸</button>
+                                    <button type="button" class="btn  btn-default btn-flat btn-close pull-left">关闸</button>
+                                    <button type="button" class="btn  btn-primary btn-flat  pull-right open-send-info-modal">发送消息</button>
+                                    <button type="button" class="btn  btn-primary btn-flat btn-photo pull-left">拍照</button>
+                                </div>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                         <!-- /.table-responsive -->
+                        <div class="table-footer col-xs-12">
+                            <div class="table-pageNum col-sm-3">
+                                当前第N项到N项，总共N项
+                            </div>
+                            <div class="table-pagination col-sm-6">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="disabled">
+                                            <a href="#" aria-label="Previous">
+                                               首页
+                                            </a>
+                                        </li>
+                                        <li class="disabled">
+                                            <a href="#" aria-label="Previous">
+                                                上一页
+                                            </a>
+                                        </li>
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">...</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                               下一页
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" aria-label="Next">
+                                                尾页
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                            <div class="table-showNum col-sm-3 text-right">
+                                <label>显示&nbsp;
+                                    <select name="" class="form-control input-sm">
+                                        <option value="10">6</option>
+                                    </select>
+                                </label>&nbsp;页
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /span -->
+                        <!-- /span -->
+                    </div>
+                    <!-- /row -->
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+        $('#send-info-modal .show-info-select').on('change',function(){
+             var currentVal=$(this).val();
+             if(currentVal=="0"){
+                $('#send-info-modal .user-defined-box').removeClass('hidden');
+             }
+        });
+
+        //视频流与图片切换
+        $('.car-media .switch-box .switch-img').on('click',function(){
+            var This=$(this);
+            if(!This.hasClass('check-img')){
+               var carMedia=This.closest('.car-media');
+               This.addClass('check-img');
+               carMedia.find('.img-self').removeClass('hidden');
+               carMedia.find('.vedio-box').addClass('hidden');
+               carMedia.find('.switch-total-vedio').removeClass('check-vedio');
+            }
+        });
+        $(document).on('click','.car-media .switch-box .switch-total-vedio',function(e){
+            var This=$(e.currentTarget);
+            if(!This.hasClass('check-vedio')){
+              var carMedia=This.closest('.car-media');
+              carMedia.find('.switch-img').removeClass('check-img');
+              This.addClass('check-vedio');
+              carMedia.find('.img-self').addClass('hidden');
+              carMedia.find('.vedio-box').removeClass('hidden'); 
+            }
+        });
+        $(document).on('click','.car-media .switch-vedio-list .switch-vedio',function(e){
+            var This=$(e.currentTarget);
+            if(!This.hasClass('check-vedio')){
+              var vedioBox=This.closest('.vedio-box');
+              vedioBox.find('.switch-vedio').removeClass('check-vedio');
+              This.addClass('check-vedio');
+              var vedioSrc=This.attr('data-src');
+              //更换rstp地址 
+              // vedioBox.find(param[name="mrl"]).attr('value',vedioSrc);
+
+            }
+        });
+        $('#startVedioImg').on('click',function(){
+          var $this=$(this);
+          if($this.text()=='全部显示图片'){
+             $this.text('全部显示视频');
+             $('.car-media').each(function(){
+                 $(this).find('.switch-box .switch-img').click();
+             });
+           }else{
+              $this.text('全部显示图片');
+              $('.car-media').each(function(){
+                 $(this).find('.switch-box .switch-total-vedio').click();
+             });
+           }
+        });
+
+         $(document).on("click", ".open-send-info-modal", function() {
+            layer.open({
+                type: 2,
+                title: '发送消息',
+                maxmin: true,
+                shadeClose: false, //点击遮罩关闭层
+                area: ['700px', '60%'],
+                offset: ['30px'],
+                content: ['modal/send-info-modal.html']
+            });
+            var wrap =  $(".layui-layer-content ");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+        });
+
+        $(document).on("click", ".open-close-gate-modal", function() {
+            layer.open({
+                type: 2,
+                title: '关闸',
+                maxmin: true,
+                shadeClose: false, //点击遮罩关闭层
+                area: ['500px', '60%'],
+                offset: ['30px'],
+                content: ['modal/close-gate-modal.html']
+            });
+            var wrap =  $(".layui-layer-content ");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+        });
+        
+        $("#photoRecord").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '拍照记录',
+                maxmin: false,
+                shadeClose: false, //点击遮罩关闭层
+                area : ['80%' , '85%'],
+                offset : ['10px'],
+                content: ['modal/photo-record.html']
+            });
+         });
+
+        $("#basicSeting").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '基础设置',
+                maxmin: false,
+                shadeClose: false, //点击遮罩关闭层
+                area : ['600px' , '50%'],
+                offset : ['10px'],
+                content: ['modal/basic-seting.html']
+            });
+         });
+
+        $("#displayVoice").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '显示及语音日志',
+                maxmin: false,
+                shadeClose: false, //点击遮罩关闭层
+                area : ['80%' , '85%'],
+                offset : ['10px'],
+                content: ['modal/display-voice.html']
+            });
+         });
+
+        $("#switchGate").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '开关闸日志',
+                maxmin: false,
+                shadeClose: false, //点击遮罩关闭层
+                area : ['80%' , '85%'],
+                offset : ['10px'],
+                content: ['modal/switch-gate.html']
+            });
+         });
+
+    });
+        
+    </script>
+</body>
+
+</html>

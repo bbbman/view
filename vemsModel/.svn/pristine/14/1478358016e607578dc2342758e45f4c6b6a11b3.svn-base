@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-车辆管理-黑名单车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+  
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <nav class="con-item-nav">
+                    <ul class="clearfix">
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/localCarManage.html" class="ake-third-menu" >本地车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/redlistCarManage.html" class="ake-third-menu">红名单车辆</a></li>
+                        <li class="con-nav-item active"><a href="../../parking_vip/car_manage/blacklistCarManage.html" class="ake-third-menu">黑名单车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/visitedCarManage.html" class="ake-third-menu">来访车辆</a></li>
+                        <li class="con-nav-item"><a href="../../parking_vip/car_manage/vipCarManage.html" class="ake-third-menu">VIP车辆</a></li>
+                    </ul>
+                </nav>
+                <div class="search-box pull-left form-inline">
+                    <div class="form-group addLine">
+                        <label class="sr-only" for="">停车场名称:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">停车场名称</div>
+                            <select id="" class="form-control pull-right">
+                               <option>全部</option>
+                               <option>停车场A</option>
+                               <option>停车场B</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">车牌号码</label>
+                        <div class="input-group">
+                          <div class="input-group-addon glyphicon glyphicon-picture"></div>
+                          <input type="text" class="form-control" id="" placeholder="请输入车牌号码" style="text-transform:upperCase;">
+                        </div>
+                    </div>         
+                      <div class="form-group">
+                          <button type="button" class="btn btn-primary">搜索</button>
+                      </div>
+                  </div>
+                <div class="function clearfix">
+                    <a class="btn btn-default pull-right mr5" role="button">导出进出详情</a>
+                    <a class="btn btn-default pull-right mr5">导 &nbsp;出</a>
+                    <a class="btn btn-default pull-right ake-add-btn mr5" role="button" >批量同步</a>
+                    <a class="btn btn-default pull-right mr5" id="importBlacklist">批量导入</a>
+                    <a class="btn btn-default pull-right mr5 addBalcklist" role="button">添 &nbsp;加</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="table-responsive">
+                        <table id="outsideService-table" class="table table-striped table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>车牌号码</th>
+                                    <th>车主姓名</th>
+                                    <th>预计来访时间段</th>
+                                    <th>VIP类型</th>
+                                    <th>备注1</th>
+                                    <th>备注2</th>
+                                    <th>备注3</th>
+                                    <th>最近操作员</th>
+                                    <th>最近操作时间</th>
+                                    <th class="hidden-480">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>京HG9175</td>
+                                    <td>小红</td>
+                                    <td></td>
+                                    <td>超级VIP</td>
+                                    <td>备注1</td>
+                                    <td>备注2</td>
+                                    <td>备注3</td>
+                                    <td>admin</td>
+                                    <td>2015-11-11 15:30</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info editLocalCar" title="修改">
+                                            <i class="icon-edit bigger-120"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger ml10" title="删除" data-toggle="modal" data-target=".deleteVisitedCarModal">
+                                            <i class="icon-trash bigger-120"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-info ml10 inAndOutDetailBtn" title="进出详情">进出详情</button>
+                                        <button class="btn btn-sm btn-info ml10 synchronousDetail" title="同步详情">同步详情</button>
+                                    </td>
+                                </tr>
+                                 
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+                 <!-- /.table-responsive -->
+                <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">...</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+    </div>
+
+    <!--导入modal-->
+    <div class="modal fade ake-modal" id="importBlacklistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title text-center" id="exampleModalLabel">导入商户</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="notice">
+                        <span class="col-sm-12 orange mb20">
+                            <h5>温馨提示：请按照以下步骤进行导入</h5>
+                            <p>1、请先下载模板文件，严格按照模板文件格式进行填写，不可更改文件格式.</p>
+                            <p>2、模板文件填写完成后，浏览选择文件，然后点击上传。</p>
+                            <p>3、如果上传失败，请下载失败文件，并注意失败原因的提示。重新填写上传。</p>
+                            <p>PS：此步骤仅供页面样式测试，请开发人员按具体情况自行填写。</p>
+                        </span>
+                    </div>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="businesskey" class="col-sm-3 control-label">下载模板:</label>
+                            <div class="col-sm-8">
+                                <span class="col-sm-8 uploaded-file ellipsis">XXX.xls</span>
+                                <input type="button" value="下载" class="upload-btn col-sm-2 pull-right" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="businesskey" class="col-sm-3 control-label">上传文件:</label>
+                            <div class="col-sm-8">
+                                <input type='text' name='textfield' id='textfield' class='form-control pull-left txt' style="width:60%;" />  
+                                <input type='button' class='upload-btn col-sm-2 ml15' value='浏览...' />
+                                    <input type="file" name="fileField" class="file upload-btn col-sm-offset-7 col-sm-2" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                                <input type="button" name="upload" class="upload-btn col-sm-2 pull-right" value="上传" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span id="upload-fail-tip" class="col-sm-offset-3 col-sm-8 red fail-tip">上传失败，文档格式错误，请下载失败文件！</span>
+                        </div>
+                        <div class="form-group orange">
+                            <label for="businesskey" class="col-sm-3 control-label">下载失败文件:</label>
+                            <div class="col-sm-8">
+                                <span class="col-sm-8 uploaded-file ellipsis">XXX.xls</span>
+                                <input type="button" value="下载" class="upload-btn col-sm-2 pull-right" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-flat pull-right">确认导入</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--导入modal-end-->
+
+    
+    <!--删除modal-->
+    <div class="modal fade ake-modal deleteBlacklistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title tc">删除黑名单</h4>
+                </div>
+                <div class="modal-body">
+                   <p class="tc f15">您是否确定删除此黑名单记录？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat pull-left" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--删除modal结束-->
+
+
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../dist/js/layer/layer.js"></script>
+    <script src="../../dist/js/main.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+        }
+
+    });
+    $(".addBalcklist").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '添加黑名单',
+                maxmin: false,
+                shadeClose: false, //点击遮罩关闭层
+                area : ['65%' , '74%'],
+                offset : ['30px'],
+                content: ['modal/addVisitedCarModal.html']
+            });
+    })
+    $("#importBlacklist").click(function(){
+        layer.open({
+            type: 2,
+            title: '导入黑名单',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['65%' , '62%'],
+            offset : ['30px'],
+            content: ['modal/importBalcklistModal.html']
+        });
+    })
+    $(".inAndOutDetailBtn").on('click',function(){
+            layer.open({
+                type: 2,
+                title: '进出详情',
+                maxmin: false,
+                shadeClose: false, //点击遮罩关闭层
+                area : ['98%' , '85%'],
+                offset : ['10px'],
+                content: ['modal/visitedDetailModal.html']
+            });
+    })
+     $("#synchronousDetail,.synchronousDetail").click(function(){
+        layer.open({
+            type: 2,
+            title: '同步详情',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area : ['68%' , '62%'],
+            offset : ['30px'],
+            content: ['modal/synchronousBlacklistModal.html']
+        });
+    })
+
+
+    $(".ake-third-menu").on('click',function(){
+        var src = $(this).attr('href');
+        parent.$("#ake-iframe").attr("src",src);
+    })
+        
+    </script>
+</body>
+
+</html>

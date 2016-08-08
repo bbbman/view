@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-车辆管理-VIP车辆-设置模糊匹配车牌</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body clearfix">
+            <form class="form-horizontal">
+                <div class="form-group text-center">
+                    <h4 class="cRed">车牌号码：<span class="carLicense cRed">粤A12345</span></h4>
+                </div>
+                <div class="form-group addLine">
+                    <label for="" class="col-xs-3 control-label">模糊匹配车牌：</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control matchLicense" placeholder="">
+                    </div>
+                    <button type="button" class="btn btn-info btn-flat pull-left addLineBtn" style="border-radius: 4px;">添加一行</button>
+                    <span class="cRed h34 tip ml10" style="display:inline-block">*</span>
+                    <span class="cRed h34 tip-null ml10" style="display: none"><img src="../../../dist/images/alarm.png" /><span class="ml5">模糊匹配车牌不能为空</span></span>
+                </div>
+                <!-- <div class="form-group addLine">
+                    <label for="" class="col-xs-3 control-label">模糊匹配车牌：</label>
+                    <div class="col-xs-4">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <button type="button" class="btn btn-danger btn-flat pull-left addLineBtn" style="border-radius: 4px;"><span class="lt28">删</span>除</button>
+                </div> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">设置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../../dist/js/bootstrap.min.js"></script>
+     <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+     <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+     <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+    <script src="../../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+            $("#cancel").on('click',function(){    
+                parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+            })
+            
+
+            $(".matchLicense").focus(function(){
+                $('.tip-null').css("display","none");
+                $('.tip').fadeIn();
+            })
+
+            $(".addLineBtn").on('click',function(){
+                var $matchLicense = $(this).prev('div').find('.matchLicense'),html='';
+                if($matchLicense.val().trim() == ""){
+                    $(".tip").css("display","none");
+                    $(".tip-null").fadeIn();
+                    $matchLicense.val("");
+                    return;
+                }
+                html += '<div class="form-group deleteLine">'
+                            +'<label for="" class="col-xs-3 control-label">模糊匹配车牌：</label>'
+                            +'<div class="col-xs-4">'
+                                +'<input type="text" class="form-control" placeholder="" readonly value="'+$matchLicense.val()+'">'
+                            +'</div>'
+                            +'<button type="button" class="btn btn-danger btn-flat pull-left deleteLineBtn" style="border-radius: 4px;"><span class="lt28">删</span>除</button>'
+                        +'</div>';
+                $(".addLine").after(html);
+                $matchLicense.val('');
+            })
+            
+            $(document).on('click','button.deleteLineBtn',function(){
+                $(this).closest('.deleteLine').remove();
+            })
+
+        })
+
+
+    </script>
+</body>
+</html>

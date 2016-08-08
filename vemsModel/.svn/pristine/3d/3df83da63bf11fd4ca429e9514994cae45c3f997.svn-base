@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-车辆管理-来访车辆-添加来访车辆</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../../dist/css/main.css">
+    <link rel="stylesheet" href="../../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../../dist/js/html5shiv.js"></script>
+        <script src="../../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+</head>
+
+<body class="index-page">
+<div class="modal-content ake-iframe-modal">
+    <div class="modal-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">VIP类型:</label>
+                <div class="col-xs-6">
+                    <select class="form-control" id="">
+                       <option>普通VIP</option>
+                       <option>超级VIP</option>
+                       <option>黄金VIP</option>
+                   </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车牌号码:</label>
+                <div class="col-xs-6">
+                   <input type="text" class="form-control" id="car_license_number" placeholder="请输入车牌号码" maxlength="7" style="text-transform: uppercase;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">车主姓名:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">备注1:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">备注2:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">备注3:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-xs-3 control-label">预计来访停留时间段:</label>
+                <div class="col-xs-6">
+                    <input type="text" class="form-control" id="stopTime" placeholder="" readonly="">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div  class="modal-footer">
+        <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">取消</button>
+        <button type="button" class="btn  btn-primary btn-flat pull-right" id="save_carInfo">保存</button>
+    </div>
+</div>
+
+        <script src="../../../dist/js/jquery-2.0.3.min.js"></script>
+        <!-- <![endif]-->
+        <!--[if IE]>
+            <script src="../../../dist/js/jquery-1.10.2.min.js"></script>
+        <![endif]-->
+        <script src="../../../dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../../dist/js/moment.min.js"></script>
+        <script type="text/javascript" src="../../../dist/js/daterangepicker.js"></script>
+        <script type="text/javascript" src="../../../dist/js/timeset.js"></script>
+         <script src="../../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+         <script src="../../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+         <script type="text/javascript" src="../../../dist/js/layer/layer.js"></script>
+        <script src="../../../dist/js/public.js"></script>
+        <script type="text/javascript">
+            var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+            $("#cancel").on('click',function(){
+                parent.layer.close(index);
+            })
+            $("#stopTime").binDaterangepicker({
+                isSingle: false,
+                format: 'YYYY-MM-DD HH:mm',
+                isTimePicker: true,
+                position: 'right'
+            });
+            
+        </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body class="ake-modal-body look-matchApproch-modal" style="overflow-x:hidden">
+    <div class="modal-content ake-iframe-modal">
+        <div class="row modal-body">
+            <div class="search-box pull-left form-inline" style="margin-left:20px">
+                    <div class="form-group">
+                        <label class="sr-only" for="">在场数据</label>
+                        <div class="input-group">
+                           <div class="input-group-addon text-center">在场数据</div>
+                           <select class="form-control">
+                               <option>全部</option>
+                               <option>正常在场</option>
+                               <option>异常在场</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="sr-only" for="">记录类型</label>
+                        <div class="input-group">
+                           <div class="input-group-addon text-center">记录类型</div>
+                           <select class="form-control">
+                               <option>全部</option>
+                               <option>有牌车</option>
+                               <option>无牌车</option>
+                               <option>遮挡车</option>
+                               <option>非汽车</option>
+                               <option>误触发</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="">进场时间</label>
+                        <div class="input-group">
+                          <div class="input-group-addon glyphicon glyphicon-time glyphicon "></div>
+                          <input type="text" class="form-control time-input" id="approchTime" placeholder="请选择进场时间" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">搜索</button>
+                    </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="con-item-header  con-item-header-pb14 clearfix">
+               
+               </div>
+               <div class="row">
+                <div class="col-xs-12">
+                   <div class="match-approch-list">
+                       <ul class='row'>
+                           <li class="col-xs-12 match-approch-item">
+                               <div class="col-xs-1 order">1</div>
+                               <div class="col-xs-2 approch-img">
+                                   <img src="../../dist/images/plate_test2.jpg" alt="进场车牌图片" style="width:100%" class="img-thumbnail" >
+                               </div>
+                                <div class="col-xs-5 item-detail">
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">车牌号：</span>
+                                        <span class="pull-right plate-num">粤A 12345</span>
+                                    </div>
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">出场时间：</span>
+                                        <span class="pull-right leave-time">2015-12-11 12:50</span>
+                                    </div>
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">进场通道：</span>
+                                        <span class="pull-right">东门入口</span>
+                                    </div>
+                                </div>
+                           </li>
+                            <li class="col-xs-12 match-approch-item">
+                                <div class="col-xs-1 order">1</div>
+                                <div class="col-xs-2 approch-img">
+                                    <img src="../../dist/images/plate-test.jpg" alt="进场车牌图片" style="width:100%" class="img-thumbnail" >
+                                </div>
+                                 <div class="col-xs-5 item-detail">
+                                     <div class="item-detail-con clearfix">
+                                         <span class="pull-left">车牌号：</span>
+                                         <span class="pull-right plate-num">粤A 12345</span>
+                                     </div>
+                                     <div class="item-detail-con clearfix">
+                                         <span class="pull-left">出场时间：</span>
+                                         <span class="pull-right leave-time">2015-12-11 12:50</span>
+                                     </div>
+                                     <div class="item-detail-con clearfix">
+                                         <span class="pull-left">进场通道：</span>
+                                         <span class="pull-right">东门入口</span>
+                                     </div>
+                                 </div>
+                            </li>
+                            <li class="col-xs-12 match-approch-item">
+                               <div class="col-xs-1 order">1</div>
+                               <div class="col-xs-2 approch-img">
+                                   <img src="../../dist/images/plate_test1.jpg" alt="进场车牌图片" style="width:100%" class="img-thumbnail" >
+                               </div>
+                                <div class="col-xs-5 item-detail">
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">车牌号：</span>
+                                        <span class="pull-right plate-num">粤A 12345</span>
+                                    </div>
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">出场时间：</span>
+                                        <span class="pull-right leave-time">2015-12-11 12:50</span>
+                                    </div>
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">进场通道：</span>
+                                        <span class="pull-right">东门入口</span>
+                                    </div>
+                                </div>
+                           </li>
+                            <li class="col-xs-12 match-approch-item">
+                               <div class="col-xs-1 order">1</div>
+                               <div class="col-xs-2 approch-img">
+                                   <img src="../../dist/images/plate_test1.jpg" alt="进场车牌图片" style="width:100%" class="img-thumbnail" >
+                               </div>
+                                <div class="col-xs-5 item-detail">
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">车牌号：</span>
+                                        <span class="pull-right plate-num">粤A 12345</span>
+                                    </div>
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">出场时间：</span>
+                                        <span class="pull-right leave-time">2015-12-11 12:50</span>
+                                    </div>
+                                    <div class="item-detail-con clearfix">
+                                        <span class="pull-left">进场通道：</span>
+                                        <span class="pull-right">东门入口</span>
+                                    </div>
+                                </div>
+                           </li>
+                       </ul>
+                   </div>
+                
+                </div>
+                  <div class="table-footer col-xs-12">
+                    <div class="table-pageNum col-sm-3">
+                        当前第N项到N项，总共N项
+                    </div>
+                    <div class="table-pagination col-sm-6">
+                        <nav>
+                            <ul class="pagination">
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                       首页
+                                    </a>
+                                </li>
+                                <li class="disabled">
+                                    <a href="#" aria-label="Previous">
+                                        上一页
+                                    </a>
+                                </li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">...</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                       下一页
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" aria-label="Next">
+                                        尾页
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="table-showNum col-sm-3 text-right">
+                        <label>显示&nbsp;
+                            <select name="" class="form-control input-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </label>&nbsp;页
+                    </div>
+                </div> 
+            </div>
+         </div>
+          <div class="col-sm-4 right-wrap">
+                     <div class="abnormal-leave-box">
+                         <h3>异常出场记录</h3>
+                         <div class="abnormal-leave-con">
+                             <ul>
+                                 <li class="clearfix">
+                                    <span class="pull-left abnormal-plateImg-title">出场车牌图片：</span>
+                                    <span class="pull-right">
+                                        <img src="../../dist/images/plate_test1.jpg" class="img-thumbnail" style=""> 
+                                   </span>  
+                                 </li>
+                                 <li class="clearfix">
+                                     <span class="pull-left">车牌号：</span>
+                                     <span class="pull-right">粤A 12345</span>
+                                 </li>
+                                 <li class="clearfix">
+                                     <span class="pull-left">出场时间：</span>
+                                     <span class="pull-right">2015-11-12 17:22:33</span>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
+                     <div class="match-approch-box">
+                         <h3>匹配进场记录</h3>
+                         <div class="match-approch-con">
+                             <ul>
+                                 <li class="clearfix">
+                                    <span class="pull-left abnormal-plateImg-title">出场车牌图片：</span>
+                                    <span class="pull-right">
+                                        <img src="../../dist/images/plate_test1.jpg" class="img-thumbnail" style=""> 
+                                    </span>  
+                                 </li>
+                                 <li class="clearfix">
+                                     <span class="pull-left">车牌号：</span>
+                                     <span class="pull-right plate-num">粤A 12345</span>
+                                 </li>
+                                 <li class="clearfix">
+                                     <span class="pull-left">出场时间：</span>
+                                     <span class="pull-right leave-time">2015-11-12 17:22:33</span>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
+                     <div class="btn-match-group clearfix">
+                        <button type="button" class="btn  btn-default btn-flat pull-left close-modal" data-dismiss="modal">取消</button>
+                       <button type="button" class="btn  btn-danger btn-flat  btn-del  pull-left ">删除</button>
+                       <button type="button" class="btn  btn-primary btn-flat pull-right">确认匹配</button>
+                    </div> 
+                 </div>  
+        </div>
+    </div>
+ <!--[if !IE]> -->
+ <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+ <!-- <![endif]-->
+ <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+ <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+ <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+ <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+ <script>
+      $(function(){
+        $(".close-modal").on("click",function(){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+         $('#approchTime').binDaterangepicker({
+                isSingle: false,
+                format: 'YYYY-MM-DD HH:mm',
+                isTimePicker: true,
+                position:'right'
+            });
+       
+      })
+ </script>
+</body>
+
+</html>

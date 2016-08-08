@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css" type="text/css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style type="text/css">
+      .ztree li span.button.chk.checkbox_false_part{
+        background-position: 0 0;
+      }
+      .ztree li span.button.chk.checkbox_false_part_focus{
+        background-position: 0 -14px;
+      }
+      .ztree li span.button.chk.checkbox_true_part{
+        background-position: -14px 0;
+      }
+      .ztree li span.button.chk.checkbox_true_part_focus{
+        background-position: -14px -14px;
+      }
+    </style>
+</head>
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+       <div class="modal-body">
+           <form class="form-horizontal">  
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通道名称:</label>
+                   <div class="col-xs-5">
+                      <input type="text" class="form-control" placeholder="" readonly="">
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">计费类型:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control">
+                           <option>非结算通道</option>
+                           <option>实时结算通道</option>
+                           <option>延时结算通道</option>
+                       </select>
+                   </div>
+               </div>
+               
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">计费区域:</label>
+                   <div class="col-xs-5">
+                     <div class="area-tree-content">
+                        <ul id="treeArea" class="ztree"></ul> 
+                      </div>
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left close-modal">取消</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="saveTree">确认</button>
+               </div>
+           </form>
+       </div>
+    </div>
+ <!--[if !IE]> -->
+ <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+ <!-- <![endif]-->
+ <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+ <script type="text/javascript" src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+ <script type="text/javascript" src="../../dist/js/jquery.ztree.exhide-3.5.min.js"></script>
+ <script>
+      $(function(){
+        $(".close-modal").on("click",function(){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+        
+          $.fn.zTree.init($("#treeArea"), setting, zNodes);
+          hideNodes();
+          $("#saveTree").bind('click',saveTree);
+      });
+
+        var setting = {
+             view: {
+              showLine:false,
+              showIcon: true,
+              selectedMulti: false,
+             // fontCss: getFontCss
+          },
+            check: {
+              enable: true,
+              chkStyle: "checkbox",
+              chkboxType: { "Y": "", "N": "" },
+              chkDisabledInherit: true,
+              radioType: "all"
+            },
+            data: {
+            },
+            callback: {
+               beforeCheck:zTreeBeforeCheck,
+               onCheck: zTreeOnCheck,
+            },
+        };
+         var zNodes = [
+            {id:1,name:"停车场A", rootId:'1',isParent:true,open:true,drag:false,iconSkin:"pIcon1",state:0,
+                children: [
+                  {id:10, name:"区域a",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",state:0,
+                    children: [
+                      {id:13, name:"区域b",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",checked:true}, 
+                      {id:13, name:"通道31",rootId:'13', isParent:false,open:false,drag:true,iconSkin:"pIcon3",checked:true}, 
+                      {id:14, name:"区域k",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2"},
+                       {id:15, name:"区域s",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",},
+                       {id:15, name:"区域j",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",},
+                  ]},
+                  {id:11, name:"区域a",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",state:0,
+                    children: [
+                      {id:13, name:"区域v",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",}, 
+                      {id:14, name:"区域b",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",},
+                      {id:15, name:"区域n",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",},
+                      {id:15, name:"区域m",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",},
+                  ]},
+                /*  {id:13, name:"区域b",rootId:'1', isParent:true,open:false,drag:true,iconSkin:"pIcon2",
+                    children: [
+                      {id:121, name:"A区域出口1",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:122, name:"A区域出口2",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:123, name:"A区域出口3",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"},
+                      {id:124,name:"B区域出口1",rootId:'1',isParent:false,open:false,drag:false,iconSkin:"pIcon3"}
+                  ]},*/
+            ]},
+            ];
+       function zTreeBeforeCheck(treeId, treeNode) {
+        /* var treeObj = $.fn.zTree.getZTreeObj("treeArea");
+          if(treeNode.checked){
+            treeObj.checkNode(treeNode,false,false);
+          }else{
+            treeObj.checkNode(treeNode,true,false);
+          }
+          return false;*/
+       }
+
+       function zTreeOnCheck(event, treeId, treeNode) { 
+        }
+
+       function saveTree(){
+           var zTree = $.fn.zTree.getZTreeObj("treeArea");
+           var nodes = JSON.stringify(zTree.transformToArray(zTree.getCheckedNodes(true)));
+           console.log(nodes);
+      }
+
+      function hideNodes() {
+        var zTree = $.fn.zTree.getZTreeObj("treeArea"),
+            nodes = zTree.getNodesByParam('iconSkin','pIcon3');
+        if (nodes.length == 0) {
+          return;
+        }
+        zTree.hideNodes(nodes);
+      }
+
+ </script>
+</body>
+
+</html>

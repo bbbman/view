@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>节假日设置</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/my.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="con-page-body">
+            <div class="content-inner clearfix holiday-content" id="akeHolidayCalendar">
+                <div class="con-item role-management">
+                    <div class="row con-item-header  con-item-header-p20 clearfix">
+                      <form class="col-xs-4 form-inline seting-way-box">
+                         <div class='form-group'>
+                          <div class="col-xs-12">
+                            <label class="radio-inline">
+                              <div class="iradiobox_square-blue radiobox checked">
+                                   <input type="radio" class="icheck" name="radio-group" checked="checked" value="freely">
+                                   <ins class="iCheck-helper"></ins>
+                              </div>
+                                自由设置
+                            </label>
+                            <label class="radio-inline">
+                                <div class="iradiobox_square-blue radiobox">
+                                   <input type="radio" name="radio-group" class="icheck" value="weekly">
+                                   <ins class="iCheck-helper" ></ins>
+                                   </div>
+                                    按周设置
+                            </label>
+                            <label class="radio-inline">
+                                  <div class="iradiobox_square-blue radiobox ">
+                                  <input type="radio" class="icheck"name="radio-group"  value="monthly" >
+                                  <ins class="iCheck-helper"></ins>
+                                  </div>
+                                  按月设置
+                            </label>
+                            <label class="radio-inline">
+                                  <div class="iradiobox_square-blue radiobox ">
+                                  <input type="radio" class="icheck"name="radio-group"  value="themonth" >
+                                  <ins class="iCheck-helper"></ins>
+                                  </div>
+                                  整月设置
+                            </label>
+                         </div>
+                        </div>   
+                     </form>
+                     <div class="col-xs-4 year-switch-box"> 
+                         <div class="year-show-box">
+                             <a class="btn-arrow-left"></a>
+                             <div class="box-radius year-val">2015</div>
+                             <a class="btn-arrow-right"></a>                
+                         </div> 
+                     </div>
+                     <div class="col-xs-4 btn-box clearfix"> 
+                        <button class="btn btn-primary btn-flat pull-right" title="保存" id="btn-calendar-save" style="margin-left:16px">保存</button>
+                        <button class="btn btn-primary btn-flat pull-right" title="同步详情" id="date-tingtuDetail">同步详情</button>
+                     </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 calendar-box-wrap">
+                        </div>
+                        
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script src="../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../dist/js/layer/layer.js"></script>
+    <script src="../dist/js/main.js"></script>
+    <script src="../dist/js/public.js"></script>
+    <script src="../dist/js/akecalendarset.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+             $(".main-sidebar").mCustomScrollbar({theme:"dark"});
+      }
+      //调用节假日设置插件
+      /*
+        初始化日历步骤：
+        1.清除原来的本地存储，格式如下：
+          localStorage.removeItem(calendarTag);
+        2.将数据库中的记录存储到本地，格式如下：
+          localStorage.setItem(calendarTag,JSON.stringify(HolidayData));
+        3.调用如下方法：
+         $('#akeHolidayCalendar').bindakeCalendar({calendarTag:'holiday',//日历唯一标识});
+      */
+       
+      var akeHolidayObject=$('#akeHolidayCalendar').bindakeCalendar({
+        calendarTag:'holiday',//日历唯一标识
+      });
+       $('#btn-calendar-save').on('click',function(){
+           //打印所选择的节假日日期
+           console.log(akeHolidayObject.getholidays());
+       });
+
+
+       $("#date-tingtuDetail").click(function() {
+           layer.open({
+               type: 2,
+               title: '同步详情',
+               maxmin: true,
+               shadeClose: false, //点击遮罩关闭层
+               area: ['900px', '80%'],
+               offset: ['30px'],
+               content: ['modal/date-tongbu.html']
+           });
+
+           var wrap = $(".layui-layer-content ");
+           browser_ = /iphone|ipad/i.test(navigator.userAgent);
+           if (browser_ == true) {
+               wrap.addClass("iframe-wrap");
+           }
+           return false;
+
+       });
+      
+    });
+     
+        
+    </script>
+</body>
+
+</html>

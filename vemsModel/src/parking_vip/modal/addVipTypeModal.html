@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-本地车主-新增VIP类型</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/daterangepicker.css">
+    <link rel="stylesheet" href="../../dist/css/zTreeStyle.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">VIP名称:</label>
+                       <div class="col-xs-6">
+                       <input type="text" class="form-control" id="" placeholder="">
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">VIP类型组:</label>
+                   <div class="col-xs-6">
+                      <select class="form-control">
+                          <option>普通类型</option>
+                          <option>访客类型</option>
+                          <option>黑名单类型</option>
+                      </select>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">适用停车场:</label>
+                   <div class="col-xs-6 apply-parking">
+                      <label class="checkbox-inline col-xs-10">
+                        <input type="checkbox" name="parking" id="" value="停车场A" checked="checked">停车场A
+                      </label>
+                      <label class="checkbox-inline col-xs-10">
+                        <input type="checkbox" name="parking" id="" value="停车场B" checked="checked">停车场B
+                      </label>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">通行权限:</label>
+                   <div class="col-xs-6 apply-parking" style="min-height: 34px;">
+                      <ul id="treeDemo" class="ztree"></ul>
+                   </div>
+               </div>
+               <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">结算类型:</label>
+                    <div class="col-xs-6">
+                         <select id="settle-type" class="form-control pull-left" style="width:auto;padding:6px 2px;">
+                            <option value="time">时间结算</option>
+                            <option value="count">次数结算</option>
+                            <option value="balance">余额结算</option>
+                        </select>
+                        <div id="settle-bytime" class="settleType pull-right" style="width:64%;padding: 0;display:block;">
+                            <span class="h34 pull-right ml5">元/月</span>
+                            <input type="text" id="" class="form-control pull-right" placeholder="" style="display: inline-block;width:40%;padding: 6px 8px;">
+                            <span class="h34 pull-right mr5">结算金额</span>
+                        </div>
+                        <div id="settle-bycount" class="settleType pull-right" style="width:64%;padding: 0;display:none;">
+                            <span class="h34 pull-right ml5">元/次</span>
+                            <input type="text" id="" class="form-control pull-right" placeholder="" style="display: inline-block;width:40%;padding: 6px 8px;">
+                            <span class="h34 pull-right mr5">结算金额</span>
+                        </div>
+                        <div id="settle-bybalance" class="settleType pull-right" style="width:64%;padding: 0;display:none">
+                            <input type="text" id="" class="form-control pull-right" placeholder="" style="display: inline-block;width:40%;padding: 6px 8px;">
+                            <span class="h34 pull-right mr10">充值比例</span>
+                            <span class="h34 pull-right">充值比例1:1 表示充值100元余额100元</span>
+                        </div>
+                    </div>
+                </div>
+               <!-- <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">按月结算金额(元):</label>
+                       <div class="col-xs-6">
+                       <input type="text" class="form-control" id="" placeholder="">
+                   </div>
+               </div> -->
+               <div class="mb0 form-group">
+                   <a class="col-xs-offset-9 col-xs-2 pointer set-more">更多设置</a>
+               </div>
+               <div class="more-setting" style="display:none;">
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">多车多位(上限):</label>
+                       <div class="col-xs-6">
+                           <input type="text" class="form-control" id="" value="10" placeholder="" style="display:inline-block;width:60px;"><span class="h34 ml5 mr5">车位可停放</span><input type="text" class="form-control" id="" value="10" placeholder="" style="display:inline-block;width:60px"><span class="ml5">辆车</span>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label class="checkbox-inline col-xs-offset-3 col-xs-2">
+                         <input type="checkbox" name="distinguished" id="distinguish-val" value="满位控制">满位控制
+                       </label>
+                       <label class="checkbox-inline col-xs-2">
+                         <input type="checkbox" name="distinguished" id="distinguish-date" value="区分日期"> 区分日期
+                       </label>
+                       <label class="checkbox-inline col-xs-2">
+                         <input type="checkbox" name="distinguished" id="distinguish-time" value="区分时段"> 区分时段
+                       </label>
+                   </div>
+                   <div class="form-group detail-val" style="display:none;">
+                       <!-- <label class="checkbox-inline col-sm-offset-1 col-sm-2">
+                         <input type="checkbox" name="dayOrTime" id="" value="区分时段"> 区分时段
+                       </label> -->
+                       <label for="" class="col-xs-3 control-label">满位控制:</label>
+                       <div class="col-xs-6">
+                         <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group detail-date" style="display:none;">
+                       <label for="" class="col-xs-3 control-label">区分日期:</label>
+                       <div class="col-xs-6">
+                           <button type="button" class="btn bgGray btn-flat pull-left sdc" id="setDateChart">设置日期表</button>
+                           <input type="hidden" class="dateListSetting" value="" >
+                           <input type="text" class="hide dateListSetting1" value="11" /><!--隐藏域，用来保存选择后的日期字符串-->
+                       </div>
+                   </div>
+                   <div class="form-group detail-time" style="display:none;">
+                       <!-- <label class="checkbox-inline col-sm-offset-1 col-sm-2">
+                         <input type="checkbox" name="dayOrTime" id="" value="区分时段"> 区分时段
+                       </label> -->
+                       <label for="" class="col-xs-3 control-label">区分时段:</label>
+                       <div class="col-xs-6">
+                           <select class="form-control" id="">
+                              <option>9:00-19:00</option>
+                              <option>19:00-24:00</option>
+                              <option>00:00-9:00</option>
+                           </select>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">是否设置组编号:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control set-group">
+                              <option value="2">否</option>
+                              <option value="1">是</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <label for="" class="col-xs-3 control-label">组编号</label>
+                       <div class="col-xs-6">
+                           <input type="text" class="form-control group-number" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">进场显示语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control enter_language" id="enter_display_language">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option value="0">自定义</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <div class="col-xs-offset-3 col-xs-6">
+                          <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">进场播报语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control enter_language" id="">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option value="0">自定义</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <div class="col-xs-offset-3 col-xs-6">
+                          <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">离场显示语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control leave_language">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option value="0">自定义</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <div class="col-xs-offset-3 col-xs-6">
+                          <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">离场播报语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control leave_language" id="">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option value="0">自定义</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <div class="col-xs-offset-3 col-xs-6">
+                          <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">超期有效时长(小时):</label>
+                       <div class="col-xs-6">
+                           <input type="text" class="form-control" id="" placeholder="" style="display:inline-block;float: left;width:33%;">
+                           <label class="checkbox-inline col-xs-offset-1 col-xs-7">
+                             <input type="checkbox" name="dayOrTime" id="" value="出场后沿用"> 出场后沿用
+                           </label>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">超期显示语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control" id="overtime_display_language">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option value="0">自定义</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <div class="col-xs-offset-3 col-xs-6">
+                          <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">超期播报语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">到期提醒时长(天):</label>
+                       <div class="col-xs-6">
+                           <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">到期显示语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control" id="expiry_display_language">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option value="0">自定义</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group" style="display:none;">
+                       <div class="col-xs-offset-3 col-xs-6">
+                          <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">到期播报语:</label>
+                       <div class="col-xs-6">
+                          <select class="form-control" id="overtime_display_language">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                          </select>
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label for="" class="col-xs-3 control-label">超期删除时长(天):</label>
+                       <div class="col-xs-6">
+                           <input type="text" class="form-control" id="" placeholder="">
+                       </div>
+                   </div>
+               </div>
+               <div class="mb0 form-group" style="display: none;">
+                   <a class="col-xs-offset-9 col-xs-3 pointer hide-set-more">隐藏更多设置</a>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+               </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../dist/js/moment.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="../../dist/js/timeset.js"></script>
+    <script src="../../dist/js/jquery.ztree.all-3.5.min.js"></script>
+    <script src="../../dist/js/akecalendarset.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            if (!$.browser.webkit) {
+                $.mCustomScrollbar.defaults.scrollButtons.enable=false; //滑块的上下的button是否显示
+                $.mCustomScrollbar.defaults.axis="y"; //滑块的放行 X轴或Y轴
+                 $("body").mCustomScrollbar({theme:"dark"});
+            }
+
+
+        })
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click',function(){    
+            parent.layer.close(index);   //点击关闭  会关闭iframe弹出框  
+        })
+
+        $(".set-more").click(function(){
+            $(this).parent("div.form-group").css("display","none");
+            $(this).parent("div.form-group").next(".more-setting").css("display","block");
+            $(this).parent("div.form-group").next(".more-setting").next("div.form-group").css("display","block");
+        })
+        $(".hide-set-more").click(function(){
+            $(this).parent("div.form-group").css("display","none");
+            $(this).parent("div.form-group").prev(".more-setting").css("display","none"); 
+            $(this).parent("div.form-group").prev(".more-setting").prev("div.form-group").css("display","block");
+              
+        })
+
+        $(".set-group").change(function(){
+            if($(this).val() == 1){
+                $(this).parent().parent("div.form-group").next("div.form-group").css("display","block");
+            }else{
+                $(this).parent().parent("div.form-group").next("div.form-group").css("display","none");
+            }
+        })
+
+         $("#distinguish-val").click(function(){
+            if($(this).attr("checked")){
+                $(".detail-val").css("display","block");
+            }else{
+                $(".detail-val").css("display","none");
+            }
+        })
+
+        $("#distinguish-date").click(function(){
+            if($(this).attr("checked")){
+                $(".detail-date").css("display","block");
+            }else{
+                $(".detail-date").css("display","none");
+            }
+        })
+
+        $("#distinguish-time").click(function(){
+            if($(this).attr("checked")){
+                $(".detail-time").css("display","block");
+            }else{
+                $(".detail-time").css("display","none");
+            }
+
+        })
+
+        $("#settle-type").on('change',function(){
+          // alert($(this).val());
+          if($(this).val() == "time"){
+            $("#settle-bytime").nextAll(".settleType").css("display","none");
+            $("#settle-bytime").css("display","block");
+          }else if($(this).val() == "count"){
+            $("#settle-type").nextAll(".settleType").css("display","none");
+            $("#settle-bycount").css("display","block");
+          }else{
+            $("#settle-bybalance").prevAll(".settleType").css("display","none");
+            $("#settle-bybalance").css("display","block");
+          }
+        })
+
+        $("#setDateChart").click(function(){
+            var index = parent.layer.open({
+                type: 2,
+                title: '设置日期表',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['1200px' , '100%'],
+                content: 'iframe/setDateChart.html'
+            });
+            parent.layer.full(index);
+            var wrap =  $(".layui-layer-content");
+            browser_ = /iphone|ipad/i.test(navigator.userAgent);
+            if(browser_ == true) {
+                wrap.addClass("iframe-wrap");
+            }
+            return false;
+        })
+
+        //进场显示语的自定义
+        $(".enter_language").on('change',function(){
+          // console.log($(this).val());
+          if($(this).val() == 0){ //可以自己设置select中option的value,但是这里判断里面的值要和value相等
+            $(this).closest('div.form-group').next('div.form-group').css("display","block");
+          }else{
+            $(this).closest('div.form-group').next('div.form-group').css("display","none");
+          }
+        })
+
+        //离场显示语的自定义
+        $(".leave_language").on('change',function(){
+          // console.log($(this).val());
+          if($(this).val() == 0){ //可以自己设置select中option的value,但是这里判断里面的值要和value相等
+            $(this).closest('div.form-group').next('div.form-group').css("display","block");
+          }else{
+            $(this).closest('div.form-group').next('div.form-group').css("display","none");
+          }
+        })
+
+        //超期显示语的自定义
+        $("#overtime_display_language").on('change',function(){
+          // console.log($(this).val());
+          if($(this).val() == 0){ //可以自己设置select中option的value,但是这里判断里面的值要和value相等
+            $(this).closest('div.form-group').next('div.form-group').css("display","block");
+          }else{
+            $(this).closest('div.form-group').next('div.form-group').css("display","none");
+          }
+        })
+
+        //超期显示语的自定义
+        $("#expiry_display_language").on('change',function(){
+          // console.log($(this).val());
+          if($(this).val() == 0){ //可以自己设置select中option的value,但是这里判断里面的值要和value相等
+            $(this).closest('div.form-group').next('div.form-group').css("display","block");
+          }else{
+            $(this).closest('div.form-group').next('div.form-group').css("display","none");
+          }
+        })
+
+        <!--
+        var setting = {
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            view: {
+              showIcon: false,
+              showLine: false
+            }
+        };
+
+        var zNodes =[
+            { id:1, pId:0, name:"停车场A",nocheck: true, open:true},
+            { id:11, pId:1, name:"区域一",nocheck: true, open:true},
+            { id:111, pId:11, name:"通道1",checked:true},
+            { id:112, pId:11, name:"通道2",checked:true},
+            { id:113, pId:11, name:"区域二",nocheck: true,open:true},
+            { id:1131, pId:113, name:"通道3",checked:true},
+            { id:1132, pId:113, name:"通道4",checked:true},
+            { id:1133, pId:113, name:"通道5",checked:true},
+            { id:1134, pId:113, name:"通道6",checked:true},
+            { id:2, pId:0, name:"停车场B", nocheck: true, open:true},
+            { id:21, pId:2, name:"区域一",nocheck: true,open:true},
+            { id:211, pId:21, name:"通道1",checked:true},
+            { id:212, pId:21, name:"通道2",checked:true}
+        ];
+
+        /**
+         * 注意：
+         *  id的命名规则为：
+         *      第一层节点为一位数，按顺序从1开始，依此类推；
+         *      第二层的节点为两位数，十位数取父节点的id，个位数为此节点在同级节点中的位置；
+         *      第三层的节点为三位数，前两位数为其父节点的id，各位数为此节点在同级节点中的位置；
+         *      依此类推。
+         *  
+         *  pId的命名规则为：
+         *      如果此节点为第一层节点，则pId=0；否则，pId为此节点的id的前两位。如，如果此节点id为1132，则PId为113。
+         *      以此类推。
+         *  checked:表示初始化的时候，节点是否选中状态
+         *  open:表示初始化时是否打开此节点
+         *  nocheck：为TRUE时表示该节点无checkbox
+         */
+        
+        var code;
+        
+        function setCheck() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+            py = $("#py").attr("checked")? "p":"",
+            sy = $("#sy").attr("checked")? "s":"",
+            pn = $("#pn").attr("checked")? "p":"",
+            sn = $("#sn").attr("checked")? "s":"",
+            type = { "Y":py + sy, "N":pn + sn};
+            zTree.setting.check.chkboxType = type;
+            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+        }
+        function showCode(str) {
+            if (!code) code = $("#code");
+            code.empty();
+            code.append("<li>"+str+"</li>");
+        }
+
+        $(function(){
+          $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+          setCheck();
+          $("#py").bind("change", setCheck);
+          $("#sy").bind("change", setCheck);
+          $("#pn").bind("change", setCheck);
+          $("#sn").bind("change", setCheck);
+        })
+
+
+    </script>
+</body>
+</html>

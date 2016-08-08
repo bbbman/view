@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>管理端配置-数据及日志管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../dist/js/html5shiv.js"></script>
+        <script src="../dist/js/respond.min.js"></script>
+        <![endif]-->
+
+    <style>
+        html,body {
+          height: auto;
+        }
+        body {
+          background-color: #e5e5e5;
+        }
+        .ydt_wrapper {
+          margin:0 12px;
+          background: #fff;
+          padding-bottom: 40px;
+        }
+        .bd h3 {
+          text-align: center;
+          font-size: 30px;
+          line-height: 50px;
+          font-weight: 500;
+          padding-top: 60px;
+          padding-bottom: 40px;
+          margin-top: 4px;
+          vertical-align: middle;
+          letter-spacing: 2px;
+          color:#555;
+        }
+        .status_icon {
+          display: inline-block;
+          width: 50px;
+          height: 50px;
+          vertical-align: middle;
+          margin-left: 5px;
+        }
+        .status_icon.success {
+          background: url('../dist/images/success.png') no-repeat center center;
+          background-size: cover;
+        }
+        .status_icon.warning {
+          background: url('../dist/images/warning.png') no-repeat center center;
+          background-size: cover;
+        }
+        .status_icon.error {
+          background: url('../dist/images/error.png') no-repeat center center;
+          background-size: cover;
+        }
+        .ydt_status_form {
+          width: 400px;
+          margin:0 auto;
+        }
+        .ydt_status_form .input-group {
+          width: 400px;
+        }
+        .ydt_status_form .input-group:not(:last-child) {
+          margin-bottom: 15px;
+        }
+        .ydt_status_form .input-group-addon {
+          width: 95px;
+        }
+        .ydt_status_form .form_ation {
+          text-align: center;
+        }
+        .status_detail {
+          width: 600px;
+          margin: 20px auto 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="ydt_wrapper">
+        <div class="bd">
+            <h3>一点停上线状态<span class="status_icon success"></span><span class="status_icon warning"></span><span class="status_icon error"></span></h3>
+            <form class="ydt_status_form">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">停车场编号</span>
+                    <input type="text" class="form-control" placeholder="parkID" disabled>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1" style="width:95px">帐号</span>
+                    <input type="text" class="form-control" placeholder="帐号">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">密码</span>
+                    <input type="password" class="form-control" placeholder="密码">
+                </div>
+                <div class="form_ation">
+                  <a href="javascript:;" class="btn btn-primary">确认连接一点停</a>
+                </div>
+            </form>
+
+            <!-- <div class="status_detail">
+              <textarea name="name" rows="15" cols="80" class="form-control" disabled>djfokldsjflskdjfklsdjfklsd<br>是否会思考的幅度上看<br>是否会思考的幅度上看</br>是否会思考的幅度上看</br>
+                  是否会思考的幅度上看<br>
+                  是否会思考的幅度上看<br>
+              </textarea>
+            </div> -->
+        </div>
+    </div>
+
+</body>
+
+<!--[if !IE]> -->
+<script src="../dist/js/jquery-2.0.3.min.js"></script>
+<!-- <![endif]-->
+<!--[if IE]>
+    <script src="../dist/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+<script src="../dist/js/bootstrap.min.js"></script>
+<script src="../dist/js/main.js"></script>
+<script src="../dist/js/public.js"></script>

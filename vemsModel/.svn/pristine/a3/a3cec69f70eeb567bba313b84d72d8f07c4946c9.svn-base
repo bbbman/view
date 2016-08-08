@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车场VIP-VIP车主管理-VIP车主管理-开通VIP</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min-4.3.0.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <link rel="stylesheet" href="../../dist/css/ling.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+    <style>
+    .native-date {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        background-clip: padding-box;
+    }
+
+    #native-date-input {
+        width: 220px;
+        height: 214px;
+    }
+
+    .date-info-list li.active {
+        margin: 4px 6px;
+    }
+
+    .date-info-list li.active a {
+        padding: 6px 12px;
+        cursor: default;
+    }
+
+    .date-info-list li.active a i {
+        padding-left: 4px;
+        cursor: pointer;
+    }
+
+    .vip-price {
+        margin-left: 20px;
+    }
+    </style>
+</head>
+
+<body class="index-page">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">VIP别称:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" id="">
+                            <option>AVIP</option>
+                        </select>
+                    </div>
+                    <span class="col-xs-4" style="height:34px; line-height: 34px;padding-left: 0;">停车场：佛山A停车场</span>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车主姓名:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" id="carOwner_name" placeholder="">
+                    </div>
+                    <div class="col-xs-4" style="padding-left: 0px;">
+                        <a class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" role="button" id="pickCarOwner">选择车主</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">手机号:</label>
+                    <div class="col-xs-5">
+                        <input type="tel" class="form-control" id="" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车牌:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control car_license_number" placeholder="手动输入车牌号码" maxlength="7" id="keyboardInput0" style="text-transform: uppercase;">
+                    </div>
+                    <div class="col-xs-4" style="padding-left: 0px;">
+                        <button type="button" class="btn btn-default btn-flat pull-left" id="addCarLicense" style="border-radius: 4px;">添加</button>
+                        <div style="position:absolute;top:0px;left:100px;">
+                         <label class="checkbox">
+                            <input type="checkbox" class="openKeyborad">启用全键盘
+                         </label>
+                       </div>
+                    </div>
+                    <div class="col-xs-5 show-choose" id="oweCarList" style="display:none;">
+                        <!-- <label class="checkbox-inline col-xs-10">
+                         <input type="checkbox" name="car_license" id="" value="湘A98878">湘A98878
+                       </label> -->
+                    </div>
+                </div>
+                <!-- <div class="form-group VipCarPlate-box">
+                    <div class="col-xs-5 col-xs-offset-3">
+                        <div style="border: 1px solid #ccc;border-radius: 4px;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);-webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s; -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;padding:0 15px">
+                            <div class="checkbox">
+                                <label for="">
+                                    <input type="checkbox"> 粤12345
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label for="">
+                                    <input type="checkbox"> 粤12345
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label for="">
+                                    <input type="checkbox"> 粤12345
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">车位类型:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" id="">
+                            <option>固定车位</option>
+                            <option>临时车位</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4" style="padding-left: 0px;">
+                        <button type="button" class="btn btn-default btn-flat pull-left" style="border-radius: 4px;" id="pickCarPosition">选择车位</button>
+                    </div>
+                    <div class="col-xs-5 show-choose" id="carPositionList" style="display:none;">
+                        <!-- <span class="list-item mt5">100001</span> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">结算类型:</label>
+                    <div class="col-xs-5">
+                        <p class="form-control-static">时间结算 <span class="vip-price">单价（结算金额）：100元/月</span></p>
+                    </div>
+                    <div id="settle-bytime-money" class="col-xs-12 settleMoney mt10" style="display:block;">
+                        <label for="" class="col-xs-3 control-label">开通&nbsp;</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="count-time" placeholder="" style="display:inline-block;width:40%;margin-left: -7px;margin-right: 10px;">月
+                        </div>
+                    </div>
+                    <div id="settle-bycount-money" class="col-xs-12 settleMoney mt10" style="display:none;">
+                        <label for="" class="col-xs-3 control-label">开通&nbsp;</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="" placeholder="" style="display:inline-block;width:40%;margin-left: -7px;margin-right: 10px;">次
+                        </div>
+                    </div>
+                    <div id="settle-bybalance-money" class="col-xs-12 settleMoney mt10" style="display:none;">
+                        <label for="" class="col-xs-3 control-label">充值金额</label>
+                        <div class="col-xs-5">
+                            <input type="text" class="form-control" id="" placeholder="" style="display:inline-block;width:40%;margin-left: -7px;margin-right: 10px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">VIP有效期:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" id="vip_expiry" style="width:39%">
+                            <option value="自然月">自然月</option>
+                            <option value="自定义">自定义</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-9 native-date-box" style="margin-top:15px;">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="native-date" style="width:215px">
+                                </div>
+                            </div>
+                            <div class="col-xs-4" style="display:none">
+                                <textarea class="form-control" id="native-date-input"></textarea>
+                                <input class="form-control" id="new-date-input"></input>
+                                <input class="form-control" id="link-date-input"></input>
+                            </div>
+                            <div class="col-xs-6">
+                                <ul class="nav nav-pills date-info-list" role="tablist">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-offset-3 col-xs-5 free-date" style="display:none;margin-top:15px">
+                        <div class="input-daterange input-group" id="input-daterange">
+                            <input type="text" class="input-sm form-control" name="free-date-start" id="input-daterange-start" placeholder="自定义开始时间" readonly/>
+                            <span class="input-group-addon">至</span>
+                            <input type="text" class="input-sm form-control" name="free-date-end" id="input-daterange-end" placeholder="自定义结束时间" readonly/>
+                        </div>
+                    </div>
+                    <div class="col-xs-5 show-choose" style="min-height:34px;display:none">
+                        <span class="list-item mt7" id="choose-detail">15年1月，15年2月(自然月) 或 2015/02/22-2015/03/22(自定义)</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">价格:</label>
+                    <div class="col-xs-6">
+                        <span class="price h34 ml10 f15" id="vipPrice">0</span><span class="h34 f15"> 元</span>
+                    </div>
+                </div>
+                <div class="form-group addLine">
+                    <label for="" class="col-xs-3 control-label">折扣价:</label>
+                    <div class="col-xs-5">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" style="display: inline-block; width:85%;">
+                        <span class="h34 ml15 f15"> 元</span>
+                    </div>
+                </div>
+                 <div class="form-group addLine">
+                    <label for="" class="col-xs-3 control-label">备注:</label>
+                    <div class="col-xs-5">
+                        <input type="text" id="" class="form-control pull-left" placeholder="" style="display: inline-block; width:85%;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left" id="cancel">关闭</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right" id="save">保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../dist/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="../../dist/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../dist/js/bootstrap-datepicker.js"></script>
+    <script src="../../dist/js/bootstrap-datepicker.zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../dist/js/layer/layer.js"></script>
+    <script type="text/javascript" src="../../dist/js/draggabilly.pkgd.min.js"></script>
+    <script src="../../dist/js/keyborad.js"></script>
+    <script src="../../dist/js/public.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        if (!$.browser.webkit) {
+            $.mCustomScrollbar.defaults.scrollButtons.enable = false; //滑块的上下的button是否显示
+            $.mCustomScrollbar.defaults.axis = "y"; //滑块的放行 X轴或Y轴
+            $("body").mCustomScrollbar({
+                theme: "dark"
+            });
+        };
+
+        var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+
+        $("#cancel").on('click', function() {
+            parent.layer.close(index); //点击关闭  会关闭iframe弹出框
+        })
+    });
+
+    $('#save').on('click',function(){
+       $('#link-date-input').val(getDateStr());
+         console.log( $('#link-date-input').val());
+
+    });
+  
+
+    //绑定全键盘
+    //  if(localStorage.getItem("isOpenKeyborad")!=undefined&&localStorage.getItem("isOpenKeyborad")!=0){
+    //      $('.openKeyborad').prop("checked",'checked')
+    // }
+    // $('.openKeyborad').on('click',function(){
+    //     if($(this).prop("checked")){
+    //         localStorage.setItem("isOpenKeyborad",1);
+    //         $('.openKeyborad').prop("checked",'checked');
+    //     }else{
+    //         localStorage.setItem("isOpenKeyborad",0);
+    //         $('.openKeyborad').removeAttr("checked");
+    //     }
+    // });
+    $('#keyboardInput0').binAKEkeyboard({
+        bottom:'1%'
+    });
+
+    $('#pickCarOwner').on('click', function() {
+        layer.open({
+            type: 2,
+            title: '选择车主',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['92%', '94%'],
+            offset: ['10px'],
+            content: '../iframe/pickCarOwner.html'
+        });
+    });
+
+    $('#pickCarPosition').on('click', function() {
+        layer.open({
+            type: 2,
+            title: '选择车位',
+            maxmin: true,
+            shadeClose: true, //点击遮罩关闭层
+            area: ['98%', '94%'],
+            content: ['../iframe/pickCarPosition.html']
+        });
+    });
+
+    $("#addCarLicense").on('click', function() {
+        var $car_license = $(this).parent().prev().children(".car_license_number"),
+            car_license = $car_license.val().trim().toUpperCase(),
+            html = '';
+        if (car_license == "") {
+            layer.tips('请输入车牌号码', this);
+            return;
+        }
+        if ($("#oweCarList").css("display") == "none") {
+            $("#oweCarList").css("display", "block");
+        }
+        html += '<label class="checkbox-inline col-xs-10">' + '<input type="checkbox" name="car_license" id="" value="' + car_license + '">' + car_license + '</label>';
+        $(this).parent().next('#oweCarList').append(html);
+        $car_license.val('');
+        html = '';
+    })
+
+    $("#settle-type").on('change', function() {
+        // alert($(this).val());
+        if ($(this).val() == "time") {
+            $("#settle-bytime").nextAll(".settleType").css("display", "none");
+            $("#settle-bytime").css("display", "block");
+            $(this).parent().nextAll(".settleMoney").css("display", "none");
+            $("#settle-bytime-money").css("display", "block");
+        } else if ($(this).val() == "count") {
+            $("#settle-type").nextAll(".settleType").css("display", "none");
+            $("#settle-bycount").css("display", "block");
+            $(this).parent().nextAll(".settleMoney").css("display", "none");
+            $("#settle-bycount-money").css("display", "block");
+        } else {
+            $("#settle-bybalance").prevAll(".settleType").css("display", "none");
+            $("#settle-bybalance").css("display", "block");
+            $(this).parent().nextAll(".settleMoney").css("display", "none");
+            $("#settle-bybalance-money").css("display", "block");
+        }
+    });
+
+    //删除车位
+    $(document).on("click", ".detele-carPosition", function() {
+        $(this).closest(".list-item").remove();
+        if ($("#carPositionList").find(".list-item").length == 0) {
+            $("#carPositionList").hide();
+        }
+        return false;
+    })
+
+
+
+    //类型选择
+    $("#vip_expiry").change(function() {
+        if ($(this).val() == "自定义") {
+            $(".free-date").show();
+            $(".native-date-box").hide();
+        } else {
+            $(".free-date").hide();
+            $(".native-date-box").show();
+            $('#count-time').val(parseInt($('#count-time').val()));
+            // $("#input-daterange-start,#input-daterange-end").val("");
+        }
+    });
+   function getDateStr(){
+       var dateArry=new Array();
+       $('.date-info-list .deta-detail').each(function(){
+          var liStr=$(this).text();
+          var liArray=liStr.split('年');
+          var liArray1=liArray[1].split('月');
+          dateArry.push(liArray[0]+'-'+liArray1[0]+'-'+1)
+       });
+       // var dateStr=$('#new-date-input').val();
+       var dateStr=dateArry.join(',');
+        if(dateStr==''){
+            return;
+        }
+        var singleDate=[];
+        singleDate.push(dateStr);
+        if(dateStr.indexOf(",")!=-1){
+            singleDate=dateStr.split(',');
+        }
+        // console.log(singleDate.length)
+        var dateArray=[];
+        var breakPoint=0;
+        var linkDate=function (i,j){
+             var dateArry1=singleDate[i].split('-');
+             var dateArry2=singleDate[j].split('-');
+             var cell=dateArry1[1];
+             if(dateArry1[1].length<2){
+                 cell='0'+dateArry1[1];
+             }
+             var date1Str1=dateArry1[0]+'/'+cell+'/'+'01';
+             var MonthDateNum = new Date(dateArry2[0]-0,dateArry2[1]-0, 0).getDate();
+             if(MonthDateNum<10){
+                MonthDateNum ='0'+MonthDateNum;
+             }
+             var cell0=dateArry2[1];
+             if(dateArry2[1].length<2){
+                 cell0='0'+dateArry2[1];
+             }
+             var date1Str2=dateArry2[0]+'/'+cell0+'/'+MonthDateNum;
+             dateArray.push(date1Str1+'-'+date1Str2);
+             // console.log(dateArray);
+        }
+
+       function compareFn (i,isSuccession){
+           if(!isSuccession){
+              linkDate(breakPoint,i-1);
+              breakPoint=i;
+            }
+           if(singleDate.length==i+1){
+             if(!isSuccession){
+               linkDate(i,i);
+             }else{
+               linkDate(breakPoint,i); 
+             }
+             return ;
+           }
+           var  aDate3,  oDate1,  oDate2,  iDays,aDate4; 
+           aDate3 = singleDate[i].split("-");          
+           oDate1 = new  Date(aDate3[1]+'-'+ aDate3[2]+'-'+aDate3[0]); 
+           aDate4  = singleDate[i+1].split("-");  
+           oDate2 = new  Date(aDate4[1]+'-'+aDate4[2]+'-'+aDate4[0]);  
+           iDays = parseInt(Math.abs(oDate1-oDate2)/1000/60/60/24);
+           if(iDays>40){
+             compareFn(i+1,false);
+           }else{
+             compareFn(i+1,true);   
+           }  
+
+       }
+        compareFn (0,true);
+        var dateStr1=dateArray.join(',');
+        // console.log(dateStr1);
+        return dateStr1;
+   } 
+
+    function CurentTime() {
+        var now = new Date();
+
+        var year = now.getFullYear(); //年
+        var month = now.getMonth() + 1; //月
+        var day = now.getDate(); //日
+
+        var clock = year + "-";
+
+        clock += month + "-";
+
+        if (day < 10)
+            clock += "0";
+        clock += day;
+        return clock;
+    };
+
+    function DateAdd(interval, number, date) {
+        switch (interval) {
+            case "y":
+                {
+                    date.setFullYear(date.getFullYear() + number);
+                    return date;
+                    break;
+                }
+            case "q":
+                {
+                    date.setMonth(date.getMonth() + number * 3);
+                    return date;
+                    break;
+                }
+            case "m":
+                {
+                    date.setMonth(date.getMonth() + number);
+                    return date;
+                    break;
+                }
+            case "w":
+                {
+                    date.setDate(date.getDate() + number * 7);
+                    return date;
+                    break;
+                }
+            case "d":
+                {
+                    date.setDate(date.getDate() + number);
+                    return date;
+                    break;
+                }
+            case "h":
+                {
+                    date.setHours(date.getHours() + number);
+                    return date;
+                    break;
+                }
+            case "m":
+                {
+                    date.setMinutes(date.getMinutes() + number);
+                    return date;
+                    break;
+                }
+            case "s":
+                {
+                    date.setSeconds(date.getSeconds() + number);
+                    return date;
+                    break;
+                }
+            default:
+                {
+                    date.setDate(date.getDate() + number);
+                    return date;
+                    break;
+                }
+        }
+    }
+
+
+
+    function DateDiff(date1, date2) {
+        var datediff = date1.getTime() - date2.getTime(); //store the getTime diff - or +
+        // alert(new Date() + date1 + date2);
+        return (datediff / (24 * 60 * 60 * 1000 * 30)); //Convert values to -/+ days and return value
+    };
+    
+
+    
+    $('#input-daterange').datepicker({
+        inputs: $("#input-daterange-start,#input-daterange-end"),
+        language: "zh-CN",
+        keyboardNavigation: false,
+        maxViewMode: 0,
+        calendarWeeks: true,
+        todayHighlight: true,
+        format: 'yyyy-m-dd',
+        autoclose:true
+    }).on('changeDate', function(e) {
+         console.log(e);
+        var targetId=$(e.target).attr('id');
+        var $begin = $('#input-daterange-start').datepicker('getDate');
+        var $end = $('#input-daterange-end').datepicker('getDate');
+        var timeVal=$('#count-time').val();
+        if(timeVal==""){
+           $duration = DateDiff($end, $begin);
+           $duration = Math.round($duration * 100) / 100;
+           $('#count-time').val($duration); 
+           if(parseInt($duration)==$duration){
+               $('#vipPrice').text($duration*100);
+           }else{
+               $('#vipPrice').text(parseInt($duration*30*(100/30)));
+           }
+        }else{
+            timeVal=parseFloat(timeVal);
+            if(targetId=="input-daterange-start"||DateDiff($end, $begin)==0){
+                if(parseInt(timeVal)==timeVal){
+                    var endDate=getDate(e.date,parseInt(timeVal),true);
+                   $('#input-daterange-end').datepicker('update',endDate);
+                }else{
+                    var days=parseInt(timeVal*30);
+                    $('#input-daterange-end').datepicker('update', DateAdd('d',days, e.date));
+                } 
+             }else{
+                  var diff= DateDiff(e.date,$begin);
+                  if(diff<0){
+                     $('#input-daterange-end').datepicker('update',beginTime);
+                     $duration =0;
+                  }else{
+                     $duration =getMonthValue($begin,e.date);
+                  }
+                   // $duration = DateDiff(e.date, $begin);
+                   // $duration = Math.round($duration * 100) / 100;
+                   $('#count-time').val($duration); 
+                   if(parseInt($duration)==$duration){
+                       $('#vipPrice').text($duration*100);
+                   }else{
+                       $('#vipPrice').text(parseInt($duration*30*(100/30)));
+                   }
+            }
+        }
+    });
+      $('#count-time').val('0'); 
+      $('#vipPrice').text(0);
+      $('#input-daterange-start').datepicker('update',new Date());
+      $('#input-daterange-end').datepicker('update',new Date());
+   
+
+    $(".native-date").datepicker({
+        format: "yyyy-m",
+        minViewMode: 1,
+        language: "zh-CN",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        todayHighlight: true
+    }).on('changeDate', function(e) {
+        var native_date = e.date;
+        var date_array = [];
+        var year = native_date.getFullYear();
+        var month = native_date.getMonth() + 1;
+        var textarea_val = $("#native-date-input").val();
+        var clock = year + "年" + month + "月";
+        console.log(clock);
+        console.log(textarea_val);
+        if (textarea_val !== "") {
+            var array_val = textarea_val.split(";");
+            if (array_val.indexOf(clock) == -1) {
+                array_val.push(clock);
+                var l = [];
+                $.each(array_val, function(index, item) {
+                    var item = item.slice(0, item.length - 1);
+                    var d = new Date();
+                    d.setDate(1);
+                    var t = item.split("年");
+                    d.setFullYear(t[0], t[1] - 1);
+                    l.push(d);
+                })
+                console.log(l);
+                l.sort(function(a, b) {
+                    return a < b ? 1 : -1;
+                });
+                console.log(l);
+                var r_l = [];
+                var j_l=new Array();
+                $.each(l, function(index, item) {
+                    var y = item.getFullYear();
+                    var m =q= item.getMonth() + 1;
+                    var ym = y + "年" + m + "月";
+                    var jm=y+'-'+q+'-'+'1';
+                    r_l.unshift(ym);
+                    j_l.unshift(jm);
+                });
+                console.log(r_l);
+                $(".date-info-list").find("li").remove();
+                $.each(r_l, function(index, item) {
+                    var h_ = ' <li role="presentation" class="active"><a><span class="deta-detail">' + item + '</span><i class="detele-native-date fa fa-trash-o fa-lg"></i></a></li>';
+                    $(".date-info-list").append(h_);
+                })
+                var input_realVal =r_l.join(";");
+                var input_new =j_l.join(",");
+                $("#native-date-input").val(input_realVal);
+                $("#new-date-input").val(input_new);
+                $("#count-time").val(array_val.length);
+                $('#vipPrice').text(array_val.length*100);
+
+            } else {
+                top.window.msgTips("不能重复添加", "2", 1500);
+            }
+        } else {
+            var h_ = ' <li role="presentation" class="active"><a><span class="deta-detail">' + clock + '</span><i class="detele-native-date fa fa-trash-o fa-lg"></i></a></li>';
+            $(".date-info-list").append(h_);
+            $("#native-date-input").val(clock);
+            $("#new-date-input").val(year+'-'+month+'-'+'1');
+            $("#count-time").val("1");
+            $('#vipPrice').text(100);
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $(document).on("click", ".detele-native-date", function(e) {
+        $(this).closest("li.active").remove();
+        var This=$(e.currentTarget);
+        var str=This.parent().find('.deta-detail').text().split('年');
+        var str2=str[1].split('月');
+        var str3=str[0]+'-'+str2[0]+'-'+'1';
+        var text=$("#new-date-input").val();
+        text=text.replace(str3+',',"");
+        if(text==$("#new-date-input").val()){
+           text=text.replace(','+str3,""); 
+        }
+        $("#new-date-input").val(text);
+        var input_val=[];
+        $(".deta-detail").each(function() {
+            var this_val = $(this).text();
+            input_val.unshift(this_val);
+        });
+        var input_realVal = input_val.join(";");
+        $("#native-date-input").val(input_realVal);
+        $("#count-time").val(input_val.length);
+         $('#vipPrice').text(input_val.length*100);
+    });
+
+    $("#count-time").keyup(function() {
+        var this_val = $(this).val();
+        var now = new Date();
+        var count_time = this_val - 0;
+        var re = /^(0.(\d*[1-9]\d*)|[1-9][0-9]*.([0-9]{1,})+)$/;
+        if($('#input-daterange-start').val()==""){
+               $('#input-daterange-start').datepicker('update', new Date()); 
+            }
+        if(parseInt(count_time)!=count_time) {
+        // if(re.test(count_time)) {
+            $("#vip_expiry").val("自定义");
+            $(".free-date").show();
+            $(".native-date-box").hide();
+            var day = count_time*30;
+                day = Math.round(day);
+            // var now = new Date();
+            var now = $('#input-daterange-start').datepicker('getDate');
+            var end_Date = DateAdd("d", day, now);
+            var startDate = CurentTime();
+            // $('#input-daterange-start').datepicker('update', startDate);
+            $('#input-daterange-end').datepicker('update', end_Date);
+            $('#vipPrice').text(parseInt(count_time*30*(100/30)));
+
+        }else {
+            // var now = new Date();
+            var now = $('#input-daterange-start').datepicker('getDate');
+            var startDate = CurentTime();
+            var endDate=getDate(now,parseInt(count_time),true);
+            $('#input-daterange-end').datepicker('update', endDate);
+            $('#vipPrice').text(count_time*100);
+            var input_val = [];
+            for (var i = 0; i < count_time; i++) {
+                var d = new Date();
+                d.setDate(1);
+                var count_m = DateAdd("m", i, d);
+                var y = count_m.getFullYear();
+                var m = count_m.getMonth() + 1;
+                var ym = y + "年" + m + "月";
+                input_val.push(ym);
+            };
+            console.log(input_val);
+            $(".date-info-list").find("li").remove();
+            $.each(input_val, function(index, item) {
+                var h_ = ' <li role="presentation" class="active"><a><span class="deta-detail">' + item + '</span><i class="detele-native-date fa fa-trash-o fa-lg"></i></a></li>';
+                $(".date-info-list").append(h_);
+            })
+            var input_realVal = input_val.join(";");
+            $("#native-date-input").val(input_realVal);
+        }
+    })
+   
+   function getDate(date1,timeVal,isStart){
+             var num= new Date(date1.getFullYear(),(date1.getMonth() + 1), 0).getDate();//天数
+             var d1=date1.getDate();
+             var date2;
+             if(timeVal==0){
+                return date1;  
+             } 
+             if(isStart){
+                var endDate=DateAdd('m',timeVal, date1);
+                    date2=DateAdd('d',-1, endDate);
+             }else{
+                var startDate=DateAdd('m',-timeVal,date1);
+                    date2=DateAdd('d',1,startDate);
+             } 
+             var y = date2.getFullYear();
+             var m = date2.getMonth() + 1;
+             var d = date2.getDate(); 
+             var date;
+                if(d1==num){
+                     if(d<10){
+                        m=m-1;
+                     }
+                      d=new Date(y,m, 0).getDate();//天数
+                      date=new Date(y,m-1, d);  
+                }else{
+                  date=date2;
+                }
+            return date;
+    }
+    //精确计算两个日期间相差的月份
+    function getMonthValue(beginTime,endTime){
+      var monthVal=0;
+      var diff= DateDiff(endTime,beginTime);
+      //获取开始时间的年月日 
+      var bYear=getDateValue("Y",beginTime);
+      var bMonth=getDateValue("M",beginTime);
+      var bDay=getDateValue("D",beginTime);
+      var bNum = new Date(bYear, bMonth, 0).getDate(); //获取指定月份的天数（28-31）
+      //获取结束时间的年月日
+      var eYear=getDateValue("Y",endTime);
+      var eMonth=getDateValue("M",endTime);
+      var eDay=getDateValue("D",endTime);
+      var eNum = new Date(eYear, eMonth, 0).getDate(); //获取指定月份的天数（28-31）
+       
+      var yearToMonth=parseInt((eYear- bYear)*12);
+      if(bYear==eYear&&bMonth==eMonth&&bDay==eDay){monthVal=0;return monthVal;}
+      if(bDay==1){//起始日期是当月第一天
+        if(eDay==eNum){
+            monthVal=eMonth-bMonth+1+yearToMonth;return monthVal;
+        }else{
+            monthVal=parseInt(eMonth-bMonth)+toDecimal(eDay/eNum)+yearToMonth;return monthVal;
+        }
+      }
+      if(bDay==bNum){
+         if(eDay==eNum){
+            monthVal=eMonth-bMonth+yearToMonth;return monthVal;
+         }else{
+            monthVal=(eMonth-bMonth-1)+toDecimal(eDay/eNum)+yearToMonth;return monthVal;
+         }
+      }
+      if(bDay!=bNum&&bDay!=1){
+        if((bDay-eDay)==1){
+            monthVal=eMonth-bMonth+yearToMonth;return monthVal;
+        }
+        if(eDay>(bDay-1)){
+            monthVal=(eMonth-bMonth)+toDecimal((eDay-(bDay-1))/eNum)+yearToMonth;return monthVal;
+        }
+        if(eDay<(bDay-1)){
+             var rNum = new Date(eYear, eMonth-1, 0).getDate(); //获取结束日期前一个月的总天数（28-31）
+             monthVal=(eMonth-bMonth-1)+toDecimal(eDay/eNum)+toDecimal((rNum-(bDay-1))/rNum)+yearToMonth;
+             return monthVal;
+        }
+      }
+    }
+
+    function getDateValue(type,Time){
+        var val;
+        var oDate = Time; //实例一个时间对象；
+        switch(type){
+           case "Y":val=oDate.getFullYear();   //获取年；
+                    break;
+           case "M":val=oDate.getMonth()+1;   //获取月份，由于月份是从0开始计算，所以要加1
+                    break;
+           case "D":val=  oDate.getDate(); // 获取日，
+                    break;
+           case "h":val= oDate.getHours(); //获取时，
+                    break;
+           case "m":val=oDate.getMinutes(); //分
+                    break;
+           case "s":val= oDate.getSeconds(); //秒
+                    break;
+           default:break;
+        }
+        return val;
+    }
+    //保留两位小数  
+    //功能：将浮点数四舍五入，取小数点后2位 
+    function toDecimal(x) { 
+      var f = parseFloat(x); 
+      if (isNaN(f)) { 
+        return; 
+      } 
+      f = Math.round(x*100)/100; 
+      return f; 
+    } 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">所属通道:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">型号:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">名称:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">品牌:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">地址:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">传输模式:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">传输模式参数:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+               <div class="form-group authenticationInfo">
+                   <label for="" class="col-xs-3 control-label">设备状态:</label>
+                   <div class="col-xs-5">
+                       <p class="form-control-static">在线</p>
+                   </div>
+               </div>
+               <div class="form-group">
+                   <label for="" class="col-xs-3 control-label">是否启用:</label>
+                   <div class="col-xs-5">
+                       <select class="form-control isAuthentication">
+                           <option value="2">未启用</option>
+                           <option value="1">启用</option>
+                           <option value="1">禁用</option>
+                       </select>
+                   </div>
+               </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-default btn-flat  pull-left close-modal" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">确认</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+    <script>
+    $(function() {
+
+        $(".close-modal").on("click", function() {
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        })
+
+    })
+    </script>
+</body>
+
+</html>

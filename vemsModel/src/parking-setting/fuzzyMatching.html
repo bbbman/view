@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>车辆锁定</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../dist/css/main.css">
+    <link rel="stylesheet" href="../dist/css/ling.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="dist/js/html5shiv.js"></script>
+        <script src="dist/js/respond.min.js"></script>
+        <![endif]-->
+        <style>
+        .fuzzy-value-setting .form-group input,.exclude-value-setting  .form-group input {
+            width:120px;
+        }
+        .fuzzy-value-setting .form-inline ,.exclude-value-setting .form-inline {
+            margin:10px 0;
+        }
+        .fuzzy-setting-box {
+            padding:40px;
+        }
+        .fuzzy-radio-list {
+            margin-bottom: 40px;
+        }
+        .save-fuzzy-setting {
+            margin-top: 20px;
+        }
+        .delete-fuzzy-setting {
+            margin-left:10px;
+        }
+        .fuzzy-tips-text {
+            margin:0 6px;
+        }
+        </style>
+</head>
+
+<body class="con-page-body">
+    <div class="content-inner">
+        <div class="con-item role-management">
+            <div class="con-item-header  con-item-header-pb14 clearfix">
+                <nav class="con-item-nav">
+                    <ul class="clearfix">
+                        <li class="con-nav-item active"><a href="carLock.html" class="ake-third-menu">车辆锁定</a></li>
+                        <li class="con-nav-item"><a href="fuzzyMatching.html" class="ake-third-menu">模糊匹配</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row fuzzy-setting-box" style="margin:0 6px">
+                <form class="col-xs-12">
+                    <h4 class="text-primary">模糊匹配包含的车辆</h4>
+                    <div class="fuzzy-radio-list">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 全部在场车辆
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 已缴费车辆
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 入场辅枪抓拍车辆
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 出场辅枪抓拍车辆
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 临时车
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 本地VIP
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="" value=""> 第三方VIP
+                        </label>
+                    </div>
+                    <h4 class="text-primary">模糊匹配特定值设定</h4>
+                    <div class="fuzzy-value-setting">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            <div class="form-group fuzzy-tips-text">模糊匹配为</div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="add-fuzzy-setting">添加一行</button>
+                        </div>
+                    </div>
+                    <h4 class="text-primary">排除匹配项</h4>
+                    <div class="exclude-value-setting">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            <div class="form-group fuzzy-tips-text">不能匹配为</div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="" placeholder="">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="add-exclude-setting">添加一行</button>
+                        </div>
+                    </div>
+                    <button type='submit' class="btn btn-primary save-exclude-setting">保存</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--[if !IE]> -->
+    <script src="../dist/js/jquery-2.0.3.min.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+        <script src="../dist/js/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script>
+    $(function(){
+        $('#add-fuzzy-setting').on('click',function(){
+            var html = '<div class=form-inline><div class=form-group><input class=form-control placeholder=""></div><div class="form-group fuzzy-tips-text">模糊匹配为</div><div class=form-group><input class=form-control placeholder=""></div><a class="btn btn-primary delete-fuzzy-setting">删除</a></div>';
+            $('.fuzzy-value-setting').append(html);
+            return false;
+        });
+        $(document).on('click','.delete-fuzzy-setting',function(){
+            $(this).closest('.form-inline').remove();
+            return false;
+        });
+        $('#add-exclude-setting').on('click',function(){
+            var html = '<div class=form-inline><div class=form-group><input class=form-control placeholder=""></div><div class="form-group fuzzy-tips-text">不能匹配为</div><div class=form-group><input class=form-control placeholder=""></div><a class="btn btn-primary delete-exclude-setting">删除</a></div>';
+            $('.exclude-value-setting').append(html);
+            return false;
+        });
+        $(document).on('click','.delete-exclude-setting',function(){
+            $(this).closest('.form-inline').remove();
+            return false;
+        });
+    })
+    </script>
+</body>
+
+</html>

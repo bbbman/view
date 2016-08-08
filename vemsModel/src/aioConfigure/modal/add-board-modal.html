@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>停车场管理</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../dist/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../../dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../dist/css/main.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="../../dist/js/html5shiv.js"></script>
+        <script src="../../dist/js/respond.min.js"></script>
+        <![endif]-->
+</head>
+<body class="ake-modal-body">
+    <div class="modal-content ake-iframe-modal">
+        <div class="modal-body">
+            <form class="form-horizontal">  
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">所属通道:</label>
+                    <div class="col-xs-5">
+                         <select class="form-control">
+                           <option></option>
+                           <option></option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">型号:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">名称:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">品牌:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control">
+                           <option></option>
+                           <option></option>
+                        </select>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">转换器地址:</label>
+                    <div class="col-xs-5">
+                        <input type="text" class="form-control" placeholder="" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">传输模式:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" id="sendType">
+                           <option></option>
+                           <option value="RS485">RS485</option>
+                           <option value="RJ45">RJ45</option>
+                        </select>
+                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="RS485-con">
+                        <label for="" class="control-label col-xs-3 ">传输模式参数:</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" style="width:100px;float:left">
+                               <option></option>
+                               <option value="RS485">RS485</option>
+                               <option value="RJ45">RJ45</option>
+                            </select>
+                            <span class="pull-left" style="height: 34px;font-size: 26px;margin:0 10px;">,</span>
+                            <input type="text" class="form-control" placeholder=""  style="width:100px;float:left" >
+                            <span class="pull-left" style="height: 34px;font-size: 18px;margin:0 10px;">8,n,1</span>
+                        </div>
+                    </div>
+                    <div class="RJ45-con" style="display:none">
+                        <label for="" class="control-label col-xs-3 ">传输模式参数:</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" placeholder="IP"  style="width:150px;float:left" >
+                            <span class="pull-left" style="height: 34px;font-size: 26px;margin:0 10px;">:</span>
+                            <input type="text" class="form-control" placeholder="端口"  style="width:100px;float:left" >
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="form-group">
+                    <label for="" class="col-xs-3 control-label">设备状态:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control isAuthentication">
+                            <option value="2">未启用</option>
+                            <option value="2">在线</option>
+                            <option value="1">离线</option>
+                            <option value="1">禁用</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn  btn-default btn-flat  pull-left close-modal" data-dismiss="modal">取消</button>
+                   <button type="button" class="btn  btn-primary btn-flat pull-right close-modal">确认</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+ <!--[if !IE]> -->
+ <script src="../../dist/js/jquery-2.0.3.min.js"></script>
+ <!-- <![endif]-->
+ <!--[if IE]>
+     <script src="../../dist/js/jquery-1.10.2.min.js"></script>
+ <![endif]-->
+ <script>
+      $(function(){
+        $(".close-modal").on("click",function(){
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index);
+        });
+
+
+        //端口切换
+        $("#sendType").change(function(){
+            console.log($(this).val())
+            if($(this).val() == "RS485") {
+                $(".RJ45-con").find("input").val("");
+                $(".RS485-con").show();
+                $(".RJ45-con").hide();
+            }else if($(this).val() == "RJ45") {
+                $(".RJ45-con").show();
+                $(".RS485-con").hide();
+                 $(".RS485-con").find("input").val("");
+                 $(".RS485-con").find("select").val("");
+            }
+        });
+
+       
+      })
+ </script>
+</body>
+
+</html>
